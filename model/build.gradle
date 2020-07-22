@@ -1,10 +1,23 @@
 apply plugin: 'java-library'
+
 apply plugin: 'kotlin'
+
+apply plugin: 'kotlin-kapt'
+
+apply from: '../dependencies.gradle'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+
+    // architecture components
+    implementation "androidx.room:room-runtime:$versions.roomVersion"
+    implementation "androidx.room:room-ktx:$versions.roomVersion"
+    kapt "androidx.room:room-compiler:$versions.roomVersion"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$versions.jacksonVersion"
+
+    // debugging
+    implementation "com.jakewharton.timber:timber:$versions.timberVersion"
+}
