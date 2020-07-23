@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="main"
-            type="com.ddd4.dropit.feature.main.MainActivity" />
+            name="mainViewModel"
+            type="com.ddd4.dropit.feature.main.MainViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
