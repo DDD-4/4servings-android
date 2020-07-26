@@ -16,7 +16,6 @@ dependencies {
     implementation "androidx.room:room-runtime:$versions.roomVersion"
     implementation "androidx.room:room-ktx:$versions.roomVersion"
     kapt "androidx.room:room-compiler:$versions.roomVersion"
-    implementation "com.fasterxml.jackson.core:jackson-databind:$versions.jacksonVersion"
 
     // debugging
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
