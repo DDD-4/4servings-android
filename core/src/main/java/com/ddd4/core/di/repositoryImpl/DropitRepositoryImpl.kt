@@ -1,5 +1,6 @@
-package com.ddd4.core.repository
+package com.ddd4.core.di.repositoryImpl
 
+import com.ddd4.core.di.repository.DropitRepository
 import com.ddd4.core.room.DropitDao
 import com.ddd4.model.entity.DropitEntity
 import kotlinx.coroutines.Dispatchers
@@ -7,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class DropitRepositoryImpl(private val dropitDao: DropitDao)
-    :DropitRepository {
+    : DropitRepository {
 
     override suspend fun insert(dropitEntity: DropitEntity) {
         dropitDao.insert(dropitEntity)

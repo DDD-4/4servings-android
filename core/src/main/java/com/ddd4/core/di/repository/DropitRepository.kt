@@ -1,4 +1,4 @@
-package com.ddd4.core.repository
+package com.ddd4.core.di.repository
 
 import com.ddd4.model.entity.DropitEntity
 import kotlinx.coroutines.flow.Flow

@@ -3,8 +3,8 @@ package com.ddd4.core.di.module
 import android.app.Application
 import androidx.room.Room
 import com.ddd4.core.di.qualifier.ForApplication
-import com.ddd4.core.helper.SharedPreferenceRepository
-import com.ddd4.core.helper.SharedPreferenceRepositoryImpl
+import com.ddd4.core.di.repository.SharedPreferenceRepository
+import com.ddd4.core.di.repositoryImpl.SharedPreferenceRepositoryImpl
 import com.ddd4.core.room.AppDataBase
 import dagger.Module
 import dagger.Provides
@@ -29,6 +29,8 @@ object PersistenceModule {
     @Singleton
     @ForApplication
     internal fun provideSharedPrefs(application: Application): SharedPreferenceRepository {
-        return SharedPreferenceRepositoryImpl(application)
+        return SharedPreferenceRepositoryImpl(
+            application
+        )
     }
 }
