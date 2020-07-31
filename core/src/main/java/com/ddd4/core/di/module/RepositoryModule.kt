@@ -1,6 +1,6 @@
 package com.ddd4.core.di.module
 
-import com.ddd4.core.di.repository.DropitRepository
+import com.ddd4.model.repository.DropitRepository
 import com.ddd4.core.di.repositoryImpl.DropitRepositoryImpl
 import com.ddd4.core.room.AppDataBase
 import com.ddd4.core.room.DropitDao
@@ -16,14 +16,7 @@ object RepositoryModule {
 
     @Provides
     @ActivityRetainedScoped
-    fun provideBookListDao(appDatabase: AppDataBase): DropitDao {
-        return appDatabase.dropItDao()
-    }
-
-    @Provides
-    @ActivityRetainedScoped
-    fun bookListRepository(dropitDao: DropitDao): DropitRepository {
+    fun DropItRepository(dropitDao: DropitDao): DropitRepository {
         return DropitRepositoryImpl(dropitDao)
     }
-
 }
