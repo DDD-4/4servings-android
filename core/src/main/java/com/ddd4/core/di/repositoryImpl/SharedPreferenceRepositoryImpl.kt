@@ -2,7 +2,7 @@ package com.ddd4.core.di.repositoryImpl
 
 import android.content.Context
 import com.ddd4.core.helper.SharedPreferenceHelper
-import com.ddd4.core.di.repository.SharedPreferenceRepository
+import com.ddd4.model.repository.SharedPreferenceRepository
 
 class SharedPreferenceRepositoryImpl(context: Context):
     SharedPreferenceRepository {

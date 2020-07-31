@@ -1,4 +1,4 @@
-package com.ddd4.core.di.repository
+package com.ddd4.model.repository
 
 
 interface SharedPreferenceRepository {

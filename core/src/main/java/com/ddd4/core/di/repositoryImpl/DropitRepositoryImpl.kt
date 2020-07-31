@@ -1,6 +1,6 @@
 package com.ddd4.core.di.repositoryImpl
 
-import com.ddd4.core.di.repository.DropitRepository
+import com.ddd4.model.repository.DropitRepository
 import com.ddd4.core.room.DropitDao
 import com.ddd4.model.entity.DropitEntity
 import kotlinx.coroutines.Dispatchers
