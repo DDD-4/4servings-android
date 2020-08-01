@@ -1,9 +1,13 @@
-package com.ddd4.core.helper
+package com.ddd4.core.di.repositoryImpl
 
 import android.content.Context
+import com.ddd4.core.helper.SharedPreferenceHelper
+import com.ddd4.model.repository.SharedPreferenceRepository
 
-class SharedPreferenceRepositoryImpl(context: Context): SharedPreferenceRepository {
-    private val instance = SharedPreferenceHelper.getInstance(context)
+class SharedPreferenceRepositoryImpl(context: Context):
+    SharedPreferenceRepository {
+    private val instance =
+        SharedPreferenceHelper.getInstance(context)
 
 
     override fun writePrefs(key: String?, value: Int?) {
