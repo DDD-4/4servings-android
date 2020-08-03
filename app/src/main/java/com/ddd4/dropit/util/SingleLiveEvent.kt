@@ -1,4 +1,4 @@
-package com.ddd4.dropit.mvvm
+package com.ddd4.dropit.util
 
 import androidx.annotation.MainThread
 import androidx.annotation.Nullable
@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
-
 
 class SingleLiveEvent<T> : MutableLiveData<T>() {
 
