@@ -13,13 +13,15 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Qualifier
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
 object RepositoryModule {
 
+    @Singleton
     @Provides
-    @ActivityRetainedScoped
     fun DropItRepository(
         dropitLocalDataSource: DropitLocalDataSource,
         dropitListMapper: DropitListMapper,
@@ -28,4 +30,9 @@ object RepositoryModule {
     ): DropitRepository {
         return DropitRepositoryImpl(dropitLocalDataSource, dropitListMapper, dropitDataMapper, ioDispatcher)
     }
+
+    @Singleton
+    @Provides
+    fun provideIoDispatcher() = Dispatchers.IO
+
 }

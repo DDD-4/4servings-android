@@ -2,7 +2,6 @@ package com.ddd4.data.di.module
 
 import android.app.Application
 import androidx.room.Room
-import com.ddd4.data.di.qualifier.ForApplication
 import com.ddd4.domain.repository.SharedPrefRepository
 import com.ddd4.data.repository.SharedPrefRepositoryImpl
 import com.ddd4.data.source.local.AppDataBase
@@ -32,10 +31,8 @@ object PersistenceModule {
         return appDatabase.dropItDao()
     }
 
-    //And SharedPref !
     @Provides
     @Singleton
-    @ForApplication
     internal fun provideSharedPrefs(application: Application): SharedPrefRepository {
         return SharedPrefRepositoryImpl(
             application
