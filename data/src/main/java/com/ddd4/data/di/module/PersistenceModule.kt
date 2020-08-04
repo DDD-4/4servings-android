@@ -3,10 +3,10 @@ package com.ddd4.data.di.module
 import android.app.Application
 import androidx.room.Room
 import com.ddd4.data.di.qualifier.ForApplication
-import com.ddd4.domain.repository.SharedPreferenceRepository
-import com.ddd4.data.di.repositoryImpl.SharedPreferenceRepositoryImpl
-import com.ddd4.data.room.AppDataBase
-import com.ddd4.data.room.DropitDao
+import com.ddd4.domain.repository.SharedPrefRepository
+import com.ddd4.data.repository.SharedPrefRepositoryImpl
+import com.ddd4.data.source.local.AppDataBase
+import com.ddd4.data.source.local.DropitDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,8 +36,8 @@ object PersistenceModule {
     @Provides
     @Singleton
     @ForApplication
-    internal fun provideSharedPrefs(application: Application): SharedPreferenceRepository {
-        return SharedPreferenceRepositoryImpl(
+    internal fun provideSharedPrefs(application: Application): SharedPrefRepository {
+        return SharedPrefRepositoryImpl(
             application
         )
     }
