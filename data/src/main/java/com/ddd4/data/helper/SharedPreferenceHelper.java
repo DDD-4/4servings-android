@@ -3,7 +3,7 @@ package com.ddd4.data.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.ddd4.data.consts.Globalconst;
+import com.ddd4.domain.consts.Globalconst;
 
 public class SharedPreferenceHelper {
 
