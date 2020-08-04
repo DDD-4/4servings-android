@@ -1,4 +1,4 @@
-include ':core'
-include ':model'
+include ':data'
+include ':domain'
 include ':app'
 rootProject.name='Dropit'
