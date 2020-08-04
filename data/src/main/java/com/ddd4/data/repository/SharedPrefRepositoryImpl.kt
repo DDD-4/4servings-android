@@ -1,11 +1,11 @@
-package com.ddd4.data.di.repositoryImpl
+package com.ddd4.data.repository
 
 import android.content.Context
 import com.ddd4.data.helper.SharedPreferenceHelper
-import com.ddd4.domain.repository.SharedPreferenceRepository
+import com.ddd4.domain.repository.SharedPrefRepository
 
-class SharedPreferenceRepositoryImpl(context: Context):
-    SharedPreferenceRepository {
+class SharedPrefRepositoryImpl(context: Context):
+    SharedPrefRepository {
     private val instance =
         SharedPreferenceHelper.getInstance(context)
 

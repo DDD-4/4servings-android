@@ -1,7 +1,7 @@
 package com.ddd4.domain.repository
 
 
-interface SharedPreferenceRepository {
+interface SharedPrefRepository: Repository {
 
     fun writePrefs(key: String?, value: Int?)
 
