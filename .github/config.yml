@@ -1,6 +1,6 @@
 blank_issues_enabled: false
 contact_links:
-  - name: name: bug_report
+  - name: bug_report
     url: https://github.com/DDD-4/4servings-android
     about: create a bug report
   - name: pull_request
