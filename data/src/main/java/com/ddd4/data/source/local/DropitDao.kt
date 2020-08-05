@@ -1,21 +1,21 @@
 package com.ddd4.data.source.local
 
 import androidx.room.*
-import com.ddd4.data.entity.DropitDataEntity
+import com.ddd4.data.entity.DropitDataModel
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DropitDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(dropitDataEntity: DropitDataEntity)
+    suspend fun insert(dropitDataModel: DropitDataModel)
 
     @Update
-    suspend fun update(dropitDataEntity: DropitDataEntity)
+    suspend fun update(dropitDataModel: DropitDataModel)
 
     @Delete
-    fun delete(dropitDataEntity: DropitDataEntity)
+    fun delete(dropitDataModel: DropitDataModel)
 
     @Query("SELECT * FROM drop_it_table ORDER BY d_day ASC")
-    fun getAllData(): Flow<List<DropitDataEntity>>
+    fun getAllData(): Flow<List<DropitDataModel>>
 }

@@ -1,15 +1,15 @@
 package com.ddd4.data.mapper
 
-import com.ddd4.data.entity.DropitDataEntity
-import com.ddd4.domain.entity.DropitDomainEntity
+import com.ddd4.data.entity.DropitDataModel
+import com.ddd4.domain.entity.DropitDomainModel
 import javax.inject.Inject
 
-open class DropitDataMapper @Inject constructor(): DataMapper<DropitDataEntity, DropitDomainEntity> {
-    override fun toDomainEntity(type: DropitDataEntity): DropitDomainEntity {
-        return DropitDomainEntity(type.id, type.product, type.expirationDate, type.dday)
+open class DropitDataMapper @Inject constructor(): DataMapper<DropitDataModel, DropitDomainModel> {
+    override fun toDomainEntity(type: DropitDataModel): DropitDomainModel {
+        return DropitDomainModel(type.id, type.product, type.expirationDate, type.dday)
     }
 
-    override fun toDataEntity(type: DropitDomainEntity): DropitDataEntity {
-        return DropitDataEntity(type.id, type.product, type.expirationDate, type.dday)
+    override fun toDataEntity(type: DropitDomainModel): DropitDataModel {
+        return DropitDataModel(type.id, type.product, type.expirationDate, type.dday)
     }
 }

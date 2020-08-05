@@ -3,7 +3,7 @@ package com.ddd4.data.repository
 import com.ddd4.data.mapper.DropitListMapper
 import com.ddd4.data.mapper.DropitDataMapper
 import com.ddd4.data.source.DropitLocalDataSource
-import com.ddd4.domain.entity.DropitDomainEntity
+import com.ddd4.domain.entity.DropitDomainModel
 import com.ddd4.domain.repository.DropitRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -19,19 +19,19 @@ class DropitRepositoryImpl(
 
 ): DropitRepository {
 
-    override suspend fun insert(dropitDomainEntity: DropitDomainEntity) {
-        dropitLocalDataSource.insert(dropitDataMapper.toDataEntity(dropitDomainEntity))
+    override suspend fun insert(dropitDomainModel: DropitDomainModel) {
+        dropitLocalDataSource.insert(dropitDataMapper.toDataEntity(dropitDomainModel))
     }
 
-    override suspend fun update(dropitDomainEntity: DropitDomainEntity) {
-        dropitLocalDataSource.update(dropitDataMapper.toDataEntity(dropitDomainEntity))
+    override suspend fun update(dropitDomainModel: DropitDomainModel) {
+        dropitLocalDataSource.update(dropitDataMapper.toDataEntity(dropitDomainModel))
     }
 
-    override suspend fun delete(dropitDomainEntity: DropitDomainEntity) {
-        dropitLocalDataSource.delete(dropitDataMapper.toDataEntity(dropitDomainEntity))
+    override suspend fun delete(dropitDomainModel: DropitDomainModel) {
+        dropitLocalDataSource.delete(dropitDataMapper.toDataEntity(dropitDomainModel))
     }
 
-    override suspend fun getAllData(): Flow<List<DropitDomainEntity>> {
+    override suspend fun getAllData(): Flow<List<DropitDomainModel>> {
         return withContext(ioDispatcher){
             flow {
                 emit(dropitListMapper.toDomainEntity(dropitLocalDataSource.getAllData()))

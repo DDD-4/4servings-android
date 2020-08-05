@@ -1,14 +1,14 @@
 package com.ddd4.data.source
 
-import com.ddd4.data.entity.DropitDataEntity
+import com.ddd4.data.entity.DropitDataModel
 
-interface DropitLocalDataSource {
+interface DropitLocalDataSource: BaseDataSource {
 
-    suspend fun insert(dropitDataEntity: DropitDataEntity)
+    suspend fun insert(dropitDataModel: DropitDataModel)
 
-    suspend fun update(dropitDataEntity: DropitDataEntity)
+    suspend fun update(dropitDataModel: DropitDataModel)
 
-    suspend fun delete(dropitDataEntity: DropitDataEntity)
+    suspend fun delete(dropitDataModel: DropitDataModel)
 
-    suspend fun getAllData(): List<DropitDataEntity>
+    suspend fun getAllData(): List<DropitDataModel>
 }
