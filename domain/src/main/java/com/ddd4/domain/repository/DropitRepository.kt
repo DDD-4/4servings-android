@@ -1,15 +1,15 @@
 package com.ddd4.domain.repository
 
-import com.ddd4.domain.entity.DropitDomainModel
+import com.ddd4.domain.entity.DomainModel
 import kotlinx.coroutines.flow.Flow
 
 interface DropitRepository: Repository {
 
-    suspend fun insert(dropitDomainModel: DropitDomainModel)
+    suspend fun insert(DomainModel: DomainModel)
 
-    suspend fun update(dropitDomainModel: DropitDomainModel)
+    suspend fun update(DomainModel: DomainModel)
 
-    suspend fun delete(dropitDomainModel: DropitDomainModel)
+    suspend fun delete(DomainModel: DomainModel)
 
-    suspend fun getAllData(): Flow<List<DropitDomainModel>>
+    suspend fun getAllData(): Flow<List<DomainModel>>
 }

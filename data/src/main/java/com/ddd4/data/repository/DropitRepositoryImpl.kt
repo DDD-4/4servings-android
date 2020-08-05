@@ -1,9 +1,9 @@
 package com.ddd4.data.repository
 
-import com.ddd4.data.mapper.DropitListMapper
+import com.ddd4.data.mapper.DropitDataListMapper
 import com.ddd4.data.mapper.DropitDataMapper
 import com.ddd4.data.source.DropitLocalDataSource
-import com.ddd4.domain.entity.DropitDomainModel
+import com.ddd4.domain.entity.DomainModel
 import com.ddd4.domain.repository.DropitRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -13,28 +13,28 @@ import kotlinx.coroutines.withContext
 
 class DropitRepositoryImpl(
     private val dropitLocalDataSource: DropitLocalDataSource,
-    private val dropitListMapper: DropitListMapper,
+    private val dropitDataListMapper: DropitDataListMapper,
     private val dropitDataMapper: DropitDataMapper,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 
 ): DropitRepository {
 
-    override suspend fun insert(dropitDomainModel: DropitDomainModel) {
-        dropitLocalDataSource.insert(dropitDataMapper.toDataEntity(dropitDomainModel))
+    override suspend fun insert(DomainModel: DomainModel) {
+        dropitLocalDataSource.insert(dropitDataMapper.toDataEntity(DomainModel))
     }
 
-    override suspend fun update(dropitDomainModel: DropitDomainModel) {
-        dropitLocalDataSource.update(dropitDataMapper.toDataEntity(dropitDomainModel))
+    override suspend fun update(DomainModel: DomainModel) {
+        dropitLocalDataSource.update(dropitDataMapper.toDataEntity(DomainModel))
     }
 
-    override suspend fun delete(dropitDomainModel: DropitDomainModel) {
-        dropitLocalDataSource.delete(dropitDataMapper.toDataEntity(dropitDomainModel))
+    override suspend fun delete(DomainModel: DomainModel) {
+        dropitLocalDataSource.delete(dropitDataMapper.toDataEntity(DomainModel))
     }
 
-    override suspend fun getAllData(): Flow<List<DropitDomainModel>> {
+    override suspend fun getAllData(): Flow<List<DomainModel>> {
         return withContext(ioDispatcher){
             flow {
-                emit(dropitListMapper.toDomainEntity(dropitLocalDataSource.getAllData()))
+                emit(dropitDataListMapper.toDomainEntity(dropitLocalDataSource.getAllData()))
             }
         }
     }
