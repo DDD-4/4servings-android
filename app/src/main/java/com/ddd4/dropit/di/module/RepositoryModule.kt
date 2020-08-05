@@ -1,4 +1,4 @@
-package com.ddd4.data.di.module
+package com.ddd4.dropit.di.module
 
 import com.ddd4.data.mapper.DropitDataMapper
 import com.ddd4.data.mapper.DropitListMapper

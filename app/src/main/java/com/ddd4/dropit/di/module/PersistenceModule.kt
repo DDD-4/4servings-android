@@ -1,4 +1,4 @@
-package com.ddd4.data.di.module
+package com.ddd4.dropit.di.module
 
 import android.app.Application
 import androidx.room.Room
@@ -33,7 +33,7 @@ object PersistenceModule {
 
     @Provides
     @Singleton
-    internal fun provideSharedPrefs(application: Application): SharedPrefRepository {
+    fun provideSharedPrefs(application: Application): SharedPrefRepository {
         return SharedPrefRepositoryImpl(
             application
         )

@@ -1,7 +1,8 @@
-package com.ddd4.data.di.module
+package com.ddd4.dropit.di.module
 
 import com.ddd4.domain.repository.DropitRepository
-import com.ddd4.domain.usecases.dropit.GetDummyUseCase
+import com.ddd4.domain.usecases.usecase.GetDummyUseCase
+import com.ddd4.domain.usecases.usecaseImpl.GetDummyUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +16,6 @@ object UseCaseModule {
     @Provides
     @ActivityScoped
     fun provideDummyUseCase(dropitRepository: DropitRepository): GetDummyUseCase {
-        return GetDummyUseCase(dropitRepository)
+        return GetDummyUseCaseImpl(dropitRepository)
     }
 }
