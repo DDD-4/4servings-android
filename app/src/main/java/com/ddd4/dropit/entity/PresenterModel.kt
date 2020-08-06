@@ -1,6 +1,6 @@
-package com.ddd4.domain.entity
+package com.ddd4.dropit.entity
 
-data class DropitDomainModel(
+data class PresenterModel(
     val id: Int,
     val product: String,
     val expirationDate: String,

@@ -1,19 +1,16 @@
 package com.ddd4.dropit.di.module
 
 import com.ddd4.data.mapper.DropitDataMapper
-import com.ddd4.data.mapper.DropitListMapper
+import com.ddd4.data.mapper.DropitDataListMapper
 import com.ddd4.domain.repository.DropitRepository
 import com.ddd4.data.repository.DropitRepositoryImpl
 import com.ddd4.data.source.DropitLocalDataSource
-import com.ddd4.data.source.local.DropitDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -24,11 +21,11 @@ object RepositoryModule {
     @Provides
     fun DropItRepository(
         dropitLocalDataSource: DropitLocalDataSource,
-        dropitListMapper: DropitListMapper,
+        dropitDataListMapper: DropitDataListMapper,
         dropitDataMapper: DropitDataMapper,
         ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     ): DropitRepository {
-        return DropitRepositoryImpl(dropitLocalDataSource, dropitListMapper, dropitDataMapper, ioDispatcher)
+        return DropitRepositoryImpl(dropitLocalDataSource, dropitDataListMapper, dropitDataMapper, ioDispatcher)
     }
 
     @Singleton
