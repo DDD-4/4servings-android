@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Layout Margin & Padding -->
+    <dimen name="space_16dp">16dp</dimen>
+    <dimen name="space_8dp">8dp</dimen>
+    <dimen name="space_4dp">4dp</dimen>
+    <!-- Text -->
+    <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_line_extra">4dp</dimen>
+    <!-- Component -->
+    <dimen name="divider_height">1dp</dimen>
+</resources>
