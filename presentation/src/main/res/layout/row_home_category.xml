@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_8dp"
+        android:paddingBottom="@dimen/space_8dp"
+        android:paddingStart="@dimen/space_16dp"
+        android:paddingEnd="@dimen/space_16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카테고리"
+            android:textAppearance="@style/text.14sp.regular.dark"
+            android:gravity="center_vertical"
+            android:drawableEnd="@android:drawable/ic_input_add"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
