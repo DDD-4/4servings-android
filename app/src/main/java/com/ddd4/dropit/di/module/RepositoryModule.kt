@@ -1,35 +1,39 @@
 package com.ddd4.dropit.di.module
 
-import com.ddd4.data.mapper.DropitDataMapper
-import com.ddd4.data.mapper.DropitDataListMapper
-import com.ddd4.domain.repository.DropitRepository
-import com.ddd4.data.repository.DropitRepositoryImpl
-import com.ddd4.data.source.DropitLocalDataSource
+import com.ddd4.dropit.domain.repository.DropitRepository
+import com.ddd4.dropit.data.repository.DropitRepositoryImpl
+import com.ddd4.dropit.data.source.local.LocalDataSource
+import com.ddd4.dropit.data.source.local.LocalDataSourceImpl
+import com.ddd4.dropit.data.source.local.preferences.SharedPrefHelper
+import com.ddd4.dropit.data.source.local.room.DatabaseDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(ApplicationComponent::class)
 object RepositoryModule {
 
-    @Singleton
     @Provides
-    fun DropItRepository(
-        dropitLocalDataSource: DropitLocalDataSource,
-        dropitDataListMapper: DropitDataListMapper,
-        dropitDataMapper: DropitDataMapper,
-        ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    @Singleton
+    fun provideDropitRepository(
+        localDataSource: LocalDataSource
     ): DropitRepository {
-        return DropitRepositoryImpl(dropitLocalDataSource, dropitDataListMapper, dropitDataMapper, ioDispatcher)
+        return DropitRepositoryImpl(localDataSource)
     }
 
-    @Singleton
-    @Provides
-    fun provideIoDispatcher() = Dispatchers.IO
+    //@Provides
+    //@Singleton
+    //fun provideIoDispatcher() = Dispatchers.IO
 
+    @Provides
+    @Singleton
+    fun provideDatabaseRepository(
+        databaseDao: DatabaseDao,
+        sharedPrefHelper: SharedPrefHelper
+    ): LocalDataSource {
+        return LocalDataSourceImpl(databaseDao, sharedPrefHelper)
+    }
 }

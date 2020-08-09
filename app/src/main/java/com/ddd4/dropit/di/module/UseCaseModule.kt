@@ -1,21 +1,27 @@
 package com.ddd4.dropit.di.module
 
-import com.ddd4.domain.repository.DropitRepository
-import com.ddd4.domain.usecases.usecase.GetDummyUseCase
-import com.ddd4.domain.usecases.usecaseImpl.GetDummyUseCaseImpl
+import com.ddd4.dropit.domain.repository.DropitRepository
+import com.ddd4.dropit.domain.usecase.getFolderUseCase
+import com.ddd4.dropit.domain.usecase.getItemUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.components.ApplicationComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(ApplicationComponent::class)
 object UseCaseModule {
 
     @Provides
-    @ActivityScoped
-    fun provideDummyUseCase(dropitRepository: DropitRepository): GetDummyUseCase {
-        return GetDummyUseCaseImpl(dropitRepository)
+    @Singleton
+    fun provideFolderUseCase(dropitRepository: DropitRepository): getFolderUseCase {
+        return getFolderUseCase(dropitRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideItemUseCase(dropitRepository: DropitRepository): getItemUseCase {
+        return getItemUseCase(dropitRepository)
     }
 }
