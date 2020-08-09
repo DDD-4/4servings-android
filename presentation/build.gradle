@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+apply from: '../common-android.gradle'
+
+apply from: '../dependencies.gradle'
+
+android {
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    implementation project("$modularization.domain")
+    // android
+    implementation "$presentationDependencies.appcompat"
+    implementation "$presentationDependencies.ktx"
+    implementation "$presentationDependencies.constraint"
+    implementation "$presentationDependencies.material"
+    implementation "$presentationDependencies.fragmentKtx"
+    // hilt
+    implementation "$presentationDependencies.hiltAndroid"
+    kapt "$presentationDependencies.hiltAndroidCompiler"
+    implementation "$presentationDependencies.hiltViewmodel"
+    implementation "$presentationDependencies.hiltCommon"
+    kapt "$presentationDependencies.hiltCompiler"
+    // lifecycle
+    implementation "$presentationDependencies.lifecycleExtension"
+    implementation "$presentationDependencies.lifecycleLivedata"
+    implementation "$presentationDependencies.lifecycleViewmodel"
+    implementation "$presentationDependencies.lifecycleViewmodelState"
+    // coroutines
+    implementation "$presentationDependencies.coroutinesCore"
+    implementation "$presentationDependencies.coroutinesAndroid"
+    // gilde
+    implementation "$presentationDependencies.glide"
+    implementation "$presentationDependencies.glidePalette"
+    kapt "$presentationDependencies.glideCompiler"
+    // startup
+    implementation "$presentationDependencies.startup"
+}

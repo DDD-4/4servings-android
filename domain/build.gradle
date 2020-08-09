@@ -7,16 +7,13 @@ apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-
-    // architecture components
-    implementation "androidx.room:room-runtime:$versions.roomVersion"
-    implementation "androidx.room:room-ktx:$versions.roomVersion"
-    kapt "androidx.room:room-compiler:$versions.roomVersion"
-
-    // debugging
-    implementation "com.jakewharton.timber:timber:$versions.timberVersion"
+    // hilt
+    implementation "$domainDependencies.hiltAndroid"
+    kapt "$domainDependencies.hiltAndroidCompiler"
+    implementation "$domainDependencies.hiltViewmodel"
+    implementation "$domainDependencies.hiltCommon"
+    kapt "$domainDependencies.hiltCompiler"
+    // coroutines
+    implementation "$domainDependencies.coroutinesCore"
+    implementation "$domainDependencies.coroutinesAndroid"
 }
