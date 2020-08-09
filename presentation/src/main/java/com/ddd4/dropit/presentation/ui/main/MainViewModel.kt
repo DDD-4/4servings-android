@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
 import com.ddd4.dropit.domain.usecase.GetFolderUseCase
+
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.mapper.mapToPresentation
@@ -20,7 +21,6 @@ class MainViewModel @ViewModelInject constructor(
     val folderItems : LiveData<List<PresentationEntity.Folder>> = _folderItems
 
     val startFolder = SingleLiveEvent<Long>()
-
     val startCategory = SingleLiveEvent<Long>()
 
     init {

@@ -8,6 +8,7 @@
     <color name="textDark">#000000</color>
     <color name="textAccent">#0050FE</color>
     <color name="background_divider">#D8D8D8</color>
+<<<<<<< HEAD
 
     <color name="blue1">#0050fe</color>
 
@@ -23,4 +24,6 @@
 
     <color name="white">#ffffff</color>
     
+=======
+>>>>>>> [Upate] app 모듈에서 presentation 모듈 분리, Main UI
 </resources>
