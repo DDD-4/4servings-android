@@ -9,7 +9,7 @@ interface DatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFolder(folderData: DataEntity.Folder)
 
-    @Delete
+    @Update
     suspend fun updateFolder(folderData: DataEntity.Folder)
 
     @Delete
@@ -21,7 +21,7 @@ interface DatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertItem(folderData: DataEntity.Item)
 
-    @Delete
+    @Update
     suspend fun updateItem(folderData: DataEntity.Item)
 
     @Delete
