@@ -24,11 +24,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun setObserve() {
         mainViewModel.startFolder.observe(this, Observer { folderId ->
             startActivity(Intent(this, FolderActivity::class.java)
-                .putExtra("folderId", folderId))
+                .putExtra(EXTRA_NAME_FOLDER_ID, folderId))
         })
         mainViewModel.startCategory.observe(this, Observer { categoryId ->
             startActivity(Intent(this, CategoryActivity::class.java)
-                .putExtra("categoryId", categoryId))
+                .putExtra(EXTRA_NAME_CATEGORY_ID, categoryId))
         })
+    }
+
+    companion object {
+        const val EXTRA_NAME_FOLDER_ID = "folderId"
+        const val EXTRA_NAME_CATEGORY_ID = "categoryId"
     }
 }
