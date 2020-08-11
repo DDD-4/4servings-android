@@ -1,5 +1,6 @@
 package com.ddd4.dropit.data.source.local
 
+import com.ddd4.dropit.data.entity.DataEntity
 import com.ddd4.dropit.data.mapper.mapToDomain
 import com.ddd4.dropit.data.source.local.preferences.SharedPrefHelper
 import com.ddd4.dropit.data.source.local.room.DatabaseDao
@@ -11,12 +12,8 @@ class LocalDataSourceImpl(
 ): LocalDataSource {
 
     override suspend fun getFolders(): List<DomainEntity.Folder> =
-        databaseDao.selectFolders().map { data ->
-            data.mapToDomain()
-        }
+        databaseDao.selectFolders().map(DataEntity.Folder::mapToDomain)
 
     override suspend fun getItems(folderId: Long): List<DomainEntity.Item> =
-        databaseDao.selectItems(folderId).map { data ->
-            data.mapToDomain()
-        }
+        databaseDao.selectItems(folderId).map(DataEntity.Item::mapToDomain)
 }
