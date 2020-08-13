@@ -8,4 +8,19 @@
     <color name="textDark">#000000</color>
     <color name="textAccent">#0050FE</color>
     <color name="background_divider">#D8D8D8</color>
+
+    <color name="blue1">#0050fe</color>
+
+    <color name="gray1">#e4e4e4</color>
+    <color name="gray2">#c3c3c3</color>
+    <color name="gray3">#a9a9a9</color>
+    <color name="gray4">#a5a5a5</color>
+    <color name="gray5">#9e9e9e</color>
+    <color name="gray6">#979797</color>
+    <color name="gray7">#646464</color>
+
+    <color name="black">#000000</color>
+
+    <color name="white">#ffffff</color>
+    
 </resources>
