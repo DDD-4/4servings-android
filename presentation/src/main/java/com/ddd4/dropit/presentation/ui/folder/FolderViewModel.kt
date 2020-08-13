@@ -1,7 +1,5 @@
 package com.ddd4.dropit.presentation.ui.folder
 
-import android.util.SparseBooleanArray
-import androidx.core.util.putAll
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,15 +15,13 @@ import com.ddd4.dropit.presentation.mapper.mapToPresentation
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.*
-import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.ConcurrentMap
 
 class FolderViewModel @ViewModelInject constructor(
     private val getFolderUseCase: GetFolderUseCase
 ): BaseViewModel() {
 
     private val _folderItems = MutableLiveData<List<Folder>>()
-    val folderItems: LiveData<List<Folder>> = _folderItems
+
 
     private val _folderItemSorting = MutableLiveData<Boolean>()
     val folderItemSorting: LiveData<Boolean> = _folderItemSorting

@@ -15,11 +15,11 @@ import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+
 @AndroidEntryPoint
 class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_folder) {
 
     private val folderViewModel: FolderViewModel by viewModels()
-
     private lateinit var listAdapter: FolderAdapter
 
     override fun setBind() {
