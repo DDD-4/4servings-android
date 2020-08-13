@@ -1,0 +1,24 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- TextAppearance (Font & Size & Color) -->
+    <style name="text.18sp.bold.dark" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textDark</item>
+    </style>
+
+    <style name="text.14sp.regular.dark" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_18sp</item>
+        <item name="android:textColor">@color/textDark</item>
+    </style>
+
+</resources>

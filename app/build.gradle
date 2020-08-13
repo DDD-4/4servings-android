@@ -1,130 +1,36 @@
 apply plugin: 'com.android.application'
 
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
-apply plugin: 'kotlin-kapt'
-
-apply plugin: 'dagger.hilt.android.plugin'
+apply from: '../common-android.gradle'
 
 apply from: '../dependencies.gradle'
 
-
 android {
-    compileSdkVersion versions.compileSdk
     defaultConfig {
-        applicationId "com.ddd4.dropit"
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.compileSdk
-        versionCode versions.versionCode
-        versionName versions.versionName
+        applicationId "$application.id"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
     }
 
     buildFeatures {
         dataBinding = true
     }
-
-    androidExtensions {
-        experimental = true
-    }
-
-    lintOptions {
-        abortOnError false
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-
-    configurations{
-        all*.exclude group: 'com.google.guava', module: 'listenablefuture'
-    }
-
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-            returnDefaultValues = true
-        }
-    }
-
-    kapt {
-        generateStubs = true
-    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project("$modularization.presentation")
+    implementation project("$modularization.data")
+    implementation project("$modularization.domain")
+    // support library
     implementation 'com.android.support:appcompat-v7:28.0.0'
-
-    // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-
-    // android supports
-    implementation "com.google.android.material:material:$versions.materialVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintVersion"
-
-    // architecture components
-    implementation "androidx.fragment:fragment-ktx:$versions.fragmentVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycleVersion"
-    implementation "androidx.room:room-runtime:$versions.roomVersion"
-    implementation "androidx.room:room-ktx:$versions.roomVersion"
-    implementation project(path: ':domain')
-    implementation project(path: ':data')
-    kapt "androidx.room:room-compiler:$versions.roomVersion"
-    testImplementation "androidx.arch.core:core-testing:$versions.archCompomentVersion"
-
-    // dagger
-    implementation "com.google.dagger:hilt-android:$versions.daggerHiltAndroidVersion"
-    implementation "com.google.dagger:hilt-android-testing:$versions.daggerHiltAndroidVersion"
-    implementation "androidx.hilt:hilt-common:$versions.daggerHiltVersion"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.daggerHiltVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$versions.daggerHiltAndroidVersion"
-    kapt "androidx.hilt:hilt-compiler:$versions.daggerHiltVersion"
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$versions.daggerHiltAndroidVersion"
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$versions.daggerHiltAndroidVersion"
-
-    // coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutinesVersion"
-
-    // glide
-    implementation "com.github.bumptech.glide:glide:$versions.glideVersion"
-    implementation "com.github.florent37:glidepalette:$versions.glidePaletteVersion"
-    kapt "com.github.bumptech.glide:compiler:$versions.glideVersion"
-
-    // startup
-    implementation "androidx.startup:startup-runtime:$versions.startupVersion"
-
-    // debugging
-    implementation "com.jakewharton.timber:timber:$versions.timberVersion"
-
-    // unit test
-    testImplementation "junit:junit:$versions.junitVersion"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockitoKotlinVersion"
-    testImplementation "org.mockito:mockito-inline:$versions.mockitoInlineVersion"
-    testImplementation "org.robolectric:robolectric:$versions.robolectricVersion"
-    androidTestImplementation "androidx.test:core:$versions.androidxTest"
-    androidTestImplementation "com.google.truth:truth:$versions.truthVersion"
-    androidTestImplementation "androidx.test.ext:junit:$versions.androidxTestJunit"
-    androidTestImplementation "com.android.support.test:runner:$versions.androidTestRunner"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoVersion"
+    // hilt
+    implementation "$appDependencies.hiltAndroid"
+    kapt "$appDependencies.hiltAndroidCompiler"
+    implementation "$appDependencies.hiltViewmodel"
+    implementation "$appDependencies.hiltCommon"
+    kapt "$appDependencies.hiltCompiler"
+    //room
+    implementation "$appDependencies.roomRuntime"
+    implementation "$appDependencies.roomKtx"
+    kapt "$appDependencies.roomCompiler"
+    testImplementation "$appDependencies.archCoreTest"
 }
