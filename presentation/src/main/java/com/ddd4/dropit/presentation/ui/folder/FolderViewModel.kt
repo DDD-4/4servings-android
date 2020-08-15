@@ -53,6 +53,7 @@ class FolderViewModel @ViewModelInject constructor(
     val item: SingleLiveEvent<Folder> = _item
 
     init {
+        initView()
         getFolderItems()
         initView()
         sortByLatestButtonClick()
@@ -103,7 +104,6 @@ class FolderViewModel @ViewModelInject constructor(
             _selectImageButton.value = "취소"
         }
         _selectedImageState.value = !_selectedImageState.value!!
-    }
 
     fun nextButtonClicked(){
        if(_isButtonActivated.value!!) {

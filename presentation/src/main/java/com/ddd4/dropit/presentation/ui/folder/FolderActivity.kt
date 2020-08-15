@@ -42,6 +42,7 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
             startActivity(intent)
         })
         folderViewModel.nextButton.observe(this, Observer {
+<<<<<<< HEAD
             Toast.makeText(this, "${it.size}", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MoveFolderActivity::class.java)
             startActivity(intent)
@@ -65,5 +66,11 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
         val extra = intent.extras
         val alarmId = extra?.get("alarmId") as Long
         Timber.d("alarmId: $alarmId")
+=======
+            val intent = Intent(this, MoveFolderActivity::class.java)
+            startActivity(intent)
+        })
+
+>>>>>>> Add 2-1-2 folder selection layout
     }
 }
