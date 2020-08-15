@@ -40,4 +40,5 @@
     <dimen name="capture_radius">50dp</dimen>
     <dimen name="capture_line">2dp</dimen>
     <dimen name="button_elevation">8dp</dimen>
+
 </resources>

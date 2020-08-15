@@ -24,16 +24,30 @@ class FolderViewModel @ViewModelInject constructor(
     private val _folderItemSorting = MutableLiveData<Boolean>()
     val folderItemSorting: LiveData<Boolean> = _folderItemSorting
 
-    val sortByLatestButtonClicked = SingleLiveEvent<Void>()
-    val sortByExpirationButtonClicked = SingleLiveEvent<Void>()
-    val floatingButtonClicked = SingleLiveEvent<Void>()
+    val sortByLatestButton = SingleLiveEvent<Void>()
+    val sortByExpirationButton = SingleLiveEvent<Void>()
+    val floatingButton = SingleLiveEvent<Void>()
+    val nextButton = SingleLiveEvent<Void>()
 
-    val folderItemClicked = SingleLiveEvent<Long>()
+
+    private val _selectImageButton = SingleLiveEvent<String>()
+    val selectImageButton: SingleLiveEvent<String> = _selectImageButton
+
+    private val _selectedImageState = MutableLiveData<Boolean>()
+    val selectedImageState: LiveData<Boolean> = _selectedImageState
+
+    val folderItem = SingleLiveEvent<Long>()
 
 
     init {
+        initView()
         getFolderItems()
         sortByLatestButtonClick()
+    }
+
+    private fun initView(){
+        _selectedImageState.value = false
+        _selectImageButton.value = "선택"
     }
 
     private fun getFolderItems(){
@@ -53,17 +67,30 @@ class FolderViewModel @ViewModelInject constructor(
     }
 
     fun sortByLatestButtonClick() {
-        sortByLatestButtonClicked.call()
+        sortByLatestButton.call()
         _folderItemSorting.value = true
     }
 
     fun sortByExpirationButtonClick() {
-        sortByExpirationButtonClicked.call()
+        sortByExpirationButton.call()
         _folderItemSorting.value = false
     }
 
     fun floatingButtonClicked(){
-        floatingButtonClicked.call()
+        floatingButton.call()
+    }
+
+    fun selectImageButtonClicked() {
+        if (_selectedImageState.value!!) {
+            _selectImageButton.value = "선택"
+        } else {
+            _selectImageButton.value = "취소"
+        }
+        _selectedImageState.value = !_selectedImageState.value!!
+    }
+
+    fun nextButtonClicked(){
+        nextButton.call()
     }
 
 }

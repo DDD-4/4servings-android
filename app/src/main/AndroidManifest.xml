@@ -5,6 +5,7 @@
     package="com.ddd4.dropit">
     
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
@@ -26,15 +27,17 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-        <activity android:name=".presentation.ui.main.MainActivity">
+        <activity android:name=".presentation.ui.main.MainActivity"/>
+
+        <activity android:name=".presentation.ui.folder.FolderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.folder.FolderActivity" />
         <activity android:name=".presentation.ui.category.CategoryActivity"/>
+        <activity android:name=".presentation.ui.folder.MoveFolderActivity"/>
         <activity android:name=".presentation.ui.add.AddActivity" />
         <activity android:name=".presentation.ui.capture.CaptureActivity" />
     </application>

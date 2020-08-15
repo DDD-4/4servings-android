@@ -23,16 +23,21 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
     }
 
     override fun setObserve() {
-        folderViewModel.sortByLatestButtonClicked.observe(this, Observer {
+        folderViewModel.sortByLatestButton.observe(this, Observer {
             Timber.e("sort by latest button clicked")
         })
-        folderViewModel.sortByExpirationButtonClicked.observe(this, Observer {
+        folderViewModel.sortByExpirationButton.observe(this, Observer {
             Timber.e("sort by expiration button clicked")
         })
-        folderViewModel.floatingButtonClicked.observe(this, Observer {
+        folderViewModel.floatingButton.observe(this, Observer {
             val intent = Intent(this, AddActivity::class.java)
             startActivity(intent)
         })
+        folderViewModel.nextButton.observe(this, Observer {
+            val intent = Intent(this, MoveFolderActivity::class.java)
+            startActivity(intent)
+        })
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
