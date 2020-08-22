@@ -1,6 +1,9 @@
 package com.ddd4.dropit.presentation.ui.folder
 
+<<<<<<< HEAD
 import android.graphics.Color
+=======
+>>>>>>> Fix FolderAdapter due to dependence of view data
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +11,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+<<<<<<< HEAD
 import com.ddd4.dropit.presentation.BR
 import com.ddd4.dropit.presentation.databinding.RowDetailFolderBinding
 import com.ddd4.dropit.presentation.entity.PresentationEntity.*
@@ -16,6 +20,13 @@ import kotlinx.coroutines.selects.select
 
 class FolderAdapter(
     private val viewModel: FolderViewModel,
+=======
+import com.ddd4.dropit.presentation.databinding.RowDetailFolderBinding
+import com.ddd4.dropit.presentation.entity.PresentationEntity.*
+
+
+class FolderAdapter(
+>>>>>>> Fix FolderAdapter due to dependence of view data
     private val onItemClick: ItemHandler?= null
 ) :
     ListAdapter<Folder, FolderAdapter.FolderViewHolder>(FolderDiffCallback()) {
@@ -43,6 +54,7 @@ class FolderAdapter(
                 selectedView.put(i, false)
             }
             binding.folder = item
+<<<<<<< HEAD
 //            binding.setVariable(BR.selectedItem, selectedView)
 //            binding.setVariable(BR.indexKey, position)
             binding.viewShadow.visibility = View.GONE
@@ -63,6 +75,17 @@ class FolderAdapter(
                 else {
                     onItemClick?.onItemDetailClicked(item)
                 }
+=======
+            binding.viewShadow.visibility = View.GONE
+
+            binding.folderLayout.setOnClickListener {
+                selectedView.put(position, !selectedView.get(position))
+                binding.viewShadow.visibility =
+                    if(selectedView.get(position)) { View.VISIBLE }
+                    else { View.GONE }
+                onItemClick?.onItemClicked(item, selectedView.get(position))
+
+>>>>>>> Fix FolderAdapter due to dependence of view data
             }
         }
     }

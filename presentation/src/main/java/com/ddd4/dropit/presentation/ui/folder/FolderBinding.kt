@@ -10,21 +10,30 @@ import com.ddd4.dropit.presentation.base.adapter.BaseRecyclerView
 import com.ddd4.dropit.presentation.databinding.RowDetailFolderBinding
 import com.ddd4.dropit.presentation.entity.PresentationEntity
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.ddd4.dropit.presentation.util.loadDrawable
 import com.ddd4.dropit.presentation.util.loadResource
 =======
 >>>>>>> Add 2-1-2 folder selection layout
+=======
+import com.ddd4.dropit.presentation.util.loadDrawable
+import com.ddd4.dropit.presentation.util.loadResource
+>>>>>>> Fix FolderAdapter due to dependence of view data
 import com.ddd4.dropit.presentation.util.loadUrlCenterCrop
 import timber.log.Timber
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Fix FolderAdapter due to dependence of view data
 @BindingAdapter("folderItem")
 fun setRecyclerView(recyclerView: RecyclerView, list: List<PresentationEntity.Folder>?) {
     list?.let {
         (recyclerView.adapter as FolderAdapter).submitList(it)
         Timber.e("first binding end! size: ${it.size}")
         recyclerView.adapter?.notifyDataSetChanged()
+<<<<<<< HEAD
 =======
     @JvmStatic
     @BindingAdapter(value = ["folderItem"])
@@ -33,6 +42,8 @@ fun setRecyclerView(recyclerView: RecyclerView, list: List<PresentationEntity.Fo
             layoutId = R.layout.row_detail_folder, items = items, bindingVariableId = BR.detailFolderItem
         ) {}
 >>>>>>> Add 2-1-2 folder selection layout
+=======
+>>>>>>> Fix FolderAdapter due to dependence of view data
     }
 }
 
