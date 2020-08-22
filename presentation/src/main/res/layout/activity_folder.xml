@@ -8,6 +8,7 @@
             type="com.ddd4.dropit.presentation.ui.folder.FolderViewModel" />
         <import type="android.view.View"/>
         <import type="android.R.color"/>
+        <import type="android.R.drawable"/>
     </data>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
@@ -16,6 +17,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         app:elevation="0dp"
         app:liftOnScroll="true">
 
@@ -59,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:text="@{folderVM.selectImageButton}"
-                    android:onClick="@{() -> folderVM.selectImageButtonClicked()}"
+                    android:onClick="@{() -> folderVM.selectImageButtonClick()}"
                     app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tvTitle"
@@ -70,6 +72,7 @@
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -77,11 +80,11 @@
                 android:id="@+id/tvSortByLatest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sort_by_latest"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="@{folderVM.folderItemSorting ? @color/blue1 : @color/gray1}"
                 android:onClick="@{() -> folderVM.sortByLatestButtonClick()}"
+                android:padding="8dp"
+                android:text="@string/sort_by_latest"
+                android:textColor="@{folderVM.folderItemSorting ? @color/blue1 : @color/gray1}"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvSortByExpiration" />
 
@@ -89,13 +92,23 @@
                 android:id="@+id/tvSortByExpiration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:textColor="@{folderVM.folderItemSorting ? @color/gray1 : @color/blue1}"
                 android:onClick="@{() -> folderVM.sortByExpirationButtonClick()}"
+                android:padding="8dp"
                 android:text="@string/sort_by_expiration_date"
                 android:textAppearance="@style/text.12sp.regular.dark"
+                android:textColor="@{folderVM.folderItemSorting ? @color/gray1 : @color/blue1}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.ddd4.dropit.presentation.customview.BlockView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@+id/layout"
+                android:visibility="@{folderVM.selectedImageState? View.VISIBLE : View.INVISIBLE }"
+                android:background="#80FFFFFF"
+                app:layout_constraintTop_toTopOf="@+id/layout"
+                app:layout_constraintEnd_toEndOf="@+id/tvSortByExpiration"
+                app:layout_constraintBottom_toBottomOf="@+id/layout"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_16dp"
         android:visibility="@{folderVM.selectedImageState? View.INVISIBLE : View.VISIBLE }"
-        android:onClick="@{() -> folderVM.floatingButtonClicked()}"
+        android:onClick="@{() -> folderVM.floatingButtonClick()}"
         android:layout_gravity="bottom|end"/>
 
     <Button
@@ -143,8 +156,8 @@
         android:layout_gravity="bottom"
         android:onClick="@{() -> folderVM.nextButtonClicked()}"
         android:layout_margin="@dimen/space_16dp"
-        android:background="@drawable/bg_button"
-        android:text="폴더 선택"
+        android:background="@{folderVM.isButtonActivated ? @drawable/bg_active_button : @drawable/bg_inactive_button}"
+        android:text="@string/select_folder"
         android:textColor="#ffffff"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

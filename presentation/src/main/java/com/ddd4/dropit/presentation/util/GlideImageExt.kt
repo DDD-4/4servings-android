@@ -37,3 +37,7 @@ fun ImageView.loadDrawable(drawable: Drawable) {
 fun ImageView.loadBitmap(bitmap: Bitmap) {
     GlideApp.with(this).load(drawable).into(this)
 }
+
+    fun ImageView.loadResource(res: Int) {
+    GlideApp.with(this).load(res).into(this)
+}

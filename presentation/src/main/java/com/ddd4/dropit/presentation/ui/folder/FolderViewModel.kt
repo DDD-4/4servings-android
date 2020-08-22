@@ -1,5 +1,7 @@
 package com.ddd4.dropit.presentation.ui.folder
 
+import android.util.SparseBooleanArray
+import androidx.core.util.putAll
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,25 +12,40 @@ import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
+import com.ddd4.dropit.presentation.entity.PresentationEntity.Folder
 import com.ddd4.dropit.presentation.mapper.mapToPresentation
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
 
 class FolderViewModel @ViewModelInject constructor(
     private val getFolderUseCase: GetFolderUseCase
 ): BaseViewModel() {
 
-    private val _folderItems = MutableLiveData<List<PresentationEntity.Folder>>()
-    val folderItems: LiveData<List<PresentationEntity.Folder>> = _folderItems
+    private val _folderItems = MutableLiveData<List<Folder>>()
+    val folderItems: LiveData<List<Folder>> = _folderItems
 
     private val _folderItemSorting = MutableLiveData<Boolean>()
     val folderItemSorting: LiveData<Boolean> = _folderItemSorting
 
-    val sortByLatestButton = SingleLiveEvent<Void>()
-    val sortByExpirationButton = SingleLiveEvent<Void>()
-    val floatingButton = SingleLiveEvent<Void>()
-    val nextButton = SingleLiveEvent<Void>()
+    private val _isButtonActivated = MutableLiveData<Boolean>()
+    val isButtonActivated: LiveData<Boolean> = _isButtonActivated
 
+    private val _selectedImageList = MutableLiveData<ArrayList<Long>>()
+
+    private val _sortByLatestButton = SingleLiveEvent<Void>()
+    val sortByLatestButton: LiveData<Void> = _sortByLatestButton
+
+    private val _sortByExpirationButton = SingleLiveEvent<Void>()
+    val sortByExpirationButton:LiveData<Void> = _sortByExpirationButton
+
+    private val _floatingButton = SingleLiveEvent<Void>()
+    val floatingButton:LiveData<Void> = _floatingButton
+
+    private val _nextButton = SingleLiveEvent<ArrayList<Long>>()
+    val nextButton: LiveData<ArrayList<Long>> = _nextButton
 
     private val _selectImageButton = SingleLiveEvent<String>()
     val selectImageButton: SingleLiveEvent<String> = _selectImageButton
@@ -38,49 +55,51 @@ class FolderViewModel @ViewModelInject constructor(
 
     val folderItem = SingleLiveEvent<Long>()
 
-
     init {
-        initView()
         getFolderItems()
+        initView()
         sortByLatestButtonClick()
     }
 
     private fun initView(){
         _selectedImageState.value = false
         _selectImageButton.value = "선택"
+        _selectedImageList.value = arrayListOf()
     }
 
     private fun getFolderItems(){
         //TEST
         _folderItems.value =
-            listOf(PresentationEntity.Folder(
+            listOf(
+                Folder(
                 id = 0,
                 name = "test",
                 thumbnail = "https://bit.ly/2DCfOXL",
                 createAt = Date()),
 
-            PresentationEntity.Folder(
+            Folder(
                 id = 1,
                 name = "test2",
                 thumbnail = "https://bit.ly/2DCfOXL",
-                createAt = Date()))
+                createAt = Date())
+            )
     }
 
     fun sortByLatestButtonClick() {
-        sortByLatestButton.call()
+        _sortByLatestButton.call()
         _folderItemSorting.value = true
     }
 
     fun sortByExpirationButtonClick() {
-        sortByExpirationButton.call()
+        _sortByExpirationButton.call()
         _folderItemSorting.value = false
     }
 
-    fun floatingButtonClicked(){
-        floatingButton.call()
+    fun floatingButtonClick(){
+        _floatingButton.call()
     }
 
-    fun selectImageButtonClicked() {
+    fun selectImageButtonClick() {
         if (_selectedImageState.value!!) {
             _selectImageButton.value = "선택"
         } else {
@@ -90,7 +109,29 @@ class FolderViewModel @ViewModelInject constructor(
     }
 
     fun nextButtonClicked(){
-        nextButton.call()
+       if(_isButtonActivated.value!!) {
+           _nextButton.value = _selectedImageList.value //call
+       }
     }
 
+    val onItemClickListener by lazy {
+        object : ItemHandler {
+            override fun <T> onItemClicked(item: T, visibility: Boolean) {
+                if (selectImageButton.value == "취소") {
+                    when(visibility) {
+                        true -> {
+                            _selectedImageList.value?.add((item as Folder).id)
+                        }
+                        false -> {
+                            _selectedImageList.value?.remove((item as Folder).id)
+                        }
+                    }
+                } else {
+                    _selectedImageList.value?.clear()
+                }
+                _isButtonActivated.value = _selectedImageList.value?.isNotEmpty()
+
+            }
+        }
+    }
 }
