@@ -5,8 +5,35 @@
     <dimen name="space_8dp">8dp</dimen>
     <dimen name="space_4dp">4dp</dimen>
     <!-- Text -->
+    <dimen name="text_20sp">20sp</dimen>
     <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_12sp">12sp</dimen>
     <dimen name="text_line_extra">4dp</dimen>
+    <!-- Button -->
+    <dimen name="button_height">52dp</dimen>
+    <dimen name="button_radius">8dp</dimen>
     <!-- Component -->
     <dimen name="divider_height">1dp</dimen>
+    <dimen name="image_line">1dp</dimen>
+    <dimen name="space_20dp">20dp</dimen>
+    <dimen name="space_14dp">14dp</dimen>
+    <dimen name="progress_height">10dp</dimen>
+    <dimen name="progress_radius">50dp</dimen>
+    <dimen name="space_40dp">40dp</dimen>
+    <dimen name="space_10dp">10dp</dimen>
+    <dimen name="space_100dp">100dp</dimen>
+    <dimen name="space_36dp">36dp</dimen>
+    <dimen name="card_add_category_size">106dp</dimen>
+    <dimen name="space_6dp">6dp</dimen>
+    <dimen name="card_add_category_radius">6dp</dimen>
+    <dimen name="space_3dp">3dp</dimen>
+    <dimen name="subcategory_radius">50dp</dimen>
+    <dimen name="subcategory_line">2dp</dimen>
+    <dimen name="text_14sp">14sp</dimen>
+    <dimen name="card_add_category_elevation">4dp</dimen>
+    <dimen name="date_selector_line">1dp</dimen>
+    <dimen name="space_24dp">24dp</dimen>
+    <dimen name="space_9dp">9dp</dimen>
+    <dimen name="space_12dp">12dp</dimen>
 </resources>

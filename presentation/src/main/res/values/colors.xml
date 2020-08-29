@@ -6,7 +6,10 @@
     <color name="colorAccent">#0050FE</color>
     <!-- Text -->
     <color name="textDark">#000000</color>
+    <color name="textLight">#FFFFFF</color>
     <color name="textAccent">#0050FE</color>
+
+<!--feature/folder-ui-->
     <color name="background_divider">#D8D8D8</color>
 
     <color name="blue1">#0050fe</color>
@@ -22,4 +25,19 @@
     <color name="black">#000000</color>
 
     <color name="white">#ffffff</color>
+
+<!--    feature/add -->
+    <color name="textHint">#C3C3C3</color>
+    <!-- Line -->
+    <color name="background_view_divider">#D8D8D8</color>
+    <color name="background_item_divider">#979797</color>
+    <color name="image_line_add">#979797</color>
+    <!-- Button -->
+    <color name="button_default">#9E9E9E</color>
+    <color name="button_activate">#0050FE</color>
+    <!-- Progress -->
+    <color name="progress_background">#E4E4E4</color>
+    <color name="progress_state_background">#9E9E9E</color>
+    <color name="subcategory_line">#C3C3C3</color>
+    <color name="date_selector_line">#C3C3C3</color>
 </resources>
