@@ -20,6 +20,7 @@ dependencies {
     implementation "$presentationDependencies.constraint"
     implementation "$presentationDependencies.material"
     implementation "$presentationDependencies.fragmentKtx"
+    implementation "$presentationDependencies.legacySupport"
     // hilt
     implementation "$presentationDependencies.hiltAndroid"
     kapt "$presentationDependencies.hiltAndroidCompiler"

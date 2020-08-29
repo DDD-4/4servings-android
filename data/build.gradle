@@ -20,4 +20,6 @@ dependencies {
     // coroutines
     implementation "$dataDependencies.coroutinesCore"
     implementation "$dataDependencies.coroutinesAndroid"
+    //gson
+    implementation "$dataDependencies.gson"
 }

@@ -1,5 +1,6 @@
 package com.ddd4.dropit.di.module
 
+import android.content.Context
 import com.ddd4.dropit.domain.repository.DropitRepository
 import com.ddd4.dropit.data.repository.DropitRepositoryImpl
 import com.ddd4.dropit.data.source.local.LocalDataSource
@@ -10,6 +11,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
 
 @Module
@@ -24,16 +26,13 @@ object RepositoryModule {
         return DropitRepositoryImpl(localDataSource)
     }
 
-    //@Provides
-    //@Singleton
-    //fun provideIoDispatcher() = Dispatchers.IO
-
     @Provides
     @Singleton
     fun provideDatabaseRepository(
         databaseDao: DatabaseDao,
-        sharedPrefHelper: SharedPrefHelper
+        sharedPrefHelper: SharedPrefHelper,
+        @ApplicationContext context: Context
     ): LocalDataSource {
-        return LocalDataSourceImpl(databaseDao, sharedPrefHelper)
+        return LocalDataSourceImpl(databaseDao, sharedPrefHelper, context)
     }
 }
