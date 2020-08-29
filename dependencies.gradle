@@ -26,6 +26,7 @@ ext {
             lifecycleVersion        : '2.2.0',
             roomVersion             : '2.2.5',
             archCompomentVersion    : '2.1.0',
+            navigationVersion       : '2.3.0',
 
             // startup
             startupVersion          : '1.0.0-alpha01',
@@ -86,6 +87,8 @@ ext {
             lifecycleLivedata       : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion",
             lifecycleViewmodel      : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion",
             lifecycleViewmodelState : "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycleVersion",
+            navigationFragment      : "androidx.navigation:navigation-fragment-ktx:$versions.navigationVersion",
+            navigationUi            : "androidx.navigation:navigation-ui-ktx:$versions.navigationVersion",
             coroutinesCore          : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesVersion",
             coroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion",
             glide                   : "com.github.bumptech.glide:glide:$versions.glideVersion",

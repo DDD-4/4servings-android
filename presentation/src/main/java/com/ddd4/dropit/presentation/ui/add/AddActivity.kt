@@ -1,12 +1,36 @@
 package com.ddd4.dropit.presentation.ui.add
 
+import android.os.Bundle
+import androidx.navigation.findNavController
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
 import com.ddd4.dropit.presentation.databinding.ActivityAddBinding
+import com.ddd4.dropit.presentation.util.navigateUpOrFinish
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_add.*
 
+@AndroidEntryPoint
 class AddActivity : BaseActivity<ActivityAddBinding>(R.layout.activity_add) {
 
     override fun setBind() {
         
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setupActionBar()
+    }
+
+    private fun setupActionBar() {
+        setSupportActionBar(toolbar)
+        supportActionBar.apply {
+            this?.setDisplayHomeAsUpEnabled(true)
+            this?.setDisplayShowHomeEnabled(true)
+            this?.setHomeAsUpIndicator(R.drawable.ic_back_gray_32dp)
+            this?.setDisplayShowTitleEnabled(false)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return findNavController(R.id.addNavHost).navigateUpOrFinish(this)
     }
 }
