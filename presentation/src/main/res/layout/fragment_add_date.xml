@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="addVM"
+            type="com.ddd4.dropit.presentation.ui.add.AddSharedViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space_20dp"
+            android:paddingBottom="@dimen/space_100dp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_date"
+                android:textAppearance="@style/text.20sp.bold.dark"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginEnd="@dimen/space_20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/llKnowDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@{addVM.isDateState ? @drawable/bg_date_activate : @drawable/bg_date_default}"
+                android:orientation="horizontal"
+                android:padding="@dimen/space_16dp"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginEnd="@dimen/space_20dp"
+                android:layout_marginTop="@dimen/space_36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_add_date_start"
+                    android:textAppearance="@style/text.12sp.regular.dark"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/text_add_date_hint"
+                    android:text="@{addVM.pickerDate}"
+                    android:textAppearance="@style/text.16sp.regular.hint"
+                    android:textColor="@{addVM.isDateState ? @color/textAccent : @color/textHint}"
+                    app:datePickerListener="@{addVM.datePickerListener}"
+                    android:gravity="end" />
+
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/rbtnLittleDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_add_date_little"
+                android:textAppearance="@style/text.12sp.regular.dark"
+                android:paddingStart="@dimen/space_9dp"
+                android:paddingEnd="@dimen/space_9dp"
+                android:layout_marginTop="@dimen/space_24dp"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginEnd="@dimen/space_20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llKnowDate"/>
+
+            <RadioButton
+                android:id="@+id/rbtnDontDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_add_date_dont"
+                android:textAppearance="@style/text.12sp.regular.dark"
+                android:paddingStart="@dimen/space_9dp"
+                android:paddingEnd="@dimen/space_9dp"
+                android:layout_marginTop="@dimen/space_24dp"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginEnd="@dimen/space_20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rbtnLittleDate"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
