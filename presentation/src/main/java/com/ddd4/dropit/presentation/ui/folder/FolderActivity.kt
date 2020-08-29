@@ -10,6 +10,8 @@ import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
 import com.ddd4.dropit.presentation.databinding.ActivityFolderBinding
 import com.ddd4.dropit.presentation.ui.add.AddActivity
+import com.ddd4.dropit.presentation.ui.detailFolder.FolderItemDetailActivity
+import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -44,10 +46,15 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
             val intent = Intent(this, MoveFolderActivity::class.java)
             startActivity(intent)
         })
+        folderViewModel.item.observe(this, Observer {
+            Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, FolderItemDetailActivity::class.java)
+            startActivity(intent)
+        })
     }
 
     private fun setupAdapter() {
-        listAdapter = FolderAdapter(folderViewModel.onItemClickListener)
+        listAdapter = FolderAdapter(folderViewModel, folderViewModel.onItemClickListener)
         binding.rvDetailFolder.layoutManager = GridLayoutManager(this, 3)
         binding.rvDetailFolder.adapter = listAdapter
     }

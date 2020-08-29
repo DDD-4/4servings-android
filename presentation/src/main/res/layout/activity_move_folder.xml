@@ -10,7 +10,8 @@
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="fill_parent"
@@ -33,20 +34,22 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="16dp">
+                    android:padding="12dp">
 
                     <ImageButton
                         android:id="@+id/btnBack"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/ic_arrow_back"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:background="@drawable/ic_arrow_back" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:text="이동할 폴더를 선택해주세요."
                         android:textAppearance="@style/text.18sp.bold.dark"
                         app:layout_constraintBottom_toBottomOf="@+id/btnBack"
@@ -69,14 +72,37 @@
                 android:layout_height="match_parent"
                 android:padding="12dp">
 
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="?android:selectableItemBackground"
+                    android:src="@drawable/ic_group_8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:background="@null"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:text="폴더 만들기"
+                    app:layout_constraintStart_toStartOf="@+id/imageButton"
+                    app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+                <TextView
+                    android:id="@+id/tvFolder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="55dp"
                     android:text="폴더"
                     android:textAppearance="@style/text.18sp.bold.dark"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvFolderList"
@@ -87,7 +113,7 @@
                     app:spanCount="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvFolder" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

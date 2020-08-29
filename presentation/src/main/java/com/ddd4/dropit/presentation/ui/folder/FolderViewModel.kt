@@ -53,7 +53,8 @@ class FolderViewModel @ViewModelInject constructor(
     private val _selectedImageState = MutableLiveData<Boolean>()
     val selectedImageState: LiveData<Boolean> = _selectedImageState
 
-    val folderItem = SingleLiveEvent<Long>()
+    private val _item = SingleLiveEvent<Folder>()
+    val item: SingleLiveEvent<Folder> = _item
 
     init {
         getFolderItems()
@@ -73,13 +74,13 @@ class FolderViewModel @ViewModelInject constructor(
             listOf(
                 Folder(
                 id = 0,
-                name = "test",
+                name = "D-12",
                 thumbnail = "https://bit.ly/2DCfOXL",
                 createAt = Date()),
 
             Folder(
                 id = 1,
-                name = "test2",
+                name = "D-12",
                 thumbnail = "https://bit.ly/2DCfOXL",
                 createAt = Date())
             )
@@ -130,7 +131,10 @@ class FolderViewModel @ViewModelInject constructor(
                     _selectedImageList.value?.clear()
                 }
                 _isButtonActivated.value = _selectedImageList.value?.isNotEmpty()
+            }
 
+            override fun <T> onItemDetailClicked(item: T) {
+                _item.value = (item as Folder)
             }
         }
     }

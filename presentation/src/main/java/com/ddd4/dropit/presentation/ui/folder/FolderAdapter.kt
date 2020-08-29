@@ -1,5 +1,6 @@
 package com.ddd4.dropit.presentation.ui.folder
 
+import android.graphics.Color
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ddd4.dropit.presentation.BR
 import com.ddd4.dropit.presentation.databinding.RowDetailFolderBinding
 import com.ddd4.dropit.presentation.entity.PresentationEntity.*
+import kotlinx.coroutines.selects.select
 
 
 class FolderAdapter(
+    private val viewModel: FolderViewModel,
     private val onItemClick: ItemHandler?= null
 ) :
     ListAdapter<Folder, FolderAdapter.FolderViewHolder>(FolderDiffCallback()) {
@@ -39,15 +43,26 @@ class FolderAdapter(
                 selectedView.put(i, false)
             }
             binding.folder = item
+//            binding.setVariable(BR.selectedItem, selectedView)
+//            binding.setVariable(BR.indexKey, position)
             binding.viewShadow.visibility = View.GONE
 
             binding.folderLayout.setOnClickListener {
-                selectedView.put(position, !selectedView.get(position))
-                binding.viewShadow.visibility =
-                    if(selectedView.get(position)) { View.VISIBLE }
-                    else { View.GONE }
-                onItemClick?.onItemClicked(item, selectedView.get(position))
-
+                if(viewModel.selectedImageState.value!!) { //다중선택시
+                    selectedView.put(position, !selectedView.get(position))
+                        if (selectedView.get(position)) {
+                            binding.viewShadow.visibility = View.VISIBLE
+                           // binding.tvDetailFolder.setTextColor(Color.WHITE)
+                        } else {
+                            binding.viewShadow.visibility = View.GONE
+                           //
+                            // binding.tvDetailFolder.setTextColor(Color.BLACK)
+                        }
+                    onItemClick?.onItemClicked(item, selectedView.get(position))
+                }
+                else {
+                    onItemClick?.onItemDetailClicked(item)
+                }
             }
         }
     }
