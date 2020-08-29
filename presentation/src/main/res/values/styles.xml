@@ -5,9 +5,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
 
     <!-- TextAppearance (Font & Size & Color) -->
+    <style name="text.20sp.bold.dark" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textDark</item>
+    </style>
+
     <style name="text.18sp.bold.dark" parent="@android:style/Widget.DeviceDefault.TextView">
         <!--<item name="fontFamily">@font/xxx</item>-->
         <item name="android:textSize">@dimen/text_18sp</item>
@@ -15,10 +24,67 @@
         <item name="android:textColor">@color/textDark</item>
     </style>
 
-    <style name="text.14sp.regular.dark" parent="@android:style/Widget.DeviceDefault.TextView">
+    <style name="text.18sp.bold.light" parent="@android:style/Widget.DeviceDefault.TextView">
         <!--<item name="fontFamily">@font/xxx</item>-->
         <item name="android:textSize">@dimen/text_18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textLight</item>
+    </style>
+
+    <style name="text.16sp.regular.dark" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_16sp</item>
         <item name="android:textColor">@color/textDark</item>
+    </style>
+
+    <style name="text.16sp.regular.hint" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_16sp</item>
+        <item name="android:textColor">@color/textHint</item>
+    </style>
+
+    <style name="text.14sp.regular.dark" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_14sp</item>
+        <item name="android:textColor">@color/textDark</item>
+    </style>
+
+    <style name="text.14sp.regular.light" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_14sp</item>
+        <item name="android:textColor">@color/textLight</item>
+    </style>
+
+    <style name="text.14sp.regular.hint" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_14sp</item>
+        <item name="android:textColor">@color/textHint</item>
+        <item name="android:lineSpacingExtra">@dimen/text_line_extra</item>
+    </style>
+
+    <style name="text.14sp.bold.accent" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textAccent</item>
+    </style>
+
+    <style name="text.12sp.regular.dark" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_12sp</item>
+        <item name="android:textColor">@color/textDark</item>
+    </style>
+
+    <style name="text.12sp.regular.hint" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_12sp</item>
+        <item name="android:textColor">@color/textHint</item>
+    </style>
+
+    <style name="text.12sp.bold.hint" parent="@android:style/Widget.DeviceDefault.TextView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_12sp</item>
+        <item name="android:textColor">@color/textHint</item>
     </style>
 
 </resources>
