@@ -1,4 +1,4 @@
-package com.ddd4.dropit.presentation.ui.folder
+package com.ddd4.dropit.presentation.ui.moveFolder
 
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
