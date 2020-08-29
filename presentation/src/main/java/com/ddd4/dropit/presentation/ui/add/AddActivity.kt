@@ -1,6 +1,7 @@
 package com.ddd4.dropit.presentation.ui.add
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
@@ -12,8 +13,14 @@ import kotlinx.android.synthetic.main.activity_add.*
 @AndroidEntryPoint
 class AddActivity : BaseActivity<ActivityAddBinding>(R.layout.activity_add) {
 
+    private val addSharedViewModel: AddSharedViewModel by viewModels()
+
     override fun setBind() {
-        
+        binding.apply {
+            addVM = addSharedViewModel
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
