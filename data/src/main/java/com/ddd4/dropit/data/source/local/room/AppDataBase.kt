@@ -7,7 +7,10 @@ import androidx.room.TypeConverters
 import com.ddd4.dropit.data.entity.DataEntity
 import java.util.*
 
-@Database(entities = [DataEntity.Folder::class, DataEntity.Item::class], version = 1, exportSchema = true)
+@Database(entities = [
+    DataEntity.Folder::class, DataEntity.Item::class,
+    DataEntity.Category::class, DataEntity.SubCategory::class]
+    , version = 1, exportSchema = true)
 @TypeConverters(DateConverter::class)
 abstract class AppDataBase: RoomDatabase(){
     abstract fun databaseDao(): DatabaseDao
