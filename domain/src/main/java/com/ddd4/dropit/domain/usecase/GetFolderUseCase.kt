@@ -8,13 +8,6 @@ import java.lang.Exception
 class GetFolderUseCase(
     private val dropitRepository: DropitRepository
 ) {
-
     suspend fun execute(): Result<List<DomainEntity.Folder>> =
-        try {
-            dropitRepository.getFolders().let { data ->
-                Result.Success(data)
-            }
-        } catch (e: Exception) {
-            Result.Error(e)
-        }
+        dropitRepository.getFolderItems()
 }

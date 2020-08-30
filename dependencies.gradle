@@ -20,12 +20,15 @@ ext {
             ktxVersion                  : '1.2.0',
             constraintlayoutVersion     : '1.1.3',
             materialVersion             : '1.3.0-alpha02',
+            legacySupportVersion        : '1.0.0',
+            gsonVersion                 : '2.8.5',
 
             // architecture components
             fragmentVersion         : '1.2.5',
             lifecycleVersion        : '2.2.0',
             roomVersion             : '2.2.5',
             archCompomentVersion    : '2.1.0',
+            navigationVersion       : '2.3.0',
 
             // startup
             startupVersion          : '1.0.0-alpha01',
@@ -76,6 +79,7 @@ ext {
             ktx                     : "androidx.core:core-ktx:$versions.ktxVersion",
             constraint              : "androidx.constraintlayout:constraintlayout:$versions.constraintlayoutVersion",
             material                : "com.google.android.material:material:$versions.materialVersion",
+            legacySupport           : "androidx.legacy:legacy-support-v4:$versions.legacySupportVersion",
             hiltAndroid             : "com.google.dagger:hilt-android:$versions.hilt",
             hiltAndroidCompiler     : "com.google.dagger:hilt-android-compiler:$versions.hilt", //kapt
             hiltCommon              : "androidx.hilt:hilt-common:$versions.hiltLifecycle",
@@ -86,6 +90,8 @@ ext {
             lifecycleLivedata       : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion",
             lifecycleViewmodel      : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion",
             lifecycleViewmodelState : "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycleVersion",
+            navigationFragment      : "androidx.navigation:navigation-fragment-ktx:$versions.navigationVersion",
+            navigationUi            : "androidx.navigation:navigation-ui-ktx:$versions.navigationVersion",
             coroutinesCore          : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesVersion",
             coroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion",
             glide                   : "com.github.bumptech.glide:glide:$versions.glideVersion",
@@ -113,7 +119,8 @@ ext {
             roomCompiler            : "androidx.room:room-compiler:$versions.roomVersion", //kapt
             archCoreTest            : "androidx.arch.core:core-testing:$versions.archCompomentVersion", //testImplementation
             coroutinesCore          : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0",
-            coroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
+            coroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0",
+            gson                    : "com.google.code.gson:gson:$versions.gsonVersion"
     ]
     testDependencies = [
             junit                   : "junit:junit:$versions.junitVersion",

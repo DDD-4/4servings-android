@@ -4,6 +4,8 @@ apply from: '../common-android.gradle'
 
 apply from: '../dependencies.gradle'
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     buildFeatures {
         dataBinding = true
@@ -18,6 +20,7 @@ dependencies {
     implementation "$presentationDependencies.constraint"
     implementation "$presentationDependencies.material"
     implementation "$presentationDependencies.fragmentKtx"
+    implementation "$presentationDependencies.legacySupport"
     // hilt
     implementation "$presentationDependencies.hiltAndroid"
     kapt "$presentationDependencies.hiltAndroidCompiler"
@@ -29,6 +32,9 @@ dependencies {
     implementation "$presentationDependencies.lifecycleLivedata"
     implementation "$presentationDependencies.lifecycleViewmodel"
     implementation "$presentationDependencies.lifecycleViewmodelState"
+    // navigation
+    implementation "$presentationDependencies.navigationFragment"
+    implementation "$presentationDependencies.navigationUi"
     // coroutines
     implementation "$presentationDependencies.coroutinesCore"
     implementation "$presentationDependencies.coroutinesAndroid"

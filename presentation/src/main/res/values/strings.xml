@@ -5,4 +5,19 @@
     <!-- Text -->
     <string name="home_title_folder">폴더</string>
     <string name="home_title_category">카테고리</string>
+    <string name="button_text_next">다음</string>
+    <string name="title_section">어떤 제품인지 알려주세요.</string>
+    <string name="title_contents">조금 알 것 같아요.</string>
+    <string name="description_contents">등록 이미지</string>
+    <string name="hint_contents">이름을 입력해주세요.</string>
+    <string name="title_date">거의 다 됐어요!</string>
+    <string name="text_add_image">여기를 눌러\n사진을 등록해주세요.</string>
+    <string name="description_category">카테고리 이미지</string>
+    <string name="text_add_date_start">개봉일</string>
+    <string name="text_add_date_hint">날짜를 선택해주세요.</string>
+    <string name="text_add_date_little">기억이 날 듯 말 듯</string>
+    <string name="text_add_date_dont">잘 모르겠어요</string>
+    <string name="text_default_folder">최근항목</string>
+    <string name="text_add_item">등록하러 가기</string>
+    <string name="text_add_item_hint">아직 버릴 물건이 없어요.\n제품을 등록하면\n버릴 날짜를 알려드릴게요.</string>
 </resources>
