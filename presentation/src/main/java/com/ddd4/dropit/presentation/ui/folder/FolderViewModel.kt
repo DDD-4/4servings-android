@@ -65,6 +65,7 @@ class FolderViewModel @ViewModelInject constructor(
         _selectedImageState.value = false
         _selectImageButton.value = "선택"
         _selectedImageList.value = arrayListOf()
+        _isButtonActivated.value = false
     }
 
     private fun getFolderItems(){

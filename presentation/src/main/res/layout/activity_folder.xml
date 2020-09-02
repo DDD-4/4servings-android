@@ -62,7 +62,6 @@
                     android:id="@+id/ibSelectImage"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:text="@{folderVM.selectImageButton}"
                     android:onClick="@{() -> folderVM.selectImageButtonClick()}"
                     app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -146,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_16dp"
-        android:visibility="@{folderVM.selectedImageState? View.INVISIBLE : View.VISIBLE }"
+        android:src="@drawable/ic_add_white_24dp"
         android:onClick="@{() -> folderVM.floatingButtonClick()}"
         android:layout_gravity="bottom|end"/>
 
@@ -154,7 +153,6 @@
         android:id="@+id/folderRectangleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="@{folderVM.selectedImageState? View.VISIBLE : View.INVISIBLE }"
         android:layout_gravity="bottom"
         android:onClick="@{() -> folderVM.nextButtonClicked()}"
         android:layout_margin="@dimen/space_16dp"
