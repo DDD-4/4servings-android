@@ -72,6 +72,7 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
         })
     }
 
+    //TODO FIX
     private fun setupAdapter() {
         listAdapter = FolderAdapter(folderViewModel, folderViewModel.onItemClickListener)
         binding.rvDetailFolder.layoutManager = GridLayoutManager(this, 3)

@@ -18,7 +18,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
+        android:paddingBottom="@dimen/space_16dp"
         app:elevation="0dp"
         app:liftOnScroll="true">
 
@@ -37,7 +37,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="12dp">
+                android:padding="@dimen/space_12dp">
 
                 <ImageButton
                     android:id="@+id/btnBack"
@@ -51,7 +51,7 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:paddingLeft="@dimen/space_16dp"
                     android:text="@string/title"
                     android:textAppearance="@style/text.18sp.bold.dark"
                     app:layout_constraintBottom_toBottomOf="@+id/btnBack"
@@ -62,11 +62,11 @@
                     android:id="@+id/ibSelectImage"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
+                    android:paddingRight="@dimen/space_8dp"
                     android:onClick="@{() -> folderVM.selectImageButtonClick()}"
                     app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tvTitle"
-                    app:srcCompat="@drawable/abc_vector_test"/>
+                    app:layout_constraintTop_toTopOf="@+id/tvTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> folderVM.sortByLatestButtonClick()}"
-                android:padding="8dp"
+                android:paddingRight="@dimen/space_12dp"
                 android:text="@string/sort_by_latest"
                 android:textColor="@{folderVM.folderItemSorting ? @color/blue1 : @color/gray1}"
                 android:textSize="12sp"
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> folderVM.sortByExpirationButtonClick()}"
-                android:padding="8dp"
+                android:paddingRight="@dimen/space_20dp"
                 android:text="@string/sort_by_expiration_date"
                 android:textAppearance="@style/text.12sp.regular.dark"
                 android:textColor="@{folderVM.folderItemSorting ? @color/gray1 : @color/blue1}"

@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
         <import type="android.view.View"/>
         <import type="android.R.color"/>
     </data>
@@ -34,7 +33,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="12dp">
+                    android:padding="@dimen/space_12dp">
 
                     <ImageButton
                         android:id="@+id/btnBack"
@@ -49,8 +48,8 @@
                         android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="이동할 폴더를 선택해주세요."
+                        android:layout_marginStart="@dimen/space_16dp"
+                        android:text="@string/select_folder_to_move"
                         android:textAppearance="@style/text.18sp.bold.dark"
                         app:layout_constraintBottom_toBottomOf="@+id/btnBack"
                         app:layout_constraintStart_toEndOf="@+id/btnBack"
@@ -70,13 +69,13 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="12dp">
+                android:padding="@dimen/space_12dp">
 
                 <ImageButton
                     android:id="@+id/imageButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="@dimen/space_32dp"
                     android:background="?android:selectableItemBackground"
                     android:src="@drawable/ic_group_8"
                     app:layout_constraintStart_toStartOf="parent"
@@ -86,11 +85,10 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginTop="@dimen/space_12dp"
                     android:background="@null"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:text="폴더 만들기"
+                    android:textAppearance="@style/text.14sp.regular.dark"
+                    android:text="@string/create_folder"
                     app:layout_constraintStart_toStartOf="@+id/imageButton"
                     app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
@@ -98,8 +96,8 @@
                     android:id="@+id/tvFolder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="55dp"
-                    android:text="폴더"
+                    android:layout_marginTop="@dimen/space_55dp"
+                    android:text="@string/home_title_folder"
                     android:textAppearance="@style/text.18sp.bold.dark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />

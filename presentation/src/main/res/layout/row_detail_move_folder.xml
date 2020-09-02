@@ -10,7 +10,7 @@
         android:id="@+id/ivFolder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="13dp"
+        android:paddingBottom="@dimen/space_12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />

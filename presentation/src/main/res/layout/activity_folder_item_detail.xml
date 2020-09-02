@@ -7,8 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp">
+    android:paddingStart="@dimen/space_20dp"
+    android:paddingEnd="@dimen/space_20dp">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="fill_parent"
@@ -45,18 +45,21 @@
                     android:id="@+id/ibSelectImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="편집"
+                    android:padding="@dimen/space_10dp"
+                    android:text="@string/edit"
+                    android:textAppearance="@style/text.14sp.regular.dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tvDelete"
+                    android:textAppearance="@style/text.14sp.regular.gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:padding="10dp"
-                    android:text="삭제"
+                    android:layout_marginEnd="@dimen/space_6dp"
+                    android:padding="@dimen/space_10dp"
+                    android:text="@string/delete"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ibSelectImage"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -80,10 +83,10 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/imageView"
-            android:layout_width="52dp"
-            android:layout_height="22dp"
-            android:layout_marginTop="20dp"
+            android:id="@+id/tvDday"
+            android:layout_width="@dimen/dday_button_width"
+            android:layout_height="@dimen/dday_button_height"
+            android:layout_marginTop="@dimen/space_20dp"
             android:background="@drawable/bg_dday_button"
             android:gravity="center"
             android:text="D-22"
@@ -93,94 +96,98 @@
 
         <EditText
             android:id="@+id/editText"
+            style="@style/text.24sp.regular.dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="제품 이름은 10글자 이내"
-            android:textColor="#000000"
-            android:textSize="24sp"
+            android:layout_marginTop="@dimen/space_6dp"
+            android:hint="@string/text_hint"
             android:enabled="false"
             android:focusable="false"
-            android:background="@null"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDday" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/ivItem"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="@dimen/space_28dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText" />
 
-        <View
-            android:id="@+id/view"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutDropDay"
             android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:layout_marginTop="18dp"
+            android:layout_height="@dimen/layout_height"
+            android:layout_marginTop="@dimen/space_18dp"
             android:background="@drawable/bg_blue_border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/ivItem" >
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="버리는 날"
-            android:textColor="@color/blue1"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
+            android:textAppearance="@style/text.12sp.regular.accent"
+            android:text="@string/drop_day"
+            app:layout_constraintBottom_toBottomOf="@+id/layoutDropDay"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view" />
+            app:layout_constraintTop_toTopOf="@+id/layoutDropDay" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvDropDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:text="2020년 8월 12일"
-            android:textColor="@color/blue1"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
+            android:padding="@dimen/space_20dp"
+            tools:text="2020년 8월 12일"
+            android:textAppearance="@style/text.18sp.regular.accent"
+            app:layout_constraintBottom_toBottomOf="@+id/layoutDropDay"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view" />
+            app:layout_constraintTop_toTopOf="@+id/layoutDropDay" />
 
-        <View
-            android:id="@+id/view2"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutStartDay"
             android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="50dp"
+            android:layout_height="@dimen/layout_height"
+            android:layout_marginTop="@dimen/space_10dp"
+            android:layout_marginBottom="@dimen/space_50dp"
             android:background="@drawable/bg_gray_border"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutDropDay">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:text="개봉일"
-            android:textColor="@color/gray6"
-            app:layout_constraintBottom_toBottomOf="@+id/view2"
+            android:padding="@dimen/space_20dp"
+            android:text="@string/start_day"
+            android:textAppearance="@style/text.12sp.regular.dark"
+            app:layout_constraintBottom_toBottomOf="@+id/layoutStartDay"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view2" />
+            app:layout_constraintTop_toTopOf="@+id/layoutStartDay" />
 
         <TextView
+            android:id="@+id/tvStartDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:text="2020년 8월 12일"
-            android:textColor="@color/gray6"
-            app:layout_constraintBottom_toBottomOf="@+id/view2"
-            app:layout_constraintEnd_toEndOf="@+id/view2"
-            app:layout_constraintTop_toTopOf="@+id/view2" />
+            android:padding="@dimen/space_20dp"
+            tools:text="2020년 8월 12일"
+            android:textAppearance="@style/text.18sp.regular.dark"
+            app:layout_constraintBottom_toBottomOf="@+id/layoutStartDay"
+            app:layout_constraintEnd_toEndOf="@+id/layoutStartDay"
+            app:layout_constraintTop_toTopOf="@+id/layoutStartDay" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>
