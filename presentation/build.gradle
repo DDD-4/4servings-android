@@ -5,6 +5,7 @@ apply from: '../common-android.gradle'
 apply from: '../dependencies.gradle'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-android'
 
 android {
     buildFeatures {

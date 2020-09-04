@@ -3,6 +3,7 @@ package com.ddd4.dropit.presentation.ui.add
 import android.app.DatePickerDialog
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +13,7 @@ import com.ddd4.dropit.domain.entity.DomainEntity
 import com.ddd4.dropit.domain.usecase.GetCategoryUseCase
 import com.ddd4.dropit.domain.usecase.GetSubCategoryUseCase
 import com.ddd4.dropit.domain.usecase.SetItemUseCase
+import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.mapper.mapToDomain
@@ -22,6 +24,7 @@ import com.ddd4.dropit.presentation.util.addToDate
 import com.ddd4.dropit.presentation.util.intToDate
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AddSharedViewModel @ViewModelInject constructor(
@@ -121,8 +124,10 @@ class AddSharedViewModel @ViewModelInject constructor(
         }
     }
 
+    val captureClick = SingleLiveEvent<Void>()
+
     fun onImageClicked() {
-        //add Image -> Permission & On/Off
+        captureClick.call()
     }
 
     val datePickerListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
@@ -132,6 +137,8 @@ class AddSharedViewModel @ViewModelInject constructor(
         _selectedEndAt.value = addToDate(year, month, dayOfMonth, _dayOfEnd.value!!)
         _isDateState.value = true
         _nextButtonState.value = true
+        isLittleState.value = false
+        isDontState.value = false
     }
 
     val onItemClickListener = object: ItemClickListener {
@@ -154,5 +161,63 @@ class AddSharedViewModel @ViewModelInject constructor(
     fun onNextClicked() {
         nextClick.call()
         _nextButtonState.value = false
+    }
+
+    val isLittleState = MutableLiveData<Boolean>()
+    val dateLittleText = MutableLiveData<String>()
+
+    val isDontState = MutableLiveData<Boolean>()
+    val dateDontText = MutableLiveData<String>()
+
+    fun onRadioClicked(view: View) {
+        when (view.id) {
+            R.id.rbtnLittleDate -> {
+                isDontState.value = false
+                isLittleState.value = true
+                _pickerDate.value = ""
+                _isDateState.value = false
+                _nextButtonState.value = false
+            }
+            R.id.rbtnDontDate -> {
+                isDontState.value = true
+                isLittleState.value = false
+                _pickerDate.value = ""
+                _isDateState.value = false
+                dateDontText.value = getTodayDate()
+                _nextButtonState.value = true
+            }
+        }
+    }
+
+    val littleDateTextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            dateLittleText.value = s.toString()
+        }
+        override fun afterTextChanged(s: Editable?) {
+            getLittleDate(s.toString().toInt())
+
+            _nextButtonState.value = !s.isNullOrEmpty()
+        }
+
+        private fun getLittleDate(week: Int) {
+            val calendar = Calendar.getInstance()
+            calendar.time = Date()
+            calendar.add(Calendar.WEEK_OF_YEAR, -week)
+            _selectedStartAt.value = calendar.time
+            _selectedEndAt.value = addToDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), _dayOfEnd.value!!)
+        }
+    }
+
+    private fun getTodayDate(): String {
+        val today = Date()
+        val calendar = Calendar.getInstance()
+        calendar.time = today
+
+        _selectedStartAt.value = intToDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+        _selectedEndAt.value = addToDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), _dayOfEnd.value!!)
+
+        val formatter = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+        return formatter.format(today)
     }
 }

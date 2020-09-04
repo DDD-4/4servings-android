@@ -36,4 +36,5 @@
     <dimen name="space_24dp">24dp</dimen>
     <dimen name="space_9dp">9dp</dimen>
     <dimen name="space_12dp">12dp</dimen>
+    <dimen name="space_2dp">2dp</dimen>
 </resources>

@@ -24,6 +24,9 @@ class AddContentsFragment : BaseFragment<FragmentAddContentsBinding>(R.layout.fr
         addSharedViewModel.nextClick.observe(this, Observer {
             findNavController().navigate(AddContentsFragmentDirections.actionAddContentsFragmentToAddDateFragment())
         })
+        addSharedViewModel.captureClick.observe(this, Observer {
+            //카메라 캡쳐 이동
+        })
     }
 
     override fun onResume() {
