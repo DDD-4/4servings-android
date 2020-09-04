@@ -29,4 +29,18 @@ class DropitRepositoryImpl(
 
     override suspend fun getAlarmIds(): Result<List<DomainEntity.Item>> =
         localDataSource.getAlarmIds()
+
+    override suspend fun getItemsByFolder(folderId: Long): Result<List<DomainEntity.Item>> =
+        localDataSource.getItemsByFolder(folderId)
+
+
+    override suspend fun getItemsByCategory(categoryId: Long): Result<List<DomainEntity.Item>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getDetailItem(itemId: Long): Result<DomainEntity.Item> =
+        localDataSource.getDetailItem(itemId)
+
+    override suspend fun updateItem(item: DomainEntity.Item): Result<Unit> =
+        localDataSource.updateItem(item)
 }

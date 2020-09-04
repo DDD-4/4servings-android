@@ -2,6 +2,7 @@ package com.ddd4.dropit.data.source.local
 
 import android.content.Context
 import com.ddd4.dropit.data.entity.DataEntity
+import com.ddd4.dropit.data.mapper.mapToData
 import com.ddd4.dropit.data.mapper.mapToDomain
 import com.ddd4.dropit.data.source.local.model.Category
 import com.ddd4.dropit.data.source.local.preferences.SharedPrefHelper
@@ -85,12 +86,49 @@ class LocalDataSourceImpl(
             }
         }
 
-    override suspend fun getAlarmIds(): Result<List<DomainEntity.Item>> =
+    override suspend fun getItemsByFolder(folderId: Long): Result<List<DomainEntity.Item>> =
         withContext(Dispatchers.IO) {
             try {
-                val result = databaseDao.selectItemAlarmIds().map(DataEntity.Item::mapToDomain)
+                val result =
+                    databaseDao.selectItemsByFolder(folderId).map(DataEntity.Item::mapToDomain)
+
                 Result.Success(result)
             } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun getItemsByCategory(categoryId: Long): Result<List<DomainEntity.Item>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getDetailItem(itemId: Long): Result<DomainEntity.Item> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = databaseDao.selectItem(itemId).mapToDomain()
+                Result.Success(result)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+
+    override suspend fun updateItem(item: DomainEntity.Item): Result<Unit> =
+        withContext(Dispatchers.IO) {
+            try {
+                databaseDao.updateItem(DataEntity.Item(
+                    id = item.id,
+                    folderId = item.folderId,
+                    categoryId = item.categoryId,
+                    subCategoryId = item.subCategoryId,
+                    name = item.name,
+                    image = item.image,
+                    startAt = item.startAt,
+                    endAt = item.endAt,
+                    createAt = item.createAt
+                ))
+                Result.Success(Unit)
+            } catch (e: Exception){
                 Result.Error(e)
             }
         }

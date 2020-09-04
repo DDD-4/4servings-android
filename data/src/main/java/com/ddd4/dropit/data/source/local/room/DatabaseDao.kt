@@ -25,14 +25,20 @@ interface DatabaseDao {
     @Insert
     suspend fun insertItem(item: DataEntity.Item)
 
+    @Update
+    suspend fun updateItem(item: DataEntity.Item)
+
     //@Update
     //suspend fun updateItem(folderData: DataEntity.Item)
 
     //@Delete
     //suspend fun deleteItem(folderData: DataEntity.Item)
 
-    //@Query("SELECT * FROM item WHERE folder_id = :folderId")
-    //suspend fun selectItems(folderId: Long): List<DataEntity.Item>
+    @Query("SELECT * FROM item WHERE folder_id = :folderId")
+    suspend fun selectItemsByFolder(folderId: Long): List<DataEntity.Item>
+
+    @Query("SELECT * FROM item WHERE id = :itemId")
+    suspend fun selectItem(itemId: Long): DataEntity.Item
 
     @Transaction
     suspend fun insertSection(sections: List<Category>) {
@@ -70,4 +76,5 @@ interface DatabaseDao {
 
     @Query("SELECT * FROM item")
     suspend fun selectItemAlarmIds(): List<DataEntity.Item>
+
 }

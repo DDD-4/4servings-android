@@ -8,6 +8,7 @@ import java.lang.Exception
 class SetSectionUseCase(
     private val dropitRepository: DropitRepository
 ) {
-    suspend fun execute(): Result<Unit> =
+    suspend operator fun invoke(
+    ): Result<Unit> =
         dropitRepository.setSectionFromJson()
 }

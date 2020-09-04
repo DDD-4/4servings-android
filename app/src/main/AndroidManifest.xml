@@ -43,6 +43,9 @@
         <activity android:name=".presentation.ui.add.AddActivity" />
         <activity android:name=".presentation.ui.capture.CaptureActivity" />
         <activity android:name=".presentation.ui.detailFolder.FolderItemDetailActivity"/>
+        
+        <activity android:name=".presentation.dialog.DialogActivity"
+            android:theme="@style/Theme.DropItDialog" />
     </application>
 
 </manifest>

@@ -7,6 +7,8 @@ import com.ddd4.dropit.domain.repository.DropitRepository
 class SetItemUseCase(
     private val dropitRepository: DropitRepository
 ) {
-    suspend fun execute(item: DomainEntity.Item): Result<Unit> =
+    suspend operator fun invoke(
+        item: DomainEntity.Item
+    ): Result<Unit> =
         dropitRepository.setItem(item)
 }

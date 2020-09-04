@@ -1,5 +1,6 @@
 package com.ddd4.dropit.di.module
 
+import androidx.room.Update
 import com.ddd4.dropit.domain.repository.DropitRepository
 import com.ddd4.dropit.domain.usecase.*
 import dagger.Module
@@ -41,4 +42,19 @@ object UseCaseModule {
     @Singleton
     fun provideGetAlarmIdUseCase(dropitRepository: DropitRepository): GetAlarmIdUseCase =
         GetAlarmIdUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetFolderItemUseCase(dropitRepository: DropitRepository): GetFolderItemUseCase =
+        GetFolderItemUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetDetailItemUseCase(dropitRepository: DropitRepository): GetDetailItemUseCase =
+        GetDetailItemUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideUpdateItemUseCase(dropitRepository: DropitRepository): UpdateItemUseCase =
+        UpdateItemUseCase(dropitRepository)
 }
