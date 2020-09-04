@@ -22,7 +22,7 @@ interface DatabaseDao {
     //@Query("SELECT * FROM folder WHERE id = :folderId")
     //suspend fun selectFolder(folderId: Long): DataEntity.Folder?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun insertItem(item: DataEntity.Item)
 
     //@Update

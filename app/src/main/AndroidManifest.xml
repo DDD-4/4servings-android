@@ -30,7 +30,7 @@
         <activity android:name=".presentation.ui.main.MainActivity"/>
 
 
-        <activity android:name=".presentation.ui.folder.FolderActivity">
+        <activity android:name=".presentation.ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,6 +38,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.ui.category.CategoryActivity"/>
+        <activity android:name=".presentation.ui.folder.FolderActivity"/>
         <activity android:name=".presentation.ui.moveFolder.MoveFolderActivity"/>
         <activity android:name=".presentation.ui.add.AddActivity" />
         <activity android:name=".presentation.ui.capture.CaptureActivity" />
