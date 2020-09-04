@@ -75,7 +75,7 @@ class AddSharedViewModel @ViewModelInject constructor(
 
     fun getCategoryItems() {
         viewModelScope.launch {
-            when (val result = getCategoryUseCase.execute()) {
+            when (val result = getCategoryUseCase()) {
                 is Result.Success -> {
                     if (result.data.isNotEmpty()) {
                         _categoryItems.value = result.data.map(DomainEntity.Category::mapToPresentation)
@@ -90,7 +90,7 @@ class AddSharedViewModel @ViewModelInject constructor(
 
     private fun getSubCategoryItems(id: Long) {
         viewModelScope.launch {
-            when (val result = getSubCategoryUseCase.execute(id)) {
+            when (val result = getSubCategoryUseCase(id)) {
                 is Result.Success -> {
                     if (result.data.isNotEmpty()) {
                         _subCategoryItems.value = result.data.map(DomainEntity.SubCategory::mapToPresentation)

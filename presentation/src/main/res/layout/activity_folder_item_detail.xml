@@ -3,12 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="detailItemViewModel"
+            type="com.ddd4.dropit.presentation.ui.detailFolder.FolderItemDetailViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="android.R.color"/>
+        <import type="android.R.drawable"/>
+        <import type="android.R.string" />
+        <import type="android.R.style" />
+
+    </data>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingStart="@dimen/space_20dp"
-    android:paddingEnd="@dimen/space_20dp">
+    android:paddingStart="@dimen/space_20dp">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="fill_parent"
@@ -37,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_arrow_back"
+                    android:visibility="@{detailItemViewModel.isEditMode? View.GONE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -45,8 +58,10 @@
                     android:id="@+id/ibSelectImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_6dp"
                     android:padding="@dimen/space_10dp"
-                    android:text="@string/edit"
+                    android:text="@{detailItemViewModel.isEditMode? @string/ok : @string/edit}"
+                    android:onClick="@{() -> detailItemViewModel.editButtonClick()}"
                     android:textAppearance="@style/text.14sp.regular.dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_6dp"
                     android:padding="@dimen/space_10dp"
-                    android:text="@string/delete"
+                    android:text="@{detailItemViewModel.isEditMode? @string/cancel : @string/delete}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ibSelectImage"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -80,6 +95,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingEnd="@dimen/space_20dp"
         android:background="@color/white">
 
         <TextView
@@ -89,29 +105,33 @@
             android:layout_marginTop="@dimen/space_20dp"
             android:background="@drawable/bg_dday_button"
             android:gravity="center"
-            android:text="D-22"
+            android:text="@{detailItemViewModel.itemDetails.getDDay()}"
+            tools:text="D-22"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editText"
-            style="@style/text.24sp.regular.dark"
+            style="@style/Theme.24sp.EditTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_6dp"
             android:hint="@string/text_hint"
-            android:enabled="false"
-            android:focusable="false"
+            android:text="@={detailItemViewModel.itemName}"
+            android:maxLength="10"
+            android:enabled="@{detailItemViewModel.isEditMode}"
+            android:focusable="@{detailItemViewModel.isEditMode}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDday" />
 
-        <ImageView
+        <androidx.cardview.widget.CardView
             android:id="@+id/ivItem"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/space_28dp"
             app:layout_constraintDimensionRatio="1:1"
+            app:cardCornerRadius="@dimen/card_add_category_radius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -119,18 +139,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutDropDay"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_height"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_18dp"
-            android:background="@drawable/bg_blue_border"
+            android:background="@{detailItemViewModel.isEditMode? @drawable/bg_gray2_border: @drawable/bg_blue_border}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivItem" >
 
         <TextView
+            android:id="@+id/tvDrop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:textAppearance="@style/text.12sp.regular.accent"
+            android:textAppearance= "@style/text.12sp.regular.accent"
             android:text="@string/drop_day"
             app:layout_constraintBottom_toBottomOf="@+id/layoutDropDay"
             app:layout_constraintStart_toStartOf="parent"
@@ -142,6 +163,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/space_20dp"
             tools:text="2020년 8월 12일"
+            android:text="@{detailItemViewModel.itemDetails.getStartDate()}"
             android:textAppearance="@style/text.18sp.regular.accent"
             app:layout_constraintBottom_toBottomOf="@+id/layoutDropDay"
             app:layout_constraintEnd_toEndOf="parent"
@@ -152,16 +174,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutStartDay"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_height"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_10dp"
             android:layout_marginBottom="@dimen/space_50dp"
-            android:background="@drawable/bg_gray_border"
+            android:background="@{detailItemViewModel.isEditMode? @drawable/bg_gray2_border : @drawable/bg_gray6_border}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutDropDay">
 
         <TextView
+            android:id="@+id/tvStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/space_20dp"
@@ -177,6 +200,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/space_20dp"
             tools:text="2020년 8월 12일"
+            android:text="@{detailItemViewModel.itemDetails.getEndDate()}"
             android:textAppearance="@style/text.18sp.regular.dark"
             app:layout_constraintBottom_toBottomOf="@+id/layoutStartDay"
             app:layout_constraintEnd_toEndOf="@+id/layoutStartDay"

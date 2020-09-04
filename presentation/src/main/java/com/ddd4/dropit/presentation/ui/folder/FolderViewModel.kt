@@ -1,30 +1,26 @@
 package com.ddd4.dropit.presentation.ui.folder
 
-import android.util.SparseBooleanArray
-import androidx.core.util.putAll
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ddd4.dropit.domain.usecase.GetFolderUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
-import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
-import com.ddd4.dropit.presentation.entity.PresentationEntity.Folder
+import com.ddd4.dropit.domain.usecase.GetFolderItemUseCase
+import com.ddd4.dropit.presentation.entity.PresentationEntity.*
 import com.ddd4.dropit.presentation.mapper.mapToPresentation
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.*
-import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.ConcurrentMap
 
 class FolderViewModel @ViewModelInject constructor(
-    private val getFolderUseCase: GetFolderUseCase
+    private val getFolderItemUseCase: GetFolderItemUseCase
 ): BaseViewModel() {
 
-    private val _folderItems = MutableLiveData<List<Folder>>()
+    private val _folderItems = MutableLiveData<List<Item>>()
+    val folderItems: LiveData<List<Item>> = _folderItems
 
     private val _folderItemSorting = MutableLiveData<Boolean>()
     val folderItemSorting: LiveData<Boolean> = _folderItemSorting
@@ -52,11 +48,10 @@ class FolderViewModel @ViewModelInject constructor(
     private val _selectedImageState = MutableLiveData<Boolean>()
     val selectedImageState: LiveData<Boolean> = _selectedImageState
 
-    private val _item = SingleLiveEvent<Folder>()
-    val item: SingleLiveEvent<Folder> = _item
+    private val _item = SingleLiveEvent<Long>()
+    val item: SingleLiveEvent<Long> = _item
 
     init {
-        getFolderItems()
         initView()
         sortByLatestButtonClick()
     }
@@ -68,22 +63,17 @@ class FolderViewModel @ViewModelInject constructor(
         _isButtonActivated.value = false
     }
 
-    private fun getFolderItems(){
-        //TEST
-        _folderItems.value =
-            listOf(
-                Folder(
-                id = 0,
-                name = "D-12",
-                thumbnail = "https://bit.ly/2DCfOXL",
-                createAt = Date()),
-
-            Folder(
-                id = 1,
-                name = "D-12",
-                thumbnail = "https://bit.ly/2DCfOXL",
-                createAt = Date())
-            )
+    fun start(folderId: Long) = viewModelScope.launch {
+        when (val result = getFolderItemUseCase(folderId)){
+            is Result.Success -> {
+                if(result.data.isNotEmpty()) {
+                    _folderItems.value = result.data.map (DomainEntity.Item::mapToPresentation)
+                } else {
+                    Timber.d("empty")
+                }
+            }
+            is Result.Error -> Timber.d(result.exception)
+        }
     }
 
     fun sortByLatestButtonClick() {
@@ -120,10 +110,10 @@ class FolderViewModel @ViewModelInject constructor(
                 if (selectImageButton.value == "취소") {
                     when(visibility) {
                         true -> {
-                            _selectedImageList.value?.add((item as Folder).id)
+                            _selectedImageList.value?.add((item as Item).id!!)
                         }
                         false -> {
-                            _selectedImageList.value?.remove((item as Folder).id)
+                            _selectedImageList.value?.remove((item as Item).id)
                         }
                     }
                 } else {
@@ -133,8 +123,7 @@ class FolderViewModel @ViewModelInject constructor(
             }
 
             override fun <T> onItemDetailClicked(item: T) {
-                _item.value = (item as Folder)
-
+                _item.value = (item as Item).id
             }
         }
     }

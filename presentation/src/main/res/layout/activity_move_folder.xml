@@ -4,9 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <variable
+            name="moveFolderVM"
+            type="com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderViewModel" />
         <import type="android.view.View"/>
         <import type="android.R.color"/>
     </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -76,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_32dp"
+                    android:onClick="@{() -> moveFolderVM.createNewFolder()}"
                     android:background="?android:selectableItemBackground"
                     android:src="@drawable/ic_group_8"
                     app:layout_constraintStart_toStartOf="parent"
@@ -98,6 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_55dp"
                     android:text="@string/home_title_folder"
+                    android:visibility="@{moveFolderVM.folderList.isEmpty() ? View.INVISIBLE : View.VISIBLE}"
                     android:textAppearance="@style/text.18sp.bold.dark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -106,6 +112,7 @@
                     android:id="@+id/rvFolderList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="@{moveFolderVM.folderList.isEmpty() ? View.INVISIBLE : View.VISIBLE}"
                     tools:listitem="@layout/row_detail_move_folder"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="2"

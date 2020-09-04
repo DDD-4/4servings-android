@@ -14,6 +14,8 @@ import com.ddd4.dropit.presentation.util.ItemClickListener
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.io.File
+import java.util.*
 
 class MainViewModel @ViewModelInject constructor(
     private val setSectionUseCase: SetSectionUseCase,
@@ -43,7 +45,7 @@ class MainViewModel @ViewModelInject constructor(
 
     private fun setSectionFromJson() {
         viewModelScope.launch {
-            when (val result = setSectionUseCase.execute()) {
+            when (val result = setSectionUseCase()) {
                 is Result.Success -> getCategoryItems()
                 is Result.Error -> Timber.d(result.exception)
             }
@@ -52,7 +54,7 @@ class MainViewModel @ViewModelInject constructor(
 
     private fun getCategoryItems() {
         viewModelScope.launch {
-            when (val result = getCategoryUseCase.execute()) {
+            when (val result = getCategoryUseCase()) {
                 is Result.Success -> _categoryItems.value = result.data.map(DomainEntity.Category::mapToPresentation)
                 is Result.Error -> Timber.d(result.exception)
             }
@@ -61,7 +63,7 @@ class MainViewModel @ViewModelInject constructor(
 
     private fun getFolderItems() {
         viewModelScope.launch {
-            when (val result = getFolderUseCase.execute()) {
+            when (val result = getFolderUseCase()) {
                 is Result.Success -> {
                     if (result.data.isNotEmpty()) {
                         _folderItems.value = result.data.map(DomainEntity.Folder::mapToPresentation)

@@ -14,6 +14,7 @@ import com.ddd4.dropit.presentation.databinding.ActivityFolderBinding
 import com.ddd4.dropit.presentation.ui.add.AddActivity
 import com.ddd4.dropit.presentation.ui.detailFolder.FolderItemDetailActivity
 import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderActivity
+import com.ddd4.dropit.presentation.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -23,15 +24,19 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
 
     private val folderViewModel: FolderViewModel by viewModels()
     private lateinit var listAdapter: FolderAdapter
+    private var folderId = -1L
 
     override fun setBind() {
         binding.apply {
             folderVM = folderViewModel
         }
+        folderId = getId(intent)
+        folderViewModel.start(folderId)
         setupAdapter()
     }
 
     override fun setObserve() {
+
         folderViewModel.sortByLatestButton.observe(this, Observer {
             Timber.e("sort by latest button clicked")
         })
@@ -51,10 +56,9 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
             startActivity(intent)
         })
 
-        folderViewModel.item.observe(this, Observer {
-            Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, FolderItemDetailActivity::class.java)
-            startActivity(intent)
+        folderViewModel.item.observe(this, Observer { item ->
+            startActivity(Intent(this, FolderItemDetailActivity::class.java)
+                .putExtra(Constants.EXTRA_NAME_ITEM_ID, item))
         })
 
         folderViewModel.selectImageButton.observe(this, Observer {
@@ -70,6 +74,10 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
                 }
             }
         })
+    }
+
+    private fun getId(intent: Intent): Long {
+        return intent.getLongExtra(Constants.EXTRA_NAME_FOLDER_ID, -1)
     }
 
     //TODO FIX

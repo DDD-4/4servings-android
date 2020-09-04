@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="5dp"
+    android:clipToPadding="false"
+    android:background="@color/white"
+    android:layout_marginStart="@dimen/space_30dp"
+    android:layout_marginEnd="@dimen/space_30dp">
+
+    <TextView
+        android:id="@+id/tvMakeFolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_folder"
+        android:padding="@dimen/space_26dp"
+        android:textAppearance="@style/text.16sp.regular.dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etFolderName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_20dp"
+        android:layout_marginEnd="@dimen/space_20dp"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:theme="@style/Theme.EditTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMakeFolder" />
+
+    <TextView
+        android:id="@+id/tvPositive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_20dp"
+        android:text="@string/ok"
+        android:textAppearance="@style/text.14sp.regular.dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etFolderName" />
+
+    <TextView
+        android:id="@+id/tvNegative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_20dp"
+        android:text="@string/cancel"
+        android:textAppearance="@style/text.14sp.regular.dark"
+        app:layout_constraintEnd_toStartOf="@+id/tvPositive"
+        app:layout_constraintTop_toBottomOf="@+id/etFolderName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

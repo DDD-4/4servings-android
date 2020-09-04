@@ -28,7 +28,7 @@ import timber.log.Timber
 =======
 >>>>>>> Fix FolderAdapter due to dependence of view data
 @BindingAdapter("folderItem")
-fun setRecyclerView(recyclerView: RecyclerView, list: List<PresentationEntity.Folder>?) {
+fun setRecyclerView(recyclerView: RecyclerView, list: List<PresentationEntity.Item>?) {
     list?.let {
         (recyclerView.adapter as FolderAdapter).submitList(it)
         Timber.e("first binding end! size: ${it.size}")

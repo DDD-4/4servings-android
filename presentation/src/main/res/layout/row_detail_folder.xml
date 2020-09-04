@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="folder"
-            type="com.ddd4.dropit.presentation.entity.PresentationEntity.Folder" />
+            name="item"
+            type="com.ddd4.dropit.presentation.entity.PresentationEntity.Item" />
 
         <variable
             name="viewModel"
@@ -13,6 +13,7 @@
 
         <import type="android.view.View"/>
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/folderLayout"
         android:layout_width="match_parent"
@@ -26,6 +27,7 @@
             app:layout_constraintDimensionRatio="1:1"
             android:background="@drawable/bg_view_border"
             android:padding="1dp"
+            setImage="@{item.image}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:setImage="@{folder.thumbnail}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,10 +50,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_16dp"
             android:layout_marginBottom="@dimen/space_12dp"
+            android:text="@{item.getDDay()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textAppearance="@style/text.18sp.bold.dark"
-            android:text="@{folder.name}"
             tools:text="D-12" />
 
         <View
