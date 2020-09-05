@@ -30,9 +30,27 @@ class FolderItemDetailActivity : BaseActivity<ActivityFolderItemDetailBinding>(R
         viewModel.testIsEmpty.observe(this, Observer {
             this.toast("1자 이상 입력해주세요.")
         })
+
+        viewModel.itemDeleteButton.observe(this, Observer {
+            this.toast("삭제되었습니다.")
+            setResult(resultCode, Intent().apply { putExtra(Constants.DELETE_ITEM ,false) })
+            finish()
+        })
+
+        viewModel.editCompleteButton.observe(this, Observer {
+            this.toast("수정이 완료되었습니다.")
+        })
+
+        viewModel.backButton.observe(this, Observer {
+            finish()
+        })
     }
 
     private fun getId(intent: Intent): Long {
         return intent.getLongExtra(Constants.EXTRA_NAME_ITEM_ID, -1)
+    }
+
+    companion object {
+        const val resultCode = 6000
     }
 }

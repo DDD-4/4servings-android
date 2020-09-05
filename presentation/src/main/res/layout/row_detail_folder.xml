@@ -7,10 +7,6 @@
             name="item"
             type="com.ddd4.dropit.presentation.entity.PresentationEntity.Item" />
 
-        <variable
-            name="viewModel"
-            type="com.ddd4.dropit.presentation.ui.folder.FolderViewModel" />
-
         <import type="android.view.View"/>
     </data>
 
@@ -53,14 +49,14 @@
             android:text="@{item.getDDay()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textAppearance="@style/text.18sp.bold.dark"
+            android:textAppearance="@style/text.18sp.bold.light"
             tools:text="D-12" />
 
         <View
             android:id="@+id/viewShadow"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/bg_shadow"
+            android:background="@drawable/bg_check"
             app:layout_constraintBottom_toBottomOf="@+id/ivDetailFolder"
             app:layout_constraintEnd_toEndOf="@+id/ivDetailFolder"
             app:layout_constraintStart_toStartOf="@+id/ivDetailFolder"

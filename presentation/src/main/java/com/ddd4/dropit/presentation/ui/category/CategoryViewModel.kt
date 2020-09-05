@@ -1,26 +1,28 @@
-package com.ddd4.dropit.presentation.ui.folder
+package com.ddd4.dropit.presentation.ui.category
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ddd4.dropit.presentation.base.ui.BaseViewModel
-import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
+import com.ddd4.dropit.domain.usecase.GetCategoryItemUseCase
 import com.ddd4.dropit.domain.usecase.GetFolderItemUseCase
-import com.ddd4.dropit.presentation.entity.PresentationEntity.*
+import com.ddd4.dropit.presentation.base.ui.BaseViewModel
+import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.mapper.mapToPresentation
+import com.ddd4.dropit.presentation.ui.folder.ItemHandler
+import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.*
+import java.util.ArrayList
 
-class FolderViewModel @ViewModelInject constructor(
-    private val getFolderItemUseCase: GetFolderItemUseCase
+class CategoryViewModel @ViewModelInject constructor(
+    private val getCategoryItemUseCase: GetCategoryItemUseCase
 ): BaseViewModel() {
 
-    private val _folderItems = MutableLiveData<List<Item>>()
-    val folderItems: LiveData<List<Item>> = _folderItems
+    private val _folderItems = MutableLiveData<List<PresentationEntity.Item>>()
+    val folderItems: LiveData<List<PresentationEntity.Item>> = _folderItems
 
     private val _folderItemSorting = MutableLiveData<Boolean>()
     val folderItemSorting: LiveData<Boolean> = _folderItemSorting
@@ -33,14 +35,14 @@ class FolderViewModel @ViewModelInject constructor(
     private val _sortByLatestButton = SingleLiveEvent<Void>()
     val sortByLatestButton: LiveData<Void> = _sortByLatestButton
 
+    private val _backButton = SingleLiveEvent<Void>()
+    val backButton: LiveData<Void> = _backButton
+
     private val _sortByExpirationButton = SingleLiveEvent<Void>()
     val sortByExpirationButton: LiveData<Void> = _sortByExpirationButton
 
     private val _floatingButton = SingleLiveEvent<Void>()
     val floatingButton: LiveData<Void> = _floatingButton
-
-    private val _backButton = SingleLiveEvent<Void>()
-    val backButton: LiveData<Void> = _backButton
 
     private val _nextButton = SingleLiveEvent<ArrayList<Long>>()
     val nextButton: LiveData<ArrayList<Long>> = _nextButton
@@ -66,23 +68,17 @@ class FolderViewModel @ViewModelInject constructor(
         _isButtonActivated.value = false
     }
 
-    fun start(folderId: Long) = viewModelScope.launch {
-        when (val result = getFolderItemUseCase(folderId)) {
+    fun start(categoryId: Long) = viewModelScope.launch {
+        when (val result = getCategoryItemUseCase(categoryId)) {
             is Result.Success -> {
                 if (result.data.isNotEmpty()) {
-                    _folderItems.value = result.data.map(DomainEntity.Item::mapToPresentation)
-                        .sortedByDescending { it.endAt.time }
+                    _folderItems.value = result.data.map(DomainEntity.Item::mapToPresentation).sortedByDescending { it.endAt.time }
                 } else {
-                    _folderItems.value = emptyList()
                     Timber.d("empty")
                 }
             }
             is Result.Error -> Timber.d(result.exception)
         }
-    }
-
-    fun update(folderId: Long) = viewModelScope.launch {
-        start(folderId)
     }
 
     fun sortByLatestButtonClick() {
@@ -94,7 +90,7 @@ class FolderViewModel @ViewModelInject constructor(
     }
 
     fun sortByExpirationButtonClick() {
-        _folderItems.value = _folderItems.value!!.sortedBy { it.endAt.time }
+        _folderItems.value = _folderItems.value!!.sortedBy{ it.endAt.time }
         _folderItemSorting.value = false
         _sortByExpirationButton.call()
     }
@@ -110,38 +106,38 @@ class FolderViewModel @ViewModelInject constructor(
             _selectImageButton.value = "취소"
         }
         _selectedImageState.value = !_selectedImageState.value!!
+    }
 
-        fun nextButtonClicked() {
-            if (_isButtonActivated.value!!) {
-                _nextButton.value = _selectedImageList.value //call
-            }
+    fun nextButtonClicked() {
+        if (_isButtonActivated.value!!) {
+            _nextButton.value = _selectedImageList.value //call
         }
+    }
 
-        fun backButtonClick() {
-            _backButton.call()
-        }
+    fun backButtonClick(){
+        _backButton.call()
+    }
 
-        val onItemClickListener by lazy {
-            object : ItemHandler {
-                override fun <T> onItemClicked(item: T, visibility: Boolean) {
-                    if (selectImageButton.value == "취소") {
-                        when (visibility) {
-                            true -> {
-                                _selectedImageList.value?.add((item as Item).id!!)
-                            }
-                            false -> {
-                                _selectedImageList.value?.remove((item as Item).id)
-                            }
+    val onItemClickListener by lazy {
+        object : ItemHandler {
+            override fun <T> onItemClicked(item: T, visibility: Boolean) {
+                if (selectImageButton.value == "취소") {
+                    when (visibility) {
+                        true -> {
+                            _selectedImageList.value?.add((item as PresentationEntity.Item).id!!)
                         }
-                    } else {
-                        _selectedImageList.value?.clear()
+                        false -> {
+                            _selectedImageList.value?.remove((item as PresentationEntity.Item).id)
+                        }
                     }
-                    _isButtonActivated.value = _selectedImageList.value?.isNotEmpty()
+                } else {
+                    _selectedImageList.value?.clear()
                 }
+                _isButtonActivated.value = _selectedImageList.value?.isNotEmpty()
+            }
 
-                override fun <T> onItemDetailClicked(item: T) {
-                    _item.value = (item as Item).id
-                }
+            override fun <T> onItemDetailClicked(item: T) {
+                _item.value = (item as PresentationEntity.Item).id
             }
         }
     }

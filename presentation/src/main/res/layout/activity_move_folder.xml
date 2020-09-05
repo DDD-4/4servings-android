@@ -7,6 +7,7 @@
         <variable
             name="moveFolderVM"
             type="com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderViewModel" />
+
         <import type="android.view.View"/>
         <import type="android.R.color"/>
     </data>
@@ -43,6 +44,7 @@
                         android:id="@+id/btnBack"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:onClick="@{() -> moveFolderVM.backButtonClick()}"
                         android:background="@drawable/ic_arrow_back"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -72,17 +74,16 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/space_12dp">
+                android:layout_height="match_parent">
 
                 <ImageButton
                     android:id="@+id/imageButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_32dp"
+                    android:layout_marginTop="@dimen/space_16dp"
                     android:onClick="@{() -> moveFolderVM.createNewFolder()}"
-                    android:background="?android:selectableItemBackground"
-                    android:src="@drawable/ic_group_8"
+                    android:background="@drawable/img_folder_colored"
+                    android:layout_margin="@dimen/space_20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,10 +91,10 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_12dp"
                     android:background="@null"
-                    android:textAppearance="@style/text.14sp.regular.dark"
+                    android:layout_marginTop="@dimen/space_12dp"
                     android:text="@string/create_folder"
+                    android:textAppearance="@style/text.14sp.regular.dark"
                     app:layout_constraintStart_toStartOf="@+id/imageButton"
                     app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
@@ -101,24 +102,30 @@
                     android:id="@+id/tvFolder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_55dp"
+                    android:padding="@dimen/space_20dp"
+                    android:layout_marginTop="@dimen/space_36dp"
                     android:text="@string/home_title_folder"
+                    android:textAppearance="@style/text.20sp.bold.dark"
                     android:visibility="@{moveFolderVM.folderList.isEmpty() ? View.INVISIBLE : View.VISIBLE}"
-                    android:textAppearance="@style/text.18sp.bold.dark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvFolderList"
+                    setItems="@{moveFolderVM.folderList}"
+                    setListener="@{moveFolderVM.onItemClickListener}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:padding="@dimen/space_12dp"
                     android:visibility="@{moveFolderVM.folderList.isEmpty() ? View.INVISIBLE : View.VISIBLE}"
-                    tools:listitem="@layout/row_detail_move_folder"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="2"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvFolder" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvFolder"
+                    app:spanCount="2"
+                    tools:listitem="@layout/row_detail_move_folder" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import kotlin.math.floor
 sealed class PresentationEntity {
 
     data class Folder (
-        var id: Long,
+        var id: Long?,
         var name: String,
         var createAt: Date,
         var updateAt: Date? = Date()
@@ -30,8 +30,7 @@ sealed class PresentationEntity {
         var updateAt: Date? = Date()
     ): PresentationEntity() {
         fun getDDay(): String {
-            val day = (endAt.time - startAt.time) / TODAY
-            Timber.e("day :$day AND start: $startAt ${startAt.time}, end: $endAt ${endAt.time}")
+            val day = (endAt.time - Date().time) / TODAY
             return "D-$day"
         }
 
