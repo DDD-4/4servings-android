@@ -3,6 +3,7 @@ package com.ddd4.dropit.data.source.local.room
 import androidx.room.*
 import com.ddd4.dropit.data.entity.DataEntity
 import com.ddd4.dropit.data.source.local.model.Category
+import com.ddd4.dropit.domain.entity.DomainEntity
 
 @Dao
 interface DatabaseDao {
@@ -19,6 +20,9 @@ interface DatabaseDao {
     @Query("SELECT * FROM folder")
     suspend fun selectFolders(): List<DataEntity.Folder>
 
+    @Query("SELECT * FROM folder WHERE name = :folderName")
+    suspend fun selectFolder(folderName: String): DataEntity.Folder
+
     //@Query("SELECT * FROM folder WHERE id = :folderId")
     //suspend fun selectFolder(folderId: Long): DataEntity.Folder?
 
@@ -28,14 +32,23 @@ interface DatabaseDao {
     @Update
     suspend fun updateItem(item: DataEntity.Item)
 
+    @Query("UPDATE item SET folder_id = :folderId WHERE id = :itemId")
+    suspend fun updateItemByFolderId(folderId: Long, itemId: Long)
+
     //@Update
     //suspend fun updateItem(folderData: DataEntity.Item)
 
     //@Delete
     //suspend fun deleteItem(folderData: DataEntity.Item)
 
+    @Query("DELETE FROM item WHERE id = :itemId")
+    suspend fun deleteItem(itemId: Long)
+
     @Query("SELECT * FROM item WHERE folder_id = :folderId")
     suspend fun selectItemsByFolder(folderId: Long): List<DataEntity.Item>
+
+    @Query("SELECT * FROM item WHERE category_id = :categoryId")
+    suspend fun selectItemsByCategory(categoryId: Long): List<DataEntity.Item>
 
     @Query("SELECT * FROM item WHERE id = :itemId")
     suspend fun selectItem(itemId: Long): DataEntity.Item

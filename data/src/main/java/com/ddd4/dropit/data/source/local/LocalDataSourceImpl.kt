@@ -98,9 +98,25 @@ class LocalDataSourceImpl(
             }
         }
 
-    override suspend fun getItemsByCategory(categoryId: Long): Result<List<DomainEntity.Item>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getFolderByName(folderName: String): Result<DomainEntity.Folder> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = databaseDao.selectFolder(folderName).mapToDomain()
+                Result.Success(result)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun getItemsByCategory(categoryId: Long): Result<List<DomainEntity.Item>> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = databaseDao.selectItemsByCategory(categoryId).map(DataEntity.Item::mapToDomain)
+                Result.Success(result)
+            } catch (e: Exception){
+                Result.Error(e)
+            }
+        }
 
     override suspend fun getDetailItem(itemId: Long): Result<DomainEntity.Item> =
         withContext(Dispatchers.IO) {
@@ -116,19 +132,39 @@ class LocalDataSourceImpl(
     override suspend fun updateItem(item: DomainEntity.Item): Result<Unit> =
         withContext(Dispatchers.IO) {
             try {
-                databaseDao.updateItem(DataEntity.Item(
-                    id = item.id,
-                    folderId = item.folderId,
-                    categoryId = item.categoryId,
-                    subCategoryId = item.subCategoryId,
-                    name = item.name,
-                    image = item.image,
-                    startAt = item.startAt,
-                    endAt = item.endAt,
-                    createAt = item.createAt
-                ))
+                databaseDao.updateItem(item.mapToData())
                 Result.Success(Unit)
             } catch (e: Exception){
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun createFolder(folder: DomainEntity.Folder): Result<Unit> =
+        withContext(Dispatchers.IO) {
+            try {
+                databaseDao.insertFolder(folder.mapToData())
+                Result.Success(Unit)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun deleteItem(itemId: Long): Result<Unit> =
+        withContext(Dispatchers.IO) {
+            try {
+                databaseDao.deleteItem(itemId)
+                Result.Success(Unit)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun updateItemByFolderId(folderId: Long, itemId: Long): Result<Unit> =
+        withContext(Dispatchers.IO) {
+            try {
+                databaseDao.updateItemByFolderId(folderId, itemId)
+                Result.Success(Unit)
+            } catch (e: Exception) {
                 Result.Error(e)
             }
         }

@@ -57,4 +57,29 @@ object UseCaseModule {
     @Singleton
     fun provideUpdateItemUseCase(dropitRepository: DropitRepository): UpdateItemUseCase =
         UpdateItemUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideCreateFolderUseCase(dropitRepository: DropitRepository): CreateFolderUseCase =
+        CreateFolderUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetCategoryItemUseCase(dropitRepository: DropitRepository): GetCategoryItemUseCase =
+        GetCategoryItemUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteItemUseCase(dropitRepository: DropitRepository): DeleteItemUseCase =
+        DeleteItemUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideUpdateItemByFolderId(dropitRepository: DropitRepository): UpdateItemByFolderIdUseCase =
+        UpdateItemByFolderIdUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetFolderByNameUseCase(dropitRepository: DropitRepository): GetFolderByNameUseCase =
+        GetFolderByNameUseCase(dropitRepository)
 }

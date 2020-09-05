@@ -14,6 +14,8 @@ interface LocalDataSource {
 
     suspend fun getFolderItems(): Result<List<DomainEntity.Folder>>
 
+    suspend fun getFolderByName(folderName: String): Result<DomainEntity.Folder>
+
     suspend fun setItem(item: DataEntity.Item): Result<Unit>
 
     suspend fun getAlarmIds(): Result<List<DomainEntity.Item>>
@@ -25,4 +27,10 @@ interface LocalDataSource {
     suspend fun getDetailItem(itemId: Long): Result<DomainEntity.Item>
 
     suspend fun updateItem(item: DomainEntity.Item): Result<Unit>
+
+    suspend fun createFolder(folder: DomainEntity.Folder): Result<Unit>
+
+    suspend fun deleteItem(itemId: Long): Result<Unit>
+
+    suspend fun updateItemByFolderId(folderId: Long, itemId: Long): Result<Unit>
 }
