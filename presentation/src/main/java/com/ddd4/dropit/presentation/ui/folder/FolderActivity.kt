@@ -103,7 +103,6 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
         binding.rvDetailFolder.adapter = listAdapter
     }
 
-
     override fun onResume() {
         super.onResume()
         folderViewModel.start(folderId)

@@ -127,11 +127,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDday" />
 
-        <androidx.cardview.widget.CardView
+        <ImageView
             android:id="@+id/ivItem"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/space_28dp"
+            android:background="@drawable/bg_white_border"
+            setImage="@{detailItemViewModel.itemDetails.image}"
             app:layout_constraintDimensionRatio="1:1"
             app:cardCornerRadius="@dimen/card_add_category_radius"
             app:layout_constraintEnd_toEndOf="parent"

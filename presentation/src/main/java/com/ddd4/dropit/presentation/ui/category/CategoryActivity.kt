@@ -30,7 +30,6 @@ class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity
             categoryVM = viewModel
         }
         categoryId = getId(intent)
-        viewModel.start(categoryId)
         setupAdapter()
     }
 
@@ -88,5 +87,11 @@ class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity
         listAdapter = CategoryAdapter(viewModel, viewModel.onItemClickListener)
         binding.rvDetailFolder.layoutManager = GridLayoutManager(this, 3)
         binding.rvDetailFolder.adapter = listAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.start(categoryId)
+        listAdapter.notifyDataSetChanged()
     }
 }

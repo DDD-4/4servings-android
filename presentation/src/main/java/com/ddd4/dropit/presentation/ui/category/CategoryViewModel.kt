@@ -74,6 +74,7 @@ class CategoryViewModel @ViewModelInject constructor(
                 if (result.data.isNotEmpty()) {
                     _folderItems.value = result.data.map(DomainEntity.Item::mapToPresentation).sortedByDescending { it.endAt.time }
                 } else {
+                    _folderItems.value = emptyList()
                     Timber.d("empty")
                 }
             }
