@@ -54,12 +54,6 @@ sealed class DataEntity {
         @ColumnInfo(name = "update_at") var updateAt: Date? = Date()
     ): DataEntity()
 
-    data class FolderAndItems (
-        @Embedded val folder: Folder,
-        @Relation(parentColumn = "id", entityColumn = "folder_id")
-        var items: List<Item> = ArrayList()
-    ): DataEntity()
-
     @Entity(tableName = "category")
     data class Category(
         @PrimaryKey(autoGenerate = false) val id: Long,
@@ -79,11 +73,5 @@ sealed class DataEntity {
         @ColumnInfo(name = "category_id") val categoryId: Long,
         @ColumnInfo(name = "end_date") val endAt: Int,
         @ColumnInfo(name = "title") val title: String
-    ): DataEntity()
-
-    data class Section(
-        @Embedded val category: Category,
-        @Relation(parentColumn = "id", entityColumn = "category_id")
-        var subCategories: List<SubCategory> = ArrayList()
     ): DataEntity()
 }

@@ -64,12 +64,7 @@ class LocalDataSourceImpl(
     override suspend fun getFolderItems(): Result<List<DomainEntity.Folder>> =
         withContext(Dispatchers.IO) {
             try {
-                if (databaseDao.selectFolders().isNullOrEmpty()) {
-                    databaseDao.insertFolder(DataEntity.Folder(name = "최근항목", createAt = Date()))
-                }
-
                 val result = databaseDao.selectFolders().map(DataEntity.Folder::mapToDomain)
-
                 Result.Success(result)
             } catch (e: Exception) {
                 Result.Error(e)
@@ -79,6 +74,10 @@ class LocalDataSourceImpl(
     override suspend fun setItem(item: DataEntity.Item): Result<Unit> =
         withContext(Dispatchers.IO) {
             try {
+                if (databaseDao.selectFolders().isNullOrEmpty()) {
+                    databaseDao.insertFolder(DataEntity.Folder(name = "최근항목", createAt = Date()))
+                }
+
                 val result = databaseDao.insertItem(item)
                 Result.Success(result)
             } catch (e: Exception) {
