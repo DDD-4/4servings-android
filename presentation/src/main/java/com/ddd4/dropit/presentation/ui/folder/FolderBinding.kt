@@ -1,6 +1,7 @@
 package com.ddd4.dropit.presentation.ui.folder
 
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ddd4.dropit.presentation.entity.PresentationEntity
@@ -29,10 +30,12 @@ fun setCategoryItemRecyclerView(recyclerView: RecyclerView, list: List<Presentat
     }
 }
 
-
 @BindingAdapter("setImage")
-fun setImageUrl(view: ImageView, src: String) {
-    view.loadUrlCenterCrop(src)
+fun setImageUrl(view: ImageView, src: String?) {
+    src?.let{
+        view.loadUrlCenterCrop(src)
+        view.clipToOutline = true
+    }
 }
 
 @BindingAdapter("setItems", "setListener")

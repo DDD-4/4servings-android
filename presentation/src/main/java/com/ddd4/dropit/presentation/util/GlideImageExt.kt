@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import timber.log.Timber
@@ -38,6 +39,6 @@ fun ImageView.loadBitmap(bitmap: Bitmap) {
     GlideApp.with(this).load(drawable).into(this)
 }
 
-    fun ImageView.loadResource(res: Int) {
+fun ImageView.loadResource(res: Int) {
     GlideApp.with(this).load(res).into(this)
 }
