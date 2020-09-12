@@ -17,6 +17,12 @@ object MainBinding {
     @JvmStatic
     @BindingAdapter(value = ["mainItems", "clickListener"])
     fun setMainFolderItems(view: RecyclerView, mainItems: List<PresentationEntity.Folder>?, clickListener: ItemClickListener) {
+        if (mainItems?.size ?: 0 < 2) {
+            view.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
+        } else {
+            view.layoutManager = GridLayoutManager(view.context, 2, GridLayoutManager.HORIZONTAL, false)
+        }
+
         view.adapter?.run {
             if (this is MainFolderAdapter) {
                 this.items = mainItems
@@ -26,11 +32,6 @@ object MainBinding {
         } ?: run {
             MainFolderAdapter(mainItems, clickListener).apply {
                 view.adapter = this
-            }
-            if (mainItems?.size ?: 0 < 2) {
-                view.layoutManager = GridLayoutManager(view.context, 1)
-            } else {
-                view.layoutManager = GridLayoutManager(view.context, 2)
             }
         }
     }
