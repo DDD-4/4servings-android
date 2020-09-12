@@ -28,7 +28,7 @@ class FolderViewModel @ViewModelInject constructor(
     private val _isButtonActivated = MutableLiveData<Boolean>()
     val isButtonActivated: LiveData<Boolean> = _isButtonActivated
 
-    private val _selectedImageList = MutableLiveData<ArrayList<Long>>()
+    private val _selectedImageList = ArrayList<Long>()
 
     private val _sortByLatestButton = SingleLiveEvent<Void>()
     val sortByLatestButton: LiveData<Void> = _sortByLatestButton
@@ -64,7 +64,6 @@ class FolderViewModel @ViewModelInject constructor(
     private fun initView() {
         _selectedImageState.value = false
         _selectImageButton.value = "선택"
-        _selectedImageList.value = arrayListOf()
         _isButtonActivated.value = false
     }
 
@@ -107,13 +106,15 @@ class FolderViewModel @ViewModelInject constructor(
             clearSelected.call()
         } else {
             _selectImageButton.value = "취소"
+            _selectedImageList.clear()
+
         }
         _selectedImageState.value = !_selectedImageState.value!!
     }
 
     fun nextButtonClicked() {
         if (_isButtonActivated.value!!) {
-            _nextButton.value = _selectedImageList.value //call
+            _nextButton.value = _selectedImageList //call
         }
     }
 
@@ -127,16 +128,16 @@ class FolderViewModel @ViewModelInject constructor(
                 if (selectImageButton.value == "취소") {
                     when (visibility) {
                         true -> {
-                            _selectedImageList.value?.add((item as Item).id!!)
+                            _selectedImageList.add((item as Item).id!!)
                         }
                         false -> {
-                            _selectedImageList.value?.remove((item as Item).id)
+                            _selectedImageList.remove((item as Item).id)
                         }
                     }
                 } else {
-                    _selectedImageList.value?.clear()
+                    Timber.d("select.")
                 }
-                _isButtonActivated.value = _selectedImageList.value?.isNotEmpty()
+                _isButtonActivated.value = _selectedImageList.isNotEmpty()
             }
 
             override fun <T> onItemDetailClicked(item: T) {
