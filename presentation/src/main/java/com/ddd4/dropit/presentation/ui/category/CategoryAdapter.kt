@@ -49,11 +49,8 @@ class CategoryAdapter(
                     selectedView.put(position, !selectedView.get(position))
                         if (selectedView.get(position)) {
                             binding.viewShadow.visibility = View.VISIBLE
-                           // binding.tvDetailFolder.setTextColor(Color.WHITE)
                         } else {
                             binding.viewShadow.visibility = View.GONE
-                           //
-                            // binding.tvDetailFolder.setTextColor(Color.BLACK)
                         }
                     onItemClick?.onItemClicked(item, selectedView.get(position))
                 }

@@ -54,6 +54,8 @@ class FolderViewModel @ViewModelInject constructor(
     private val _item = SingleLiveEvent<Long>()
     val item: SingleLiveEvent<Long> = _item
 
+    val test = SingleLiveEvent<Unit>()
+
     init {
         initView()
         sortByLatestButtonClick()
@@ -79,10 +81,6 @@ class FolderViewModel @ViewModelInject constructor(
             }
             is Result.Error -> Timber.d(result.exception)
         }
-    }
-
-    fun update(folderId: Long) = viewModelScope.launch {
-        start(folderId)
     }
 
     fun sortByLatestButtonClick() {

@@ -1,20 +1,13 @@
 package com.ddd4.dropit.presentation.ui.folder
 
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ddd4.dropit.presentation.R
-import com.ddd4.dropit.presentation.BR
-import com.ddd4.dropit.presentation.base.adapter.BaseRecyclerView
-import com.ddd4.dropit.presentation.databinding.RowDetailFolderBinding
 import com.ddd4.dropit.presentation.entity.PresentationEntity
 
 import com.ddd4.dropit.presentation.ui.category.CategoryAdapter
 import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderAdapter
 import com.ddd4.dropit.presentation.util.ItemClickListener
-import com.ddd4.dropit.presentation.util.loadDrawable
-import com.ddd4.dropit.presentation.util.loadResource
 import com.ddd4.dropit.presentation.util.loadUrlCenterCrop
 import timber.log.Timber
 
@@ -25,12 +18,6 @@ fun setFolderItemRecyclerView(recyclerView: RecyclerView, list: List<Presentatio
         (recyclerView.adapter as FolderAdapter).submitList(it)
         Timber.e("first binding end! size: ${it.size}")
         recyclerView.adapter?.notifyDataSetChanged()
-
-    @BindingAdapter(value = ["folderItem"])
-    fun setDetailFolderItems(view: RecyclerView, items: List<PresentationEntity.Folder>?){
-        view.adapter = object : BaseRecyclerView.Adapter<RowDetailFolderBinding>(
-            layoutId = R.layout.row_detail_folder, items = items, bindingVariableId = BR.detailFolderItem
-        ) {}
     }
 }
 

@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ddd4.dropit.presentation.BR
 import com.ddd4.dropit.presentation.databinding.RowDetailFolderBinding
 import com.ddd4.dropit.presentation.entity.PresentationEntity.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
 
 class FolderAdapter(
     private val viewModel: FolderViewModel,
@@ -27,17 +31,20 @@ class FolderAdapter(
 
     override fun onBindViewHolder(holder: FolderViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, position, onItemClick)
+        holder.bind(item, position)
     }
 
+    fun selectClearItems(){
+    }
 
     inner class FolderViewHolder constructor(val binding: RowDetailFolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item, position: Int, listener: ItemHandler?) {
+        fun bind(item: Item, position: Int) {
             for(i in 0 until itemCount){
                 selectedView.put(i, false)
             }
+
             binding.item = item
             binding.viewShadow.visibility = View.GONE
 
@@ -46,11 +53,8 @@ class FolderAdapter(
                     selectedView.put(position, !selectedView.get(position))
                         if (selectedView.get(position)) {
                             binding.viewShadow.visibility = View.VISIBLE
-                           // binding.tvDetailFolder.setTextColor(Color.WHITE)
                         } else {
                             binding.viewShadow.visibility = View.GONE
-                           //
-                            // binding.tvDetailFolder.setTextColor(Color.BLACK)
                         }
                     onItemClick?.onItemClicked(item, selectedView.get(position))
                 }

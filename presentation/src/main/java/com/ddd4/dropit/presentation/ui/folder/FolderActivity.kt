@@ -32,12 +32,10 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
             folderVM = folderViewModel
         }
         folderId = getId(intent)
-        folderViewModel.start(folderId)
         setupAdapter()
     }
 
     override fun setObserve() {
-
         folderViewModel.sortByLatestButton.observe(this, Observer {
             binding.rvDetailFolder.adapter?.notifyDataSetChanged()
         })
@@ -75,6 +73,10 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
 
         })
 
+        folderViewModel.test.observe(this, Observer {
+            listAdapter.selectClearItems()
+        })
+
         folderViewModel.selectImageButton.observe(this, Observer {
             binding.ibSelectImage.text = it
             when(it) {
@@ -107,5 +109,11 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
         val extra = intent.extras
         val alarmId = extra?.get("alarmId") as Long
         Timber.d("alarmId: $alarmId")
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        folderViewModel.start(folderId)
+        binding.rvDetailFolder.adapter?.notifyDataSetChanged()
     }
 }
