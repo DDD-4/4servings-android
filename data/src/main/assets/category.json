@@ -6,12 +6,12 @@
       {
         "id": 1,
         "categoryId": 1,
-        "endAt": 130,
+        "endAt": 1,
         "title": "스킨/로션"
       }, {
         "id": 2,
         "categoryId": 1,
-        "endAt": 5,
+        "endAt": 1,
         "title": "미스트"
       }, {
         "id": 3,

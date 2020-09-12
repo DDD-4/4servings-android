@@ -14,4 +14,6 @@ interface DropitRepository {
     suspend fun getFolderItems(): Result<List<DomainEntity.Folder>>
 
     suspend fun setItem(item: DomainEntity.Item): Result<Unit>
+
+    suspend fun getAlarmIds(): Result<List<DomainEntity.Item>>
 }

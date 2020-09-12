@@ -1,6 +1,7 @@
 package com.ddd4.dropit.presentation.ui.main
 
 import android.content.Intent
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.ddd4.dropit.presentation.R
@@ -35,5 +36,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         mainViewModel.addClick.observe(this, Observer {
             startActivity(Intent(this, AddActivity::class.java))
         })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val extra = intent.extras
+        if (extra != null) {
+            val alarmId = extra["alarmId"] as Long
+            //알람을 통해서 들어왔다면 alarmId로 해당 알람을 편집할 수 있는 화면으로 이동
+            startActivity(Intent(this, FolderActivity::class.java).putExtra("alarmId", alarmId))
+        }
     }
 }

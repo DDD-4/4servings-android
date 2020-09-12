@@ -22,6 +22,7 @@ import com.ddd4.dropit.presentation.util.ItemClickListener
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import com.ddd4.dropit.presentation.util.addToDate
 import com.ddd4.dropit.presentation.util.intToDate
+import com.ddd4.dropit.presentation.util.permission.PermissionHelper
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -30,7 +31,8 @@ import java.util.*
 class AddSharedViewModel @ViewModelInject constructor(
     private val getCategoryUseCase: GetCategoryUseCase,
     private val getSubCategoryUseCase: GetSubCategoryUseCase,
-    private val setItemUseCase: SetItemUseCase
+    private val setItemUseCase: SetItemUseCase,
+    private val permissionHelper: PermissionHelper
 ) : BaseViewModel() {
 
     private val _progressValue = MutableLiveData<Int>()
@@ -48,7 +50,10 @@ class AddSharedViewModel @ViewModelInject constructor(
     private val _selectedCategory = MutableLiveData<Long>()
     private val _selectedSubCategory = MutableLiveData<Long>()
     private val _selectedName = MutableLiveData<String>()
-    //private val _selectedImage = MutableLiveData<String>()
+
+    private val _selectedImage = MutableLiveData<String>()
+    val selectedImage : LiveData<String> = _selectedImage
+
     private val _selectedStartAt = MutableLiveData<Date>()
     private val _selectedEndAt = MutableLiveData<Date>()
 
@@ -62,7 +67,7 @@ class AddSharedViewModel @ViewModelInject constructor(
 
     val nextClick = SingleLiveEvent<Void>()
 
-    val addComplete = SingleLiveEvent<Void>()
+    val addComplete = SingleLiveEvent<Long>()
 
     fun setProgressValue(value: Int) {
         _progressValue.value = value
@@ -100,15 +105,17 @@ class AddSharedViewModel @ViewModelInject constructor(
 
     fun setItem() {
         viewModelScope.launch {
+            val alarmId = _selectedEndAt.value!!.time
             when (val result = setItemUseCase.execute(PresentationEntity.Item(
                     categoryId = _selectedCategory.value!!,
                     subCategoryId = _selectedSubCategory.value!!,
+                    alarmId = alarmId,
                     name = _selectedName.value!!,
-                    image = "image",
+                    image = _selectedImage.value,
                     startAt = _selectedStartAt.value!!,
                     endAt = _selectedEndAt.value!!,
                     createAt = Date()).mapToDomain())) {
-                is Result.Success -> addComplete.call()
+                is Result.Success -> addComplete.value = alarmId
                 is Result.Error -> Timber.d(result.exception)
             }
         }
@@ -124,10 +131,15 @@ class AddSharedViewModel @ViewModelInject constructor(
         }
     }
 
+    val isPermissionState = SingleLiveEvent<Boolean>()
     val captureClick = SingleLiveEvent<Void>()
 
     fun onImageClicked() {
-        captureClick.call()
+        if (permissionHelper.isCapturePermissionState()) {
+            captureClick.call()
+        } else {
+            isPermissionState.value = permissionHelper.isCapturePermissionState()
+        }
     }
 
     val datePickerListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
@@ -139,6 +151,7 @@ class AddSharedViewModel @ViewModelInject constructor(
         _nextButtonState.value = true
         isLittleState.value = false
         isDontState.value = false
+        dateLittleText.value = ""
     }
 
     val onItemClickListener = object: ItemClickListener {
@@ -179,6 +192,7 @@ class AddSharedViewModel @ViewModelInject constructor(
                 _nextButtonState.value = false
             }
             R.id.rbtnDontDate -> {
+                dateLittleText.value = ""
                 isDontState.value = true
                 isLittleState.value = false
                 _pickerDate.value = ""
@@ -195,8 +209,11 @@ class AddSharedViewModel @ViewModelInject constructor(
             dateLittleText.value = s.toString()
         }
         override fun afterTextChanged(s: Editable?) {
-            getLittleDate(s.toString().toInt())
-
+            if (s.toString() == "") {
+                getLittleDate(0)
+            } else {
+                getLittleDate(s.toString().toInt())
+            }
             _nextButtonState.value = !s.isNullOrEmpty()
         }
 
@@ -219,5 +236,9 @@ class AddSharedViewModel @ViewModelInject constructor(
 
         val formatter = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
         return formatter.format(today)
+    }
+
+    fun setSelectedImage(imagePath: String) {
+        _selectedImage.value = imagePath
     }
 }

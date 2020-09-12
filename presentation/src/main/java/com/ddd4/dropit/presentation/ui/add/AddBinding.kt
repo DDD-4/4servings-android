@@ -14,6 +14,7 @@ import com.ddd4.dropit.presentation.util.ItemClickListener
 import com.ddd4.dropit.presentation.util.loadUrl
 import java.util.*
 
+
 object AddBinding {
 
     @JvmStatic
@@ -61,5 +62,6 @@ object AddBinding {
     @BindingAdapter("image")
     fun setItemImage(view: ImageView, image: String?) {
         view.loadUrl(image)
+        view.scaleType = ImageView.ScaleType.CENTER_CROP
     }
 }

@@ -35,6 +35,7 @@
     <!-- Button -->
     <color name="button_default">#9E9E9E</color>
     <color name="button_activate">#0050FE</color>
+    <color name="capture_button_line">#000000</color>
     <!-- Progress -->
     <color name="progress_background">#E4E4E4</color>
     <color name="progress_state_background">#9E9E9E</color>
