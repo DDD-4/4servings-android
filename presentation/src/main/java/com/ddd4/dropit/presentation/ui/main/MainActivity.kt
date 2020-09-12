@@ -48,4 +48,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 //            startActivity(Intent(this, FolderActivity::class.java).putExtra("alarmId", alarmId))
 //        }
     }
+
+    override fun onStart() {
+        super.onStart()
+
+        mainViewModel.getFolderItems()
+    }
 }

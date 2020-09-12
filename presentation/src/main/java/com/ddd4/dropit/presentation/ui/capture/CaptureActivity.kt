@@ -296,7 +296,9 @@ class CaptureActivity : BaseActivity<ActivityCaptureBinding>(R.layout.activity_c
     private fun getImageUri(bitmap: Bitmap): Uri? {
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path = MediaStore.Images.Media.insertImage(contentResolver, bitmap, "image", null)
+        val titleFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.KOREA)
+        val title = titleFormat.format(Date())
+        val path = MediaStore.Images.Media.insertImage(contentResolver, bitmap, title, null)
         return Uri.parse(path)
     }
 }

@@ -112,7 +112,7 @@ class AddSharedViewModel @ViewModelInject constructor(
                     subCategoryId = _selectedSubCategory.value!!,
                     alarmId = alarmId,
                     name = _selectedName.value!!,
-                    image = _selectedImage.value,
+                    image = _selectedImage.value!!,
                     startAt = _selectedStartAt.value!!,
                     endAt = _selectedEndAt.value!!,
                     createAt = Date()).mapToDomain())) {
@@ -128,7 +128,7 @@ class AddSharedViewModel @ViewModelInject constructor(
             _selectedName.value = s.toString()
         }
         override fun afterTextChanged(s: Editable?) {
-            _nextButtonState.value = !s.isNullOrEmpty()
+            _nextButtonState.value = !s.isNullOrEmpty() && !_selectedImage.value.isNullOrEmpty()
         }
     }
 
@@ -241,5 +241,6 @@ class AddSharedViewModel @ViewModelInject constructor(
 
     fun setSelectedImage(imagePath: String) {
         _selectedImage.value = imagePath
+        _nextButtonState.value = !_selectedName.value.isNullOrEmpty() && !_selectedImage.value.isNullOrEmpty()
     }
 }

@@ -47,17 +47,11 @@ sealed class DataEntity {
         @ColumnInfo(name = "subcategory_id") var subCategoryId: Long,
         @ColumnInfo(name = "alarm_id") var alarmId: Long,
         @ColumnInfo(name = "name") var name: String,
-        @ColumnInfo(name = "image") var image: String? = null,
+        @ColumnInfo(name = "image") var image: String,
         @ColumnInfo(name = "start_at") var startAt: Date,
         @ColumnInfo(name = "end_at") var endAt: Date,
         @ColumnInfo(name = "create_at") var createAt: Date? = null,
         @ColumnInfo(name = "update_at") var updateAt: Date? = Date()
-    ): DataEntity()
-
-    data class FolderAndItems (
-        @Embedded val folder: Folder,
-        @Relation(parentColumn = "id", entityColumn = "folder_id")
-        var items: List<Item> = ArrayList()
     ): DataEntity()
 
     @Entity(tableName = "category")
@@ -79,11 +73,5 @@ sealed class DataEntity {
         @ColumnInfo(name = "category_id") val categoryId: Long,
         @ColumnInfo(name = "end_date") val endAt: Int,
         @ColumnInfo(name = "title") val title: String
-    ): DataEntity()
-
-    data class Section(
-        @Embedded val category: Category,
-        @Relation(parentColumn = "id", entityColumn = "category_id")
-        var subCategories: List<SubCategory> = ArrayList()
     ): DataEntity()
 }

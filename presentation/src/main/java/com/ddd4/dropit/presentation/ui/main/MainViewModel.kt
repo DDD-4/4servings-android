@@ -40,7 +40,6 @@ class MainViewModel @ViewModelInject constructor(
 
     init {
         setSectionFromJson()
-        getFolderItems()
     }
 
     private fun setSectionFromJson() {
@@ -61,7 +60,7 @@ class MainViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun getFolderItems() {
+    fun getFolderItems() {
         viewModelScope.launch {
             when (val result = getFolderUseCase()) {
                 is Result.Success -> {
