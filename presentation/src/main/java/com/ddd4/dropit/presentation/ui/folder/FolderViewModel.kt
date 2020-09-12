@@ -54,7 +54,7 @@ class FolderViewModel @ViewModelInject constructor(
     private val _item = SingleLiveEvent<Long>()
     val item: SingleLiveEvent<Long> = _item
 
-    val test = SingleLiveEvent<Unit>()
+    val clearSelected = SingleLiveEvent<Void>()
 
     init {
         initView()
@@ -104,6 +104,7 @@ class FolderViewModel @ViewModelInject constructor(
     fun selectImageButtonClick() {
         if (_selectedImageState.value!!) {
             _selectImageButton.value = "선택"
+            clearSelected.call()
         } else {
             _selectImageButton.value = "취소"
         }

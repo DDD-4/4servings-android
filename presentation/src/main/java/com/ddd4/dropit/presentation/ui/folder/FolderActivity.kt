@@ -73,10 +73,6 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
 
         })
 
-        folderViewModel.test.observe(this, Observer {
-            listAdapter.selectClearItems()
-        })
-
         folderViewModel.selectImageButton.observe(this, Observer {
             binding.ibSelectImage.text = it
             when(it) {
@@ -89,6 +85,10 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
                     binding.folderRectangleButton.animate().translationY(0f)
                 }
             }
+        })
+
+        folderViewModel.clearSelected.observe(this, Observer {
+            listAdapter.notifyClearSelect()
         })
     }
 

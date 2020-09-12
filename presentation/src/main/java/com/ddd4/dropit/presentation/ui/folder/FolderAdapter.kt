@@ -34,9 +34,6 @@ class FolderAdapter(
         holder.bind(item, position)
     }
 
-    fun selectClearItems(){
-    }
-
     inner class FolderViewHolder constructor(val binding: RowDetailFolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -63,6 +60,10 @@ class FolderAdapter(
                 }
             }
         }
+    }
+
+    fun notifyClearSelect() {
+        notifyDataSetChanged()
     }
 }
 
