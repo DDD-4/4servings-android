@@ -67,4 +67,7 @@ interface DatabaseDao {
 
     @Query("SELECT * FROM subcategory WHERE category_id = :categoryId ORDER BY id ASC")
     suspend fun selectSubCategories(categoryId: Long): List<DataEntity.SubCategory>
+
+    @Query("SELECT * FROM item")
+    suspend fun selectItemAlarmIds(): List<DataEntity.Item>
 }

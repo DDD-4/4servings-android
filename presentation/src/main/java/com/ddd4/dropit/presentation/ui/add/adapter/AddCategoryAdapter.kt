@@ -25,6 +25,7 @@ class AddCategoryAdapter(
     override fun getItemCount(): Int = if (items != null) items!!.size else 0
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+        holder.setIsRecyclable(false)
         holder.binding.item = items!![position]
         holder.binding.isSelected = false
 

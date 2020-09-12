@@ -20,6 +20,8 @@
         android:layout_margin="@dimen/space_6dp"
         android:text="@{item.title}"
         android:textAppearance="@style/text.14sp.regular.hint"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:gravity="center"
         android:textColor="@{isSelected ? @color/textAccent : @color/textHint}"
         android:background="@{isSelected ? @drawable/bg_subcategory_activate : @drawable/bg_subcategory_default}"

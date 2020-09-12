@@ -36,4 +36,9 @@ object UseCaseModule {
     @Singleton
     fun provideSubCategoryUseCase(dropitRepository: DropitRepository): GetSubCategoryUseCase =
         GetSubCategoryUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetAlarmIdUseCase(dropitRepository: DropitRepository): GetAlarmIdUseCase =
+        GetAlarmIdUseCase(dropitRepository)
 }

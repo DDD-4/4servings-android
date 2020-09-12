@@ -20,4 +20,12 @@
     <string name="text_default_folder">최근항목</string>
     <string name="text_add_item">등록하러 가기</string>
     <string name="text_add_item_hint">아직 버릴 물건이 없어요.\n제품을 등록하면\n버릴 날짜를 알려드릴게요.</string>
+    <string name="text_add_date_little_hint_number">0</string>
+    <string name="text_add_date_little_hint">대략적인 느낌\n대략 언제 사용을 시작했는지 알려주세요.</string>
+    <string name="text_add_date_dont_hint">괜찮아요. 오늘부터 우리 1일</string>
+    <string name="text_add_date_little_text">주 전</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_camera_capture">확인</string>
+    <string name="permission_denied">권한이 거부되었습니다. [설정] > [권한]에서 설정을 진행해주세요.</string>
 </resources>

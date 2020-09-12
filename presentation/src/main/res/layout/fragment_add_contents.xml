@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="addVM"
             type="com.ddd4.dropit.presentation.ui.add.AddSharedViewModel" />
@@ -61,6 +63,7 @@
                 android:background="@drawable/bg_image_add"
                 android:layout_marginTop="@dimen/space_36dp"
                 android:layout_marginStart="@dimen/space_20dp"
+                app:image="@{addVM.selectedImage}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etName"
                 android:contentDescription="@string/description_contents" />
@@ -70,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_add_image"
                 android:textAppearance="@style/text.12sp.regular.hint"
+                android:visibility="@{addVM.selectedImage != null ? View.GONE : View.VISIBLE}"
                 android:gravity="center"
                 app:layout_constraintStart_toStartOf="@+id/ivContents"
                 app:layout_constraintEnd_toEndOf="@+id/ivContents"

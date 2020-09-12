@@ -1,5 +1,6 @@
 package com.ddd4.dropit.presentation.util
 
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
@@ -30,5 +31,9 @@ fun ImageView.loadUrl(url : String?) {
 }
 
 fun ImageView.loadDrawable(drawable: Drawable) {
+    GlideApp.with(this).load(drawable).into(this)
+}
+
+fun ImageView.loadBitmap(bitmap: Bitmap) {
     GlideApp.with(this).load(drawable).into(this)
 }

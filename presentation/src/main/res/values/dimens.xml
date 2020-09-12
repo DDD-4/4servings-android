@@ -36,4 +36,8 @@
     <dimen name="space_24dp">24dp</dimen>
     <dimen name="space_9dp">9dp</dimen>
     <dimen name="space_12dp">12dp</dimen>
+    <dimen name="space_2dp">2dp</dimen>
+    <dimen name="capture_radius">50dp</dimen>
+    <dimen name="capture_line">2dp</dimen>
+    <dimen name="button_elevation">8dp</dimen>
 </resources>

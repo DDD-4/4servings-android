@@ -30,11 +30,12 @@
     <color name="textHint">#C3C3C3</color>
     <!-- Line -->
     <color name="background_view_divider">#D8D8D8</color>
-    <color name="background_item_divider">#979797</color>
+    <color name="background_item_divider">#D8D8D8</color>
     <color name="image_line_add">#979797</color>
     <!-- Button -->
     <color name="button_default">#9E9E9E</color>
     <color name="button_activate">#0050FE</color>
+    <color name="capture_button_line">#000000</color>
     <!-- Progress -->
     <color name="progress_background">#E4E4E4</color>
     <color name="progress_state_background">#9E9E9E</color>
