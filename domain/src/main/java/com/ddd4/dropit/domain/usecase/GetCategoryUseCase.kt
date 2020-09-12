@@ -8,6 +8,7 @@ import java.lang.Exception
 class GetCategoryUseCase(
     private val dropitRepository: DropitRepository
 ) {
-    suspend fun execute(): Result<List<DomainEntity.Category>> =
+    suspend operator fun invoke(
+    ): Result<List<DomainEntity.Category>> =
         dropitRepository.getCategoryItems()
 }

@@ -2,6 +2,7 @@ package com.ddd4.dropit.data.source.local
 
 import android.content.Context
 import com.ddd4.dropit.data.entity.DataEntity
+import com.ddd4.dropit.data.mapper.mapToData
 import com.ddd4.dropit.data.mapper.mapToDomain
 import com.ddd4.dropit.data.source.local.model.Category
 import com.ddd4.dropit.data.source.local.preferences.SharedPrefHelper
@@ -85,11 +86,93 @@ class LocalDataSourceImpl(
             }
         }
 
+    override suspend fun getItemsByFolder(folderId: Long): Result<List<DomainEntity.Item>> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result =
+                    databaseDao.selectItemsByFolder(folderId).map(DataEntity.Item::mapToDomain)
+
+                Result.Success(result)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun getFolderByName(folderName: String): Result<DomainEntity.Folder> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = databaseDao.selectFolder(folderName).mapToDomain()
+                Result.Success(result)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun getItemsByCategory(categoryId: Long): Result<List<DomainEntity.Item>> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = databaseDao.selectItemsByCategory(categoryId).map(DataEntity.Item::mapToDomain)
+                Result.Success(result)
+            } catch (e: Exception){
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun getDetailItem(itemId: Long): Result<DomainEntity.Item> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = databaseDao.selectItem(itemId).mapToDomain()
+                Result.Success(result)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
     override suspend fun getAlarmIds(): Result<List<DomainEntity.Item>> =
         withContext(Dispatchers.IO) {
             try {
                 val result = databaseDao.selectItemAlarmIds().map(DataEntity.Item::mapToDomain)
                 Result.Success(result)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun updateItem(item: DomainEntity.Item): Result<Unit> =
+        withContext(Dispatchers.IO) {
+            try {
+                databaseDao.updateItem(item.mapToData())
+                Result.Success(Unit)
+            } catch (e: Exception){
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun createFolder(folder: DomainEntity.Folder): Result<Unit> =
+        withContext(Dispatchers.IO) {
+            try {
+                databaseDao.insertFolder(folder.mapToData())
+                Result.Success(Unit)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun deleteItem(itemId: Long): Result<Unit> =
+        withContext(Dispatchers.IO) {
+            try {
+                databaseDao.deleteItem(itemId)
+                Result.Success(Unit)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun updateItemByFolderId(folderId: Long, itemId: Long): Result<Unit> =
+        withContext(Dispatchers.IO) {
+            try {
+                databaseDao.updateItemByFolderId(folderId, itemId)
+                Result.Success(Unit)
             } catch (e: Exception) {
                 Result.Error(e)
             }

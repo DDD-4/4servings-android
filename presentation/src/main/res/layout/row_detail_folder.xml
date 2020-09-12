@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.ddd4.dropit.presentation.entity.PresentationEntity.Item" />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/folderLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp">
+
+        <ImageView
+            android:id="@+id/ivDetailFolder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:background="@drawable/bg_view_border"
+            android:padding="1dp"
+            setImage="@{item.image}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/viewGradient"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_gradation_rectangle"
+            app:layout_constraintBottom_toBottomOf="@+id/ivDetailFolder"
+            app:layout_constraintEnd_toEndOf="@+id/ivDetailFolder"
+            app:layout_constraintStart_toStartOf="@+id/ivDetailFolder"
+            app:layout_constraintTop_toTopOf="@+id/ivDetailFolder" />
+
+        <TextView
+            android:id="@+id/tvDetailFolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_16dp"
+            android:layout_marginBottom="@dimen/space_12dp"
+            android:text="@{item.getDDay()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/text.18sp.bold.light"
+            tools:text="D-12" />
+
+        <View
+            android:id="@+id/viewShadow"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_check"
+            app:layout_constraintBottom_toBottomOf="@+id/ivDetailFolder"
+            app:layout_constraintEnd_toEndOf="@+id/ivDetailFolder"
+            app:layout_constraintStart_toStartOf="@+id/ivDetailFolder"
+            app:layout_constraintTop_toTopOf="@+id/ivDetailFolder" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

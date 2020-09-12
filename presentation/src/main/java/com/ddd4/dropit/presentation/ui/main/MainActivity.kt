@@ -41,11 +41,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val extra = intent.extras
-        if (extra != null) {
-            val alarmId = extra["alarmId"] as Long
-            //알람을 통해서 들어왔다면 alarmId로 해당 알람을 편집할 수 있는 화면으로 이동
-            startActivity(Intent(this, FolderActivity::class.java).putExtra("alarmId", alarmId))
-        }
+//        val extra = intent.extras
+//        if (extra != null) {
+//            val alarmId = extra["alarmId"] as Long
+//            //알람을 통해서 들어왔다면 alarmId로 해당 알람을 편집할 수 있는 화면으로 이동
+//            startActivity(Intent(this, FolderActivity::class.java).putExtra("alarmId", alarmId))
+//        }
     }
 }

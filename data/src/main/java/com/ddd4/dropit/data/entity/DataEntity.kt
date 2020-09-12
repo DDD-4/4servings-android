@@ -41,8 +41,8 @@ sealed class DataEntity {
             onDelete = ForeignKey.CASCADE
         )])
     data class Item (
-        @PrimaryKey(autoGenerate = true) var id: Long? = 0,
-        @ColumnInfo(name = "folder_id") var folderId: Long? = 0,
+        @PrimaryKey(autoGenerate = true) var id: Long?,
+        @ColumnInfo(name = "folder_id") var folderId: Long?,
         @ColumnInfo(name = "category_id") var categoryId: Long,
         @ColumnInfo(name = "subcategory_id") var subCategoryId: Long,
         @ColumnInfo(name = "alarm_id") var alarmId: Long,

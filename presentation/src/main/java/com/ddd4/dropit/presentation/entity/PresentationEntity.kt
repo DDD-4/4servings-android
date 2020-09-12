@@ -1,11 +1,16 @@
 package com.ddd4.dropit.presentation.entity
 
+import timber.log.Timber
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.math.floor
 
 sealed class PresentationEntity {
 
     data class Folder (
-        var id: Long,
+        var id: Long?,
         var name: String,
         var createAt: Date,
         var updateAt: Date? = Date()
@@ -23,7 +28,23 @@ sealed class PresentationEntity {
         var endAt: Date,
         var createAt: Date?,
         var updateAt: Date? = Date()
-    ): PresentationEntity()
+    ): PresentationEntity() {
+        fun getDDay(): String {
+            val day = (endAt.time - Date().time) / TODAY
+            return "D-$day"
+        }
+
+        fun getStartDate(): String {
+            val formatter = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+            return formatter.format(startAt)
+        }
+
+        fun getEndDate(): String {
+            val formatter = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+            return formatter.format(endAt)
+        }
+    }
+
 
     data class Category (
         var id: Long,
@@ -36,3 +57,5 @@ sealed class PresentationEntity {
         val title: String
     ): PresentationEntity()
 }
+
+const val TODAY = 24 * 60 * 60 * 1000

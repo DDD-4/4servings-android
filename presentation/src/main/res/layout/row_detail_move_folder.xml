@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="folderList"
+            type="com.ddd4.dropit.presentation.entity.PresentationEntity.Folder" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:paddingBottom="@dimen/space_28dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivFolder"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/img_folder_default"
+        android:layout_marginStart="@dimen/space_8dp"
+        android:layout_marginEnd="@dimen/space_8dp"
+        app:layout_constraintDimensionRatio="152:110"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_12dp"
+        android:text="@{folderList.name}"
+        android:textAppearance="@style/text.14sp.regular.dark"
+        app:layout_constraintStart_toStartOf="@+id/ivFolder"
+        app:layout_constraintTop_toBottomOf="@+id/ivFolder"
+        tools:text="title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

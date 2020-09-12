@@ -4,7 +4,10 @@
     <dimen name="space_16dp">16dp</dimen>
     <dimen name="space_8dp">8dp</dimen>
     <dimen name="space_4dp">4dp</dimen>
+    <!--Layout-->
+    <dimen name="layout_height">63dp</dimen>
     <!-- Text -->
+    <dimen name="text_24sp">24sp</dimen>
     <dimen name="text_20sp">20sp</dimen>
     <dimen name="text_18sp">18sp</dimen>
     <dimen name="text_16sp">16sp</dimen>
@@ -13,6 +16,9 @@
     <!-- Button -->
     <dimen name="button_height">52dp</dimen>
     <dimen name="button_radius">8dp</dimen>
+    <!-- D-day Button-->
+    <dimen name="dday_button_width">52dp</dimen>
+    <dimen name="dday_button_height">22dp</dimen>
     <!-- Component -->
     <dimen name="divider_height">1dp</dimen>
     <dimen name="image_line">1dp</dimen>
@@ -40,4 +46,11 @@
     <dimen name="capture_radius">50dp</dimen>
     <dimen name="capture_line">2dp</dimen>
     <dimen name="button_elevation">8dp</dimen>
+    <dimen name="space_28dp">28dp</dimen>
+    <dimen name="space_18dp">18dp</dimen>
+    <dimen name="space_50dp">50dp</dimen>
+    <dimen name="space_55dp">55dp</dimen>
+    <dimen name="space_32dp">32dp</dimen>
+    <dimen name="space_26dp">26dp</dimen>
+    <dimen name="space_30dp">30dp</dimen>
 </resources>

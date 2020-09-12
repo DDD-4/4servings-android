@@ -21,12 +21,16 @@
     <color name="gray5">#9e9e9e</color>
     <color name="gray6">#979797</color>
     <color name="gray7">#646464</color>
+    <color name="gray8">#d5d5d5</color>
 
     <color name="black">#000000</color>
 
     <color name="white">#ffffff</color>
 
-<!--    feature/add -->
+    <color name="transparentWhite">#00ffffff</color>
+
+
+    <!--    feature/add -->
     <color name="textHint">#C3C3C3</color>
     <!-- Line -->
     <color name="background_view_divider">#D8D8D8</color>
