@@ -23,7 +23,7 @@ sealed class PresentationEntity {
         var subCategoryId: Long,
         var alarmId: Long,
         var name: String,
-        var image: String? = null,
+        var image: String,
         var startAt: Date,
         var endAt: Date,
         var createAt: Date?,
