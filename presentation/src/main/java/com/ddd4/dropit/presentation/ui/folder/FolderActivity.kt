@@ -103,14 +103,7 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
         binding.rvDetailFolder.adapter = listAdapter
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        val extra = intent.extras
-        val alarmId = extra?.get("alarmId") as Long
-        Timber.d("alarmId: $alarmId")
-    }
-    
     override fun onResume() {
         super.onResume()
         folderViewModel.start(folderId)

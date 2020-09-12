@@ -106,7 +106,7 @@ class AddSharedViewModel @ViewModelInject constructor(
     fun setItem() {
         viewModelScope.launch {
             val alarmId = _selectedEndAt.value!!.time
-            when (val result = setItemUseCase.execute(PresentationEntity.Item(
+            when (val result = setItemUseCase(PresentationEntity.Item(
                     id = null,
                     categoryId = _selectedCategory.value!!,
                     subCategoryId = _selectedSubCategory.value!!,

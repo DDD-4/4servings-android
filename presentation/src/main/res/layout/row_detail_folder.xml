@@ -25,7 +25,6 @@
             android:padding="1dp"
             setImage="@{item.image}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:setImage="@{folder.thumbnail}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

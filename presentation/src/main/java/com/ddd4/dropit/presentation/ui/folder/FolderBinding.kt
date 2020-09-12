@@ -4,7 +4,6 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ddd4.dropit.presentation.entity.PresentationEntity
-
 import com.ddd4.dropit.presentation.ui.category.CategoryAdapter
 import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderAdapter
 import com.ddd4.dropit.presentation.util.ItemClickListener

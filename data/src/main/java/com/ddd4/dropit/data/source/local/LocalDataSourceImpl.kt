@@ -128,6 +128,15 @@ class LocalDataSourceImpl(
             }
         }
 
+    override suspend fun getAlarmIds(): Result<List<DomainEntity.Item>> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = databaseDao.selectItemAlarmIds().map(DataEntity.Item::mapToDomain)
+                Result.Success(result)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
 
     override suspend fun updateItem(item: DomainEntity.Item): Result<Unit> =
         withContext(Dispatchers.IO) {

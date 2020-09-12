@@ -51,4 +51,6 @@
     <dimen name="space_50dp">50dp</dimen>
     <dimen name="space_55dp">55dp</dimen>
     <dimen name="space_32dp">32dp</dimen>
+    <dimen name="space_26dp">26dp</dimen>
+    <dimen name="space_30dp">30dp</dimen>
 </resources>

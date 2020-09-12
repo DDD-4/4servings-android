@@ -108,38 +108,38 @@ class FolderViewModel @ViewModelInject constructor(
             _selectImageButton.value = "취소"
         }
         _selectedImageState.value = !_selectedImageState.value!!
+    }
 
-        fun nextButtonClicked() {
-            if (_isButtonActivated.value!!) {
-                _nextButton.value = _selectedImageList.value //call
-            }
+    fun nextButtonClicked() {
+        if (_isButtonActivated.value!!) {
+            _nextButton.value = _selectedImageList.value //call
         }
+    }
 
-        fun backButtonClick() {
-            _backButton.call()
-        }
+    fun backButtonClick() {
+        _backButton.call()
+    }
 
-        val onItemClickListener by lazy {
-            object : ItemHandler {
-                override fun <T> onItemClicked(item: T, visibility: Boolean) {
-                    if (selectImageButton.value == "취소") {
-                        when (visibility) {
-                            true -> {
-                                _selectedImageList.value?.add((item as Item).id!!)
-                            }
-                            false -> {
-                                _selectedImageList.value?.remove((item as Item).id)
-                            }
+    val onItemClickListener by lazy {
+        object : ItemHandler {
+            override fun <T> onItemClicked(item: T, visibility: Boolean) {
+                if (selectImageButton.value == "취소") {
+                    when (visibility) {
+                        true -> {
+                            _selectedImageList.value?.add((item as Item).id!!)
                         }
-                    } else {
-                        _selectedImageList.value?.clear()
+                        false -> {
+                            _selectedImageList.value?.remove((item as Item).id)
+                        }
                     }
-                    _isButtonActivated.value = _selectedImageList.value?.isNotEmpty()
+                } else {
+                    _selectedImageList.value?.clear()
                 }
+                _isButtonActivated.value = _selectedImageList.value?.isNotEmpty()
+            }
 
-                override fun <T> onItemDetailClicked(item: T) {
-                    _item.value = (item as Item).id
-                }
+            override fun <T> onItemDetailClicked(item: T) {
+                _item.value = (item as Item).id
             }
         }
     }
