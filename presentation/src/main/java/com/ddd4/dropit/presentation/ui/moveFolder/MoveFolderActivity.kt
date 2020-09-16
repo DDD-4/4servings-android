@@ -3,13 +3,10 @@ package com.ddd4.dropit.presentation.ui.moveFolder
 import android.content.Intent
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.ddd4.dropit.presentation.BR
 import com.ddd4.dropit.presentation.R
-import com.ddd4.dropit.presentation.base.adapter.BaseRecyclerView
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
-import com.ddd4.dropit.presentation.databinding.ActivityFolderBinding
 import com.ddd4.dropit.presentation.databinding.ActivityMoveFolderBinding
-import com.ddd4.dropit.presentation.dialog.DialogActivity
+import com.ddd4.dropit.presentation.ui.dialog.DialogActivity
 import com.ddd4.dropit.presentation.ui.main.MainActivity
 import com.ddd4.dropit.presentation.util.Constants
 import com.ddd4.dropit.presentation.util.toast
@@ -19,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MoveFolderActivity : BaseActivity<ActivityMoveFolderBinding>(R.layout.activity_move_folder) {
 
     private val viewModel: MoveFolderViewModel by viewModels()
-    private lateinit var folderListAdapter: MoveFolderAdapter
     private var itemIdList = arrayListOf<Long>()
 
     override fun setBind() {
@@ -39,9 +35,6 @@ class MoveFolderActivity : BaseActivity<ActivityMoveFolderBinding>(R.layout.acti
             )
         })
 
-        viewModel.folderList.observe(this, Observer {
-        })
-
         viewModel.moveFolder.observe(this, Observer {
             this.toast("사진 이동이 완료되었습니다.")
             startActivity(Intent(this, MainActivity::class.java))
@@ -50,6 +43,7 @@ class MoveFolderActivity : BaseActivity<ActivityMoveFolderBinding>(R.layout.acti
 
         viewModel.backButton.observe(this, Observer {
             finish()
+
         })
     }
 
@@ -61,7 +55,6 @@ class MoveFolderActivity : BaseActivity<ActivityMoveFolderBinding>(R.layout.acti
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == 1500 && resultCode == 2000){
-            this.toast("result")
             binding.rvFolderList.adapter?.notifyDataSetChanged()
         }
     }

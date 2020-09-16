@@ -7,7 +7,7 @@
     <data>
         <variable
             name="dialogViewModel"
-            type="com.ddd4.dropit.presentation.dialog.DialogViewModel" />
+            type="com.ddd4.dropit.presentation.ui.dialog.DialogViewModel" />
 
         <import type="android.view.View"/>
         <import type="android.R.string" />

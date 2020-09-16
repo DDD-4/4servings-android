@@ -12,19 +12,45 @@ import com.ddd4.dropit.presentation.util.loadUrlCenterCrop
 import timber.log.Timber
 
 
-@BindingAdapter("folderItem")
-fun setFolderItemRecyclerView(recyclerView: RecyclerView, list: List<PresentationEntity.Item>?) {
+@BindingAdapter("folderItem", "listener", "imageState")
+fun setFolderItemRecyclerView(
+    recyclerView: RecyclerView,
+    list: List<PresentationEntity.Item>?,
+    listener: ItemHandler,
+    imageState: Boolean
+) {
     list?.let {
-        (recyclerView.adapter as FolderAdapter).submitList(it)
         Timber.e("first binding end! size: ${it.size}")
+        recyclerView.apply {
+            adapter = FolderAdapter(listener)
+        }
+
+        (recyclerView.adapter as FolderAdapter).run {
+            submitList(it)
+            setImageState(imageState)
+        }
+
         recyclerView.adapter?.notifyDataSetChanged()
     }
 }
 
-@BindingAdapter("categoryItem")
-fun setCategoryItemRecyclerView(recyclerView: RecyclerView, list: List<PresentationEntity.Item>?) {
+@BindingAdapter("categoryItem", "listener", "imageState")
+fun setCategoryItemRecyclerView(
+    recyclerView: RecyclerView,
+    list: List<PresentationEntity.Item>?,
+    listener: ItemHandler,
+    imageState: Boolean
+    ) {
     list?.let {
-        (recyclerView.adapter as CategoryAdapter).submitList(it)
+        recyclerView.apply {
+            adapter = CategoryAdapter(listener)
+        }
+
+        (recyclerView.adapter as CategoryAdapter).run {
+            submitList(it)
+            setImageState(imageState)
+        }
+
         Timber.e("first binding end! size: ${it.size}")
         recyclerView.adapter?.notifyDataSetChanged()
     }

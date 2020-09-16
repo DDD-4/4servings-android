@@ -83,15 +83,13 @@ class CategoryViewModel @ViewModelInject constructor(
     }
 
     fun sortByLatestButtonClick() {
-        _folderItems.value?.let { items ->
-            _folderItems.value = items.sortedByDescending { it.endAt.time }
-        }
+        _folderItems.value = _folderItems.value?.sortedByDescending { it.endAt.time }
         _folderItemSorting.value = true
         _sortByLatestButton.call()
     }
 
     fun sortByExpirationButtonClick() {
-        _folderItems.value = _folderItems.value!!.sortedBy{ it.endAt.time }
+        _folderItems.value = _folderItems.value?.sortedBy{ it.endAt.time }
         _folderItemSorting.value = false
         _sortByExpirationButton.call()
     }

@@ -6,6 +6,7 @@
         <variable
             name="folderVM"
             type="com.ddd4.dropit.presentation.ui.folder.FolderViewModel" />
+
         <import type="android.view.View"/>
         <import type="android.R.color"/>
         <import type="android.R.drawable"/>
@@ -137,7 +138,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3"
+                app:imageState="@{folderVM.selectedImageState}"
                 app:folderItem="@{folderVM.folderItems}"
+                app:listener="@{folderVM.onItemClickListener}"
                 tools:listitem="@layout/row_detail_folder"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

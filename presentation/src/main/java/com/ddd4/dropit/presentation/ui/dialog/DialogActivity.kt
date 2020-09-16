@@ -1,15 +1,11 @@
-package com.ddd4.dropit.presentation.dialog
+package com.ddd4.dropit.presentation.ui.dialog
 
 import android.content.Intent
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
 import com.ddd4.dropit.presentation.databinding.ActivityCreateFolderDialogBinding
-import com.ddd4.dropit.presentation.databinding.ActivityFolderBinding
-import com.ddd4.dropit.presentation.ui.add.AddActivity
-import com.ddd4.dropit.presentation.ui.detailFolder.FolderItemDetailViewModel
 import com.ddd4.dropit.presentation.ui.main.MainActivity
 import com.ddd4.dropit.presentation.util.Constants
 import dagger.hilt.android.AndroidEntryPoint

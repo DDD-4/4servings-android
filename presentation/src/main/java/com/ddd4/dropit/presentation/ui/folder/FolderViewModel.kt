@@ -122,6 +122,7 @@ class FolderViewModel @ViewModelInject constructor(
         _backButton.call()
     }
 
+
     val onItemClickListener by lazy {
         object : ItemHandler {
             override fun <T> onItemClicked(item: T, visibility: Boolean) {
