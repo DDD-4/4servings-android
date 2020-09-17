@@ -6,23 +6,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
-import com.ddd4.dropit.domain.usecase.GetFolderUseCase
+import com.ddd4.dropit.domain.usecase.GetFoldersUseCase
 import com.ddd4.dropit.domain.usecase.UpdateItemByFolderIdUseCase
-import com.ddd4.dropit.domain.usecase.UpdateItemUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
-import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.entity.PresentationEntity.Folder
 import com.ddd4.dropit.presentation.mapper.mapToPresentation
-import com.ddd4.dropit.presentation.ui.folder.ItemHandler
 import com.ddd4.dropit.presentation.util.ItemClickListener
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class MoveFolderViewModel @ViewModelInject constructor(
-    private val getFolderUseCase: GetFolderUseCase,
+    private val getFoldersUseCase: GetFoldersUseCase,
     private val updateItemByFolderIdUseCase: UpdateItemByFolderIdUseCase
 ): BaseViewModel() {
 
@@ -42,7 +37,7 @@ class MoveFolderViewModel @ViewModelInject constructor(
     val backButton: LiveData<Void> = _backButton
 
     fun start(idList: ArrayList<Long>) = viewModelScope.launch {
-        when (val result = getFolderUseCase()){
+        when (val result = getFoldersUseCase()){
             is Result.Success -> {
                 _folderList.value =
                     if (result.data.size == 1 && result.data[0].name == "최근항목") {

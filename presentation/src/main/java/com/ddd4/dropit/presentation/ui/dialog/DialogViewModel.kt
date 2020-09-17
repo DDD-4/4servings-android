@@ -59,10 +59,10 @@ class DialogViewModel @ViewModelInject constructor(
                     updateItemByFolderIdUseCase(result.data.id!!, itemId)
                 }
             }
-                is Result.Error -> Timber.d(result.exception)
-            }
-            _confirmButton.call()
+            is Result.Error -> Timber.d(result.exception)
         }
+            _confirmButton.call()
+    }
 
     fun cancelButtonClick() {
         _cancelButton.call()

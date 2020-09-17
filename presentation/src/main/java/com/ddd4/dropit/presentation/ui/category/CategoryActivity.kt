@@ -38,7 +38,6 @@ class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity
         viewModel.floatingButton.observe(this, Observer {
             startActivity(Intent(this, AddActivity::class.java))
             overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
-
         })
 
         viewModel.nextButton.observe(this, Observer {

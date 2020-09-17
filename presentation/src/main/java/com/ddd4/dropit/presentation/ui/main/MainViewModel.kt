@@ -5,7 +5,7 @@ import androidx.lifecycle.*
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
 import com.ddd4.dropit.domain.usecase.GetCategoryUseCase
-import com.ddd4.dropit.domain.usecase.GetFolderUseCase
+import com.ddd4.dropit.domain.usecase.GetFoldersUseCase
 import com.ddd4.dropit.domain.usecase.SetSectionUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.entity.PresentationEntity
@@ -14,13 +14,11 @@ import com.ddd4.dropit.presentation.util.ItemClickListener
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.io.File
-import java.util.*
 
 class MainViewModel @ViewModelInject constructor(
     private val setSectionUseCase: SetSectionUseCase,
     private val getCategoryUseCase: GetCategoryUseCase,
-    private val getFolderUseCase: GetFolderUseCase
+    private val getFoldersUseCase: GetFoldersUseCase
 ): BaseViewModel() {
 
     private val _categoryItems = MutableLiveData<List<PresentationEntity.Category>>()
@@ -62,7 +60,7 @@ class MainViewModel @ViewModelInject constructor(
 
     fun getFolderItems() {
         viewModelScope.launch {
-            when (val result = getFolderUseCase()) {
+            when (val result = getFoldersUseCase()) {
                 is Result.Success -> {
                     if (result.data.isNotEmpty()) {
                         _folderItems.value = result.data.map(DomainEntity.Folder::mapToPresentation)
