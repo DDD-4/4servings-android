@@ -17,9 +17,12 @@ abstract class BaseActivity<T: ViewDataBinding>(private val layoutId : Int) : Ap
 
         setBind()
         setObserve()
+        setInit()
     }
 
     open fun setBind() {}
 
     open fun setObserve() {}
+
+    open fun setInit() {}
 }

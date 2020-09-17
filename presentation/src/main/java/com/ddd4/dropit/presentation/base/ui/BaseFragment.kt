@@ -28,9 +28,12 @@ abstract class BaseFragment<T : ViewDataBinding>(private val layoutId : Int) : F
 
         setBind()
         setObserve()
+        setInit()
     }
 
     open fun setBind() {}
 
     open fun setObserve() {}
+
+    open fun setInit() {}
 }

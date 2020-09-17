@@ -21,13 +21,7 @@ class AddActivity : BaseActivity<ActivityAddBinding>(R.layout.activity_add) {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setupActionBar()
-    }
-
-    private fun setupActionBar() {
+    override fun setInit() {
         setSupportActionBar(toolbar)
         supportActionBar.apply {
             this?.setDisplayHomeAsUpEnabled(true)
