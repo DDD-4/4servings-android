@@ -8,7 +8,9 @@ object Constants {
     const val PERMISSION_CODE_CAPTURE = 1001
 
     val PERMISSION_MANIFEST_CAPTURE =
-        listOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+        listOf(Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE)
 
     //Intent Request Code
     const val INTENT_CODE_IMAGE = 3000

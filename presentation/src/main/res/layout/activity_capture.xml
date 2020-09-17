@@ -8,6 +8,10 @@
     <data>
 
         <variable
+            name="view"
+            type="com.ddd4.dropit.presentation.ui.capture.CaptureActivity" />
+
+        <variable
             name="captureVM"
             type="com.ddd4.dropit.presentation.ui.capture.CaptureViewModel" />
 
@@ -30,6 +34,7 @@
             android:id="@+id/texture"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:listener="@{view.textureListener}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/capture"
