@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="view"
+            type="com.ddd4.dropit.presentation.ui.add.screen.AddSectionFragment" />
+
+        <variable
             name="addVM"
             type="com.ddd4.dropit.presentation.ui.add.AddSharedViewModel" />
 
@@ -44,7 +48,7 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:addItems="@{addVM.categoryItems}"
-                app:clickListener="@{addVM.onItemClickListener}"
+                app:clickListener="@{view.onItemClickListener}"
                 android:paddingStart="@dimen/space_14dp"
                 android:paddingEnd="@dimen/space_14dp"
                 android:layout_marginTop="@dimen/space_20dp"
@@ -61,7 +65,7 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3"
                 app:addItems="@{addVM.subCategoryItems}"
-                app:clickListener="@{addVM.onItemClickListener}"
+                app:clickListener="@{view.onItemClickListener}"
                 android:paddingStart="@dimen/space_14dp"
                 android:paddingEnd="@dimen/space_14dp"
                 android:layout_marginTop="@dimen/space_40dp"

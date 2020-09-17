@@ -8,6 +8,10 @@
         <import type="android.view.View"/>
 
         <variable
+            name="view"
+            type="com.ddd4.dropit.presentation.ui.add.screen.AddDateFragment" />
+
+        <variable
             name="addVM"
             type="com.ddd4.dropit.presentation.ui.add.AddSharedViewModel" />
 
@@ -67,7 +71,7 @@
                     android:text="@{addVM.pickerDate}"
                     android:textAppearance="@style/text.16sp.regular.hint"
                     android:textColor="@{addVM.isDateState ? @color/textAccent : @color/textHint}"
-                    app:datePickerListener="@{addVM.datePickerListener}"
+                    app:datePickerListener="@{view.datePickerListener}"
                     android:gravity="end" />
 
             </LinearLayout>
@@ -77,7 +81,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="@{addVM.isLittleState()}"
-                android:onClick="@{(view) -> addVM.onRadioClicked(view)}"
                 android:text="@string/text_add_date_little"
                 android:textAppearance="@style/text.12sp.regular.dark"
                 android:paddingStart="@dimen/space_9dp"
@@ -129,7 +132,7 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/text_add_date_little_hint_number"
                     android:text="@={addVM.dateLittleText}"
-                    app:textChangeWatcher="@{addVM.littleDateTextWatcher}"
+                    app:textChangeWatcher="@{view.littleDateWatcher}"
                     android:textAppearance="@style/text.16sp.regular.hint"
                     android:textColor="@color/textAccent"
                     android:gravity="end"
@@ -150,7 +153,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="@{addVM.isDontState}"
-                android:onClick="@{(view) -> addVM.onRadioClicked(view)}"
                 android:text="@string/text_add_date_dont"
                 android:textAppearance="@style/text.12sp.regular.dark"
                 android:paddingStart="@dimen/space_9dp"
