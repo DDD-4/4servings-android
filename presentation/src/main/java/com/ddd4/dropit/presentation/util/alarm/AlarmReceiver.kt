@@ -30,33 +30,33 @@ class AlarmReceiver : BroadcastReceiver() {
     private lateinit var notificationManager: NotificationManager
     private var alarmId: Long = 0
 
-    @Inject
-    lateinit var getAlarmIdUseCase: GetAlarmIdUseCase
+//    @Inject
+//    lateinit var getAlarmIdUseCase: GetAlarmIdUseCase
 
-    private val serviceJob = SupervisorJob()
+//    private val serviceJob = SupervisorJob()
 
     override fun onReceive(context: Context, intent: Intent) {
         Timber.d("Received intent : $intent")
 
-        if (intent.action == "android.intent.action.BOOT_COMPLETED") {
-            //기기 재부팅 후 알람 등록
-            CoroutineScope(serviceJob).launch {
-                when (val result = getAlarmIdUseCase.execute()) {
-                    is Result.Success -> {
-                        Timber.d("alarm service success")
-                        for (i in result.data.indices) {
-                            setAlarm(context, result.data[i].alarmId)
-                        }
-                    }
-                    is Result.Error -> {
-                        Timber.d("alarm service error")
-                        if (!serviceJob.isCancelled) {
-                            serviceJob.cancel()
-                        }
-                    }
-                }
-            }
-        }
+//        if (intent.action == "android.intent.action.BOOT_COMPLETED") {
+//            //기기 재부팅 후 알람 등록
+//            CoroutineScope(serviceJob).launch {
+//                when (val result = getAlarmIdUseCase.execute()) {
+//                    is Result.Success -> {
+//                        Timber.d("alarm service success")
+//                        for (i in result.data.indices) {
+//                            setAlarm(context, result.data[i].alarmId)
+//                        }
+//                    }
+//                    is Result.Error -> {
+//                        Timber.d("alarm service error")
+//                        if (!serviceJob.isCancelled) {
+//                            serviceJob.cancel()
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -99,25 +99,5 @@ class AlarmReceiver : BroadcastReceiver() {
             notificationChannel.description = "AlarmManager Tests"
             notificationManager.createNotificationChannel(notificationChannel)
         }
-    }
-
-    private fun setAlarm(context: Context, alarmId: Long) {
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        val intent = Intent(context, AlarmReceiver::class.java).putExtra("alarmId", alarmId)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context, alarmId.toInt(), intent, PendingIntent.FLAG_CANCEL_CURRENT)
-
-        //triggerTime(알람시간)은 alarmId(Date time)로 시간을 계산
-        val calendar = Calendar.getInstance()
-        calendar.time = Date(alarmId)
-        calendar.set(Calendar.HOUR_OF_DAY, 11)
-        calendar.set(Calendar.MINUTE, 30)
-        val triggerTime = calendar.timeInMillis
-
-//        val textTriggerTime = (SystemClock.elapsedRealtime() + 60 * 1000)
-//        alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, textTriggerTime, pendingIntent)
-
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent)
     }
 }

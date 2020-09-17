@@ -34,29 +34,11 @@ class AddDateFragment : BaseFragment<FragmentAddDateBinding>(R.layout.fragment_a
             addSharedViewModel.setItem()
         })
         addSharedViewModel.addComplete.observe(this, Observer { alarmId ->
-            setAlarm(alarmId)
+            alarmRegistUtil.setAlarm(alarmId)
             requireActivity().finish()
         })
     }
 
-    private fun setAlarm(alarmId: Long) {
-        val alarmManager = requireContext().getSystemService(ALARM_SERVICE) as AlarmManager
-
-        val intent = Intent(requireContext(), AlarmReceiver::class.java).putExtra("alarmId", alarmId)
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireContext(), alarmId.toInt(), intent, PendingIntent.FLAG_CANCEL_CURRENT)
-
-        //triggerTime(알람시간)은 alarmId(Date time)로 시간을 계산
-        val calendar = Calendar.getInstance()
-        calendar.time = Date(alarmId)
-        calendar.set(Calendar.HOUR_OF_DAY, 11)
-        calendar.set(Calendar.MINUTE, 30)
-        val triggerTime = calendar.timeInMillis
-
-//        val textTriggerTime = (System.currentTimeMillis() + 30 * 1000)
-//        alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, textTriggerTime, pendingIntent)
-
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent)
     override fun setInit() {
         rbtnLittleDate.setOnClickListener {
             addSharedViewModel.setLittleState()
