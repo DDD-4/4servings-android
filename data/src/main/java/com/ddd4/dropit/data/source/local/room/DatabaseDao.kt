@@ -21,10 +21,13 @@ interface DatabaseDao {
     suspend fun selectFolders(): List<DataEntity.Folder>
 
     @Query("SELECT * FROM folder WHERE name = :folderName")
-    suspend fun selectFolder(folderName: String): DataEntity.Folder
+    suspend fun selectFolderByName(folderName: String): DataEntity.Folder
 
-    //@Query("SELECT * FROM folder WHERE id = :folderId")
-    //suspend fun selectFolder(folderId: Long): DataEntity.Folder?
+    @Query("SELECT * FROM folder WHERE id = :folderId")
+    suspend fun selectFolderById(folderId: Long): DataEntity.Folder
+
+    @Query("SELECT * FROM category WHERE id = :categoryId")
+    suspend fun selectCategoryById(categoryId: Long): DataEntity.Category
 
     @Insert
     suspend fun insertItem(item: DataEntity.Item)

@@ -5,7 +5,7 @@ import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
 import java.lang.Exception
 
-class GetFolderUseCase(
+class GetFoldersUseCase(
     private val dropitRepository: DropitRepository
 ) {
     suspend operator fun invoke(

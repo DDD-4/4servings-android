@@ -1,6 +1,5 @@
 package com.ddd4.dropit.di.module
 
-import androidx.room.Update
 import com.ddd4.dropit.domain.repository.DropitRepository
 import com.ddd4.dropit.domain.usecase.*
 import dagger.Module
@@ -25,8 +24,8 @@ object UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideFolderUseCase(dropitRepository: DropitRepository): GetFolderUseCase =
-        GetFolderUseCase(dropitRepository)
+    fun provideFolderUseCase(dropitRepository: DropitRepository): GetFoldersUseCase =
+        GetFoldersUseCase(dropitRepository)
 
     @Provides
     @Singleton
@@ -82,4 +81,14 @@ object UseCaseModule {
     @Singleton
     fun provideGetFolderByNameUseCase(dropitRepository: DropitRepository): GetFolderByNameUseCase =
         GetFolderByNameUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetFolderByIdUseCase(dropitRepository: DropitRepository): GetFolderByIdUseCase =
+        GetFolderByIdUseCase(dropitRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetCategoryByIdUseCase(dropitRepository: DropitRepository): GetCategoryByIdUseCase =
+        GetCategoryByIdUseCase(dropitRepository)
 }
