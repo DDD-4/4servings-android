@@ -6,10 +6,14 @@ import com.ddd4.dropit.presentation.util.SingleLiveEvent
 
 class CaptureViewModel @ViewModelInject constructor() : BaseViewModel() {
 
-    val capturedImage = SingleLiveEvent<String>()
+    val captureComplete = SingleLiveEvent<String>()
     val captureClick = SingleLiveEvent<Void>()
 
     fun onCaptureClicked() {
         captureClick.call()
+    }
+
+    fun setCapturedImage(imageUri: String) {
+        captureComplete.value = imageUri
     }
 }

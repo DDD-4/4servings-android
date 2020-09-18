@@ -8,7 +8,9 @@ import androidx.navigation.fragment.findNavController
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseFragment
 import com.ddd4.dropit.presentation.databinding.FragmentAddSectionBinding
+import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.ui.add.AddSharedViewModel
+import com.ddd4.dropit.presentation.util.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +20,7 @@ class AddSectionFragment : BaseFragment<FragmentAddSectionBinding>(R.layout.frag
 
     override fun setBind() {
         binding.apply {
+            view = this@AddSectionFragment
             addVM = addSharedViewModel
         }
     }
@@ -38,5 +41,18 @@ class AddSectionFragment : BaseFragment<FragmentAddSectionBinding>(R.layout.frag
         super.onViewCreated(view, savedInstanceState)
 
         addSharedViewModel.getCategoryItems()
+    }
+
+    val onItemClickListener = object: ItemClickListener {
+        override fun <T> onItemClicked(item: T) {
+            when (item) {
+                is PresentationEntity.Category -> {
+                    addSharedViewModel.onCategoryClicked(item.id)
+                }
+                is PresentationEntity.SubCategory -> {
+                    addSharedViewModel.onSubCategoryClicked(item.id, item.endAt)
+                }
+            }
+        }
     }
 }

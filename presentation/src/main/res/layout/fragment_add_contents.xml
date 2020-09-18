@@ -8,6 +8,10 @@
         <import type="android.view.View"/>
 
         <variable
+            name="view"
+            type="com.ddd4.dropit.presentation.ui.add.screen.AddContentsFragment" />
+
+        <variable
             name="addVM"
             type="com.ddd4.dropit.presentation.ui.add.AddSharedViewModel" />
 
@@ -44,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="@string/hint_contents"
-                app:textChangeWatcher="@{addVM.nameTextWatcher}"
+                app:textChangeWatcher="@{view.nameTextWatcher}"
                 android:textAppearance="@style/text.16sp.regular.dark"
                 android:layout_marginTop="@dimen/space_36dp"
                 android:layout_marginStart="@dimen/space_20dp"
