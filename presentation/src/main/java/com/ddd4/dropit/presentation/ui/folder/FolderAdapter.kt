@@ -15,12 +15,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 
 class FolderAdapter(
-    private val viewModel: FolderViewModel,
-    private val onItemClick: ItemHandler?= null
+    private val onItemClick: ItemHandler? = null
 ) :
     ListAdapter<Item, FolderAdapter.FolderViewHolder>(FolderDiffCallback()) {
 
     private var selectedView = SparseBooleanArray(itemCount)
+    private var selectedImageState = false
+
+    fun setImageState(state: Boolean?) {
+         state?.let {
+             selectedImageState = it
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -46,7 +52,7 @@ class FolderAdapter(
             binding.viewShadow.visibility = View.GONE
 
             binding.folderLayout.setOnClickListener {
-                if(viewModel.selectedImageState.value!!) { //다중선택시
+                if(selectedImageState) { //다중선택시
                     selectedView.put(position, !selectedView.get(position))
                         if (selectedView.get(position)) {
                             binding.viewShadow.visibility = View.VISIBLE
@@ -60,10 +66,6 @@ class FolderAdapter(
                 }
             }
         }
-    }
-
-    fun notifyClearSelect() {
-        notifyDataSetChanged()
     }
 }
 

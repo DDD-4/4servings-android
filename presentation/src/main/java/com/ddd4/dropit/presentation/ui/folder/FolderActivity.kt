@@ -1,30 +1,24 @@
 package com.ddd4.dropit.presentation.ui.folder
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
 import com.ddd4.dropit.presentation.databinding.ActivityFolderBinding
-import com.ddd4.dropit.presentation.dialog.DialogActivity
 import com.ddd4.dropit.presentation.ui.add.AddActivity
 import com.ddd4.dropit.presentation.ui.detailFolder.FolderItemDetailActivity
 import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderActivity
 import com.ddd4.dropit.presentation.util.Constants
+import com.ddd4.dropit.presentation.util.hideButton
+import com.ddd4.dropit.presentation.util.showButton
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 
 @AndroidEntryPoint
 class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_folder) {
 
     private val folderViewModel: FolderViewModel by viewModels()
-    private lateinit var listAdapter: FolderAdapter
     private var folderId = -1L
 
     override fun setBind() {
@@ -32,21 +26,13 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
             folderVM = folderViewModel
         }
         folderId = getId(intent)
-        setupAdapter()
     }
 
     override fun setObserve() {
-        folderViewModel.sortByLatestButton.observe(this, Observer {
-            binding.rvDetailFolder.adapter?.notifyDataSetChanged()
-        })
-
-        folderViewModel.sortByExpirationButton.observe(this, Observer {
-            binding.rvDetailFolder.adapter?.notifyDataSetChanged()
-        })
 
         folderViewModel.floatingButton.observe(this, Observer {
-            val intent = Intent(this, AddActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, AddActivity::class.java))
+            overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
         })
 
         folderViewModel.nextButton.observe(this, Observer {
@@ -77,18 +63,18 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
             binding.ibSelectImage.text = it
             when(it) {
                 resources.getString(R.string.select) -> {
-                    binding.folderFloatingButton.animate().translationY(0f)
-                    binding.folderRectangleButton.animate().translationY(300f)
+                    binding.folderFloatingButton.showButton()
+                    binding.folderRectangleButton.hideButton()
                 }
                 resources.getString(R.string.cancel) -> {
-                    binding.folderFloatingButton.animate().translationY(300f)
-                    binding.folderRectangleButton.animate().translationY(0f)
+                    binding.folderFloatingButton.hideButton()
+                    binding.folderRectangleButton.showButton()
                 }
             }
         })
 
         folderViewModel.clearSelected.observe(this, Observer {
-            listAdapter.notifyClearSelect()
+            binding.rvDetailFolder.adapter?.notifyDataSetChanged()
         })
     }
 
@@ -96,16 +82,11 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
         return intent.getLongExtra(Constants.EXTRA_NAME_FOLDER_ID, -1)
     }
 
-    //TODO FIX
-    private fun setupAdapter() {
-        listAdapter = FolderAdapter(folderViewModel, folderViewModel.onItemClickListener)
-        binding.rvDetailFolder.layoutManager = GridLayoutManager(this, 3)
-        binding.rvDetailFolder.adapter = listAdapter
-    }
-
     override fun onResume() {
         super.onResume()
         folderViewModel.start(folderId)
         binding.rvDetailFolder.adapter?.notifyDataSetChanged()
     }
+
+
 }

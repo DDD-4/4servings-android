@@ -14,12 +14,18 @@ import com.ddd4.dropit.presentation.ui.folder.FolderViewModel
 import com.ddd4.dropit.presentation.ui.folder.ItemHandler
 
 class CategoryAdapter(
-    private val viewModel: CategoryViewModel,
     private val onItemClick: ItemHandler?= null
 ) :
     ListAdapter<Item, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
 
     private var selectedView = SparseBooleanArray(itemCount)
+    private var selectedImageState = false
+
+    fun setImageState(state: Boolean?) {
+        state?.let {
+            selectedImageState = it
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -30,14 +36,14 @@ class CategoryAdapter(
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, position, onItemClick)
+        holder.bind(item, position)
     }
 
 
     inner class CategoryViewHolder constructor(val binding: RowDetailFolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item, position: Int, listener: ItemHandler?) {
+        fun bind(item: Item, position: Int) {
             for(i in 0 until itemCount){
                 selectedView.put(i, false)
             }
@@ -45,7 +51,7 @@ class CategoryAdapter(
             binding.viewShadow.visibility = View.GONE
 
             binding.folderLayout.setOnClickListener {
-                if(viewModel.selectedImageState.value!!) { //다중선택시
+                if(selectedImageState) { //다중선택시
                     selectedView.put(position, !selectedView.get(position))
                         if (selectedView.get(position)) {
                             binding.viewShadow.visibility = View.VISIBLE

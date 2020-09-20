@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/space_16dp"
-                        android:text="@string/title"
+                        android:text="@{categoryVM.categoryName}"
                         android:textAppearance="@style/text.18sp.bold.dark"
                         app:layout_constraintBottom_toBottomOf="@+id/btnBack"
                         app:layout_constraintStart_toEndOf="@+id/btnBack"
@@ -141,6 +141,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="3"
+                    app:listener="@{categoryVM.onItemClickListener}"
+                    app:imageState="@{categoryVM.selectedImageState}"
                     app:categoryItem="@{categoryVM.folderItems}"
                     tools:listitem="@layout/row_detail_folder"/>
 

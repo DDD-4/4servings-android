@@ -4,9 +4,10 @@ import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
 import com.ddd4.dropit.domain.repository.DropitRepository
 
-class GetAlarmIdUseCase(
+class GetCategoryByIdUseCase(
     private val dropitRepository: DropitRepository
-) {
+){
     suspend operator fun invoke(
-    ): Result<List<DomainEntity.Item>> = dropitRepository.getAlarmIds()
+        categoryId: Long
+    ): Result<DomainEntity.Category> = dropitRepository.getCategoryById(categoryId)
 }

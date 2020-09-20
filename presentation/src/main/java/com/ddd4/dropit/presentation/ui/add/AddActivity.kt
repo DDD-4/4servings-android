@@ -34,4 +34,17 @@ class AddActivity : BaseActivity<ActivityAddBinding>(R.layout.activity_add) {
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.addNavHost).navigateUpOrFinish(this)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        overridePendingTransition(R.anim.slide_none, R.anim.slide_end)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        if(isFinishing){
+            overridePendingTransition(R.anim.slide_none, R.anim.slide_end)
+        }
+    }
 }

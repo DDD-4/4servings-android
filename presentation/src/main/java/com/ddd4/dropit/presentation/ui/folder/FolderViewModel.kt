@@ -8,6 +8,7 @@ import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
+import com.ddd4.dropit.domain.usecase.GetFolderByIdUseCase
 import com.ddd4.dropit.domain.usecase.GetFolderItemUseCase
 import com.ddd4.dropit.presentation.entity.PresentationEntity.*
 import com.ddd4.dropit.presentation.mapper.mapToPresentation
@@ -16,25 +17,25 @@ import timber.log.Timber
 import java.util.*
 
 class FolderViewModel @ViewModelInject constructor(
-    private val getFolderItemUseCase: GetFolderItemUseCase
+    private val getFolderItemUseCase: GetFolderItemUseCase,
+    private val getFolderByIdUseCase: GetFolderByIdUseCase
 ): BaseViewModel() {
+
+    private val _selectedImageList = ArrayList<Long>()
+    private val _sortByLatestButton = SingleLiveEvent<Void>()
+    private val _sortByExpirationButton = SingleLiveEvent<Void>()
 
     private val _folderItems = MutableLiveData<List<Item>>()
     val folderItems: LiveData<List<Item>> = _folderItems
+
+    private val _folderName = MutableLiveData<String>()
+    val folderName: LiveData<String> = _folderName
 
     private val _folderItemSorting = MutableLiveData<Boolean>()
     val folderItemSorting: LiveData<Boolean> = _folderItemSorting
 
     private val _isButtonActivated = MutableLiveData<Boolean>()
     val isButtonActivated: LiveData<Boolean> = _isButtonActivated
-
-    private val _selectedImageList = ArrayList<Long>()
-
-    private val _sortByLatestButton = SingleLiveEvent<Void>()
-    val sortByLatestButton: LiveData<Void> = _sortByLatestButton
-
-    private val _sortByExpirationButton = SingleLiveEvent<Void>()
-    val sortByExpirationButton: LiveData<Void> = _sortByExpirationButton
 
     private val _floatingButton = SingleLiveEvent<Void>()
     val floatingButton: LiveData<Void> = _floatingButton
@@ -61,6 +62,7 @@ class FolderViewModel @ViewModelInject constructor(
         sortByLatestButtonClick()
     }
 
+    //TODO FIX
     private fun initView() {
         _selectedImageState.value = false
         _selectImageButton.value = "선택"
@@ -71,13 +73,20 @@ class FolderViewModel @ViewModelInject constructor(
         when (val result = getFolderItemUseCase(folderId)) {
             is Result.Success -> {
                 if (result.data.isNotEmpty()) {
-                    _folderItems.value = result.data.map(DomainEntity.Item::mapToPresentation)
-                        .sortedByDescending { it.endAt.time }
+                    _folderItems.value =
+                        result.data
+                            .map(DomainEntity.Item::mapToPresentation)
+                            .sortedByDescending { it.endAt.time }
                 } else {
                     _folderItems.value = emptyList()
                     Timber.d("empty")
                 }
             }
+            is Result.Error -> Timber.d(result.exception)
+        }
+
+        when (val result = getFolderByIdUseCase(folderId)) {
+            is Result.Success -> _folderName.value = result.data.name
             is Result.Error -> Timber.d(result.exception)
         }
     }
@@ -100,6 +109,7 @@ class FolderViewModel @ViewModelInject constructor(
         _floatingButton.call()
     }
 
+    //TODO FIX
     fun selectImageButtonClick() {
         if (_selectedImageState.value!!) {
             _selectImageButton.value = "선택"
@@ -122,6 +132,7 @@ class FolderViewModel @ViewModelInject constructor(
         _backButton.call()
     }
 
+    //TODO FIX
     val onItemClickListener by lazy {
         object : ItemHandler {
             override fun <T> onItemClicked(item: T, visibility: Boolean) {

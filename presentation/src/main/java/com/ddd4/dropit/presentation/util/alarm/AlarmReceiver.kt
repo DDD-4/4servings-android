@@ -38,25 +38,25 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         Timber.d("Received intent : $intent")
 
-//        if (intent.action == "android.intent.action.BOOT_COMPLETED") {
-//            //기기 재부팅 후 알람 등록
-//            CoroutineScope(serviceJob).launch {
-//                when (val result = getAlarmIdUseCase.execute()) {
-//                    is Result.Success -> {
-//                        Timber.d("alarm service success")
-//                        for (i in result.data.indices) {
-//                            setAlarm(context, result.data[i].alarmId)
-//                        }
-//                    }
-//                    is Result.Error -> {
-//                        Timber.d("alarm service error")
-//                        if (!serviceJob.isCancelled) {
-//                            serviceJob.cancel()
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        if (intent.action == "android.intent.action.BOOT_COMPLETED") {
+            //기기 재부팅 후 알람 등록
+            CoroutineScope(serviceJob).launch {
+                when (val result = getAlarmIdUseCase()) {
+                    is Result.Success -> {
+                        Timber.d("alarm service success")
+                        for (i in result.data.indices) {
+                            setAlarm(context, result.data[i].alarmId)
+                        }
+                    }
+                    is Result.Error -> {
+                        Timber.d("alarm service error")
+                        if (!serviceJob.isCancelled) {
+                            serviceJob.cancel()
+                        }
+                    }
+                }
+            }
+        }
 
         notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 

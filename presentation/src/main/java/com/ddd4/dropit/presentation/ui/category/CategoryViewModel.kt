@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
+import com.ddd4.dropit.domain.usecase.GetCategoryByIdUseCase
 import com.ddd4.dropit.domain.usecase.GetCategoryItemUseCase
-import com.ddd4.dropit.domain.usecase.GetFolderItemUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.mapper.mapToPresentation
@@ -18,28 +18,24 @@ import timber.log.Timber
 import java.util.ArrayList
 
 class CategoryViewModel @ViewModelInject constructor(
-    private val getCategoryItemUseCase: GetCategoryItemUseCase
+    private val getCategoryItemUseCase: GetCategoryItemUseCase,
+    private val getCategoryByIdUseCase: GetCategoryByIdUseCase
 ): BaseViewModel() {
 
-    private val _folderItems = MutableLiveData<List<PresentationEntity.Item>>()
-    val folderItems: LiveData<List<PresentationEntity.Item>> = _folderItems
+    private val _categoryItems = MutableLiveData<List<PresentationEntity.Item>>()
+    private val _sortByExpirationButton = SingleLiveEvent<Void>()
+    private val _selectedImageList = MutableLiveData<ArrayList<Long>>()
+    private val _sortByLatestButton = SingleLiveEvent<Void>()
+    private val _categoryItemSorting = MutableLiveData<Boolean>()
 
-    private val _folderItemSorting = MutableLiveData<Boolean>()
-    val folderItemSorting: LiveData<Boolean> = _folderItemSorting
+    private val _categoryName = MutableLiveData<String>()
+    val categoryName: LiveData<String> = _categoryName
 
     private val _isButtonActivated = MutableLiveData<Boolean>()
     val isButtonActivated: LiveData<Boolean> = _isButtonActivated
 
-    private val _selectedImageList = MutableLiveData<ArrayList<Long>>()
-
-    private val _sortByLatestButton = SingleLiveEvent<Void>()
-    val sortByLatestButton: LiveData<Void> = _sortByLatestButton
-
     private val _backButton = SingleLiveEvent<Void>()
     val backButton: LiveData<Void> = _backButton
-
-    private val _sortByExpirationButton = SingleLiveEvent<Void>()
-    val sortByExpirationButton: LiveData<Void> = _sortByExpirationButton
 
     private val _floatingButton = SingleLiveEvent<Void>()
     val floatingButton: LiveData<Void> = _floatingButton
@@ -61,6 +57,7 @@ class CategoryViewModel @ViewModelInject constructor(
         sortByLatestButtonClick()
     }
 
+    //TODO FIX
     private fun initView() {
         _selectedImageState.value = false
         _selectImageButton.value = "선택"
@@ -72,27 +69,30 @@ class CategoryViewModel @ViewModelInject constructor(
         when (val result = getCategoryItemUseCase(categoryId)) {
             is Result.Success -> {
                 if (result.data.isNotEmpty()) {
-                    _folderItems.value = result.data.map(DomainEntity.Item::mapToPresentation).sortedByDescending { it.endAt.time }
+                    _categoryItems.value = result.data.map(DomainEntity.Item::mapToPresentation).sortedByDescending { it.endAt.time }
                 } else {
-                    _folderItems.value = emptyList()
+                    _categoryItems.value = emptyList()
                     Timber.d("empty")
                 }
             }
             is Result.Error -> Timber.d(result.exception)
         }
+
+        when(val result = getCategoryByIdUseCase(categoryId)) {
+            is Result.Success -> _categoryName.value = result.data.title
+            is Result.Error -> Timber.d(result.exception)
+        }
     }
 
     fun sortByLatestButtonClick() {
-        _folderItems.value?.let { items ->
-            _folderItems.value = items.sortedByDescending { it.endAt.time }
-        }
-        _folderItemSorting.value = true
+        _categoryItems.value = _categoryItems.value?.sortedByDescending { it.endAt.time }
+        _categoryItemSorting.value = true
         _sortByLatestButton.call()
     }
 
     fun sortByExpirationButtonClick() {
-        _folderItems.value = _folderItems.value!!.sortedBy{ it.endAt.time }
-        _folderItemSorting.value = false
+        _categoryItems.value = _categoryItems.value?.sortedBy{ it.endAt.time }
+        _categoryItemSorting.value = false
         _sortByExpirationButton.call()
     }
 
@@ -100,6 +100,7 @@ class CategoryViewModel @ViewModelInject constructor(
         _floatingButton.call()
     }
 
+    //TODO FIX
     fun selectImageButtonClick() {
         if (_selectedImageState.value!!) {
             _selectImageButton.value = "선택"
@@ -119,6 +120,7 @@ class CategoryViewModel @ViewModelInject constructor(
         _backButton.call()
     }
 
+    //TODO FIX
     val onItemClickListener by lazy {
         object : ItemHandler {
             override fun <T> onItemClicked(item: T, visibility: Boolean) {

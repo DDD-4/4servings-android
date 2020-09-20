@@ -36,6 +36,9 @@ class DropitRepositoryImpl(
     override suspend fun getItemsByCategory(categoryId: Long): Result<List<DomainEntity.Item>> =
         localDataSource.getItemsByCategory(categoryId)
 
+    override suspend fun getCategoryById(categoryId: Long): Result<DomainEntity.Category> =
+        localDataSource.getCategoryById(categoryId)
+
     override suspend fun getDetailItem(itemId: Long): Result<DomainEntity.Item> =
         localDataSource.getDetailItem(itemId)
 
@@ -53,4 +56,7 @@ class DropitRepositoryImpl(
 
     override suspend fun getFolderByName(folderName: String): Result<DomainEntity.Folder> =
         localDataSource.getFolderByName(folderName)
+
+    override suspend fun getFolderById(folderId: Long): Result<DomainEntity.Folder> =
+        localDataSource.getFolderById(folderId)
 }

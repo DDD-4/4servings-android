@@ -35,6 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
         mainViewModel.addClick.observe(this, Observer {
             startActivity(Intent(this, AddActivity::class.java))
+            overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
         })
     }
 

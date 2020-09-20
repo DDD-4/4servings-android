@@ -16,6 +16,10 @@ interface LocalDataSource {
 
     suspend fun getFolderByName(folderName: String): Result<DomainEntity.Folder>
 
+    suspend fun getFolderById(folderId: Long): Result<DomainEntity.Folder>
+
+    suspend fun getCategoryById(categoryId: Long): Result<DomainEntity.Category>
+
     suspend fun setItem(item: DataEntity.Item): Result<Unit>
 
     suspend fun getAlarmIds(): Result<List<DomainEntity.Item>>

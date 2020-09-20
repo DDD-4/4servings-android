@@ -1,20 +1,16 @@
-package com.ddd4.dropit.presentation.dialog
+package com.ddd4.dropit.presentation.ui.dialog
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ddd4.dropit.domain.usecase.CreateFolderUseCase
 import com.ddd4.dropit.domain.Result
-import com.ddd4.dropit.domain.entity.DomainEntity
 import com.ddd4.dropit.domain.usecase.GetFolderByNameUseCase
 import com.ddd4.dropit.domain.usecase.UpdateItemByFolderIdUseCase
-import com.ddd4.dropit.domain.usecase.UpdateItemUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.mapper.mapToDomain
-import com.ddd4.dropit.presentation.mapper.mapToPresentation
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -63,10 +59,10 @@ class DialogViewModel @ViewModelInject constructor(
                     updateItemByFolderIdUseCase(result.data.id!!, itemId)
                 }
             }
-                is Result.Error -> Timber.d(result.exception)
-            }
-            _confirmButton.call()
+            is Result.Error -> Timber.d(result.exception)
         }
+            _confirmButton.call()
+    }
 
     fun cancelButtonClick() {
         _cancelButton.call()

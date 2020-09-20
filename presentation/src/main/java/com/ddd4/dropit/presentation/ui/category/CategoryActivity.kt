@@ -14,6 +14,8 @@ import com.ddd4.dropit.presentation.ui.folder.FolderAdapter
 import com.ddd4.dropit.presentation.ui.folder.FolderViewModel
 import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderActivity
 import com.ddd4.dropit.presentation.util.Constants
+import com.ddd4.dropit.presentation.util.hideButton
+import com.ddd4.dropit.presentation.util.showButton
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -21,7 +23,6 @@ import timber.log.Timber
 class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity_category) {
 
     private val viewModel: CategoryViewModel by viewModels()
-    private lateinit var listAdapter: CategoryAdapter
     private var categoryId = -1L
 
 
@@ -30,28 +31,17 @@ class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity
             categoryVM = viewModel
         }
         categoryId = getId(intent)
-        setupAdapter()
     }
 
     override fun setObserve() {
 
-        viewModel.sortByLatestButton.observe(this, Observer {
-            Timber.e("sort by latest button clicked")
-        })
-
-        viewModel.sortByExpirationButton.observe(this, Observer {
-            Timber.e("sort by expiration button clicked")
-        })
-
         viewModel.floatingButton.observe(this, Observer {
-            val intent = Intent(this, AddActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, AddActivity::class.java))
+            overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
         })
 
         viewModel.nextButton.observe(this, Observer {
-            Toast.makeText(this, "${it.size}", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MoveFolderActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MoveFolderActivity::class.java))
         })
 
         viewModel.item.observe(this, Observer { item ->
@@ -67,12 +57,12 @@ class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity
             binding.ibSelectImage.text = it
             when(it) {
                 resources.getString(R.string.select) -> {
-                    binding.folderFloatingButton.animate().translationY(0f)
-                    binding.folderRectangleButton.animate().translationY(300f)
+                    binding.folderFloatingButton.showButton()
+                    binding.folderRectangleButton.hideButton()
                 }
                 resources.getString(R.string.cancel) -> {
-                    binding.folderFloatingButton.animate().translationY(300f)
-                    binding.folderRectangleButton.animate().translationY(0f)
+                    binding.folderFloatingButton.hideButton()
+                    binding.folderRectangleButton.showButton()
                 }
             }
         })
@@ -82,16 +72,9 @@ class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity
         return intent.getLongExtra(Constants.EXTRA_NAME_CATEGORY_ID, -1)
     }
 
-    //TODO FIX
-    private fun setupAdapter() {
-        listAdapter = CategoryAdapter(viewModel, viewModel.onItemClickListener)
-        binding.rvDetailFolder.layoutManager = GridLayoutManager(this, 3)
-        binding.rvDetailFolder.adapter = listAdapter
-    }
-
     override fun onResume() {
         super.onResume()
         viewModel.start(categoryId)
-        listAdapter.notifyDataSetChanged()
+        binding.rvDetailFolder.adapter?.notifyDataSetChanged()
     }
 }

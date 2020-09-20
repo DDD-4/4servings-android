@@ -12,6 +12,7 @@ import com.ddd4.dropit.domain.entity.DomainEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import java.util.*
 
@@ -22,7 +23,7 @@ class LocalDataSourceImpl(
 ): LocalDataSource {
 
     override suspend fun setSectionFromJson(): Result<Unit> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 val jsonFileString = context.assets
                     .open("category.json")
@@ -42,7 +43,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun getCategoryItems(): Result<List<DomainEntity.Category>> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 val result = databaseDao.selectCategories().map(DataEntity.Category::mapToDomain)
                 Result.Success(result)
@@ -52,7 +53,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun getSubCategoryItems(id: Long): Result<List<DomainEntity.SubCategory>> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 val result = databaseDao.selectSubCategories(id).map(DataEntity.SubCategory::mapToDomain)
                 Result.Success(result)
@@ -62,7 +63,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun getFolderItems(): Result<List<DomainEntity.Folder>> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 val result = databaseDao.selectFolders().map(DataEntity.Folder::mapToDomain)
                 Result.Success(result)
@@ -72,7 +73,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun setItem(item: DataEntity.Item): Result<Unit> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 if (databaseDao.selectFolders().isNullOrEmpty()) {
                     databaseDao.insertFolder(DataEntity.Folder(name = "최근항목", createAt = Date()))
@@ -86,7 +87,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun getItemsByFolder(folderId: Long): Result<List<DomainEntity.Item>> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 val result =
                     databaseDao.selectItemsByFolder(folderId).map(DataEntity.Item::mapToDomain)
@@ -98,9 +99,19 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun getFolderByName(folderName: String): Result<DomainEntity.Folder> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
-                val result = databaseDao.selectFolder(folderName).mapToDomain()
+                val result = databaseDao.selectFolderByName(folderName).mapToDomain()
+                Result.Success(result)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
+    override suspend fun getFolderById(folderId: Long): Result<DomainEntity.Folder> =
+        coroutineScope {
+            try {
+                val result = databaseDao.selectFolderById(folderId).mapToDomain()
                 Result.Success(result)
             } catch (e: Exception) {
                 Result.Error(e)
@@ -108,7 +119,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun getItemsByCategory(categoryId: Long): Result<List<DomainEntity.Item>> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 val result = databaseDao.selectItemsByCategory(categoryId).map(DataEntity.Item::mapToDomain)
                 Result.Success(result)
@@ -117,8 +128,19 @@ class LocalDataSourceImpl(
             }
         }
 
+    override suspend fun getCategoryById(categoryId: Long): Result<DomainEntity.Category> =
+        coroutineScope {
+            try {
+                val result = databaseDao.selectCategoryById(categoryId).mapToDomain()
+                Result.Success(result)
+            } catch (e: Exception){
+                Result.Error(e)
+            }
+        }
+
+
     override suspend fun getDetailItem(itemId: Long): Result<DomainEntity.Item> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 val result = databaseDao.selectItem(itemId).mapToDomain()
                 Result.Success(result)
@@ -138,7 +160,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun updateItem(item: DomainEntity.Item): Result<Unit> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 databaseDao.updateItem(item.mapToData())
                 Result.Success(Unit)
@@ -148,7 +170,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun createFolder(folder: DomainEntity.Folder): Result<Unit> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 databaseDao.insertFolder(folder.mapToData())
                 Result.Success(Unit)
@@ -158,7 +180,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun deleteItem(itemId: Long): Result<Unit> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 databaseDao.deleteItem(itemId)
                 Result.Success(Unit)
@@ -168,7 +190,7 @@ class LocalDataSourceImpl(
         }
 
     override suspend fun updateItemByFolderId(folderId: Long, itemId: Long): Result<Unit> =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             try {
                 databaseDao.updateItemByFolderId(folderId, itemId)
                 Result.Success(Unit)
