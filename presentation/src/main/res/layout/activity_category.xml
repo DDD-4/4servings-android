@@ -68,7 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:paddingRight="@dimen/space_8dp"
-                        android:visibility="@{categoryVM.folderItems.isEmpty() ? View.GONE : View.VISIBLE}"
+                        android:visibility="@{categoryVM.categoryItems.isEmpty() ? View.GONE : View.VISIBLE}"
                         android:onClick="@{() -> categoryVM.selectImageButtonClick()}"
                         app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -90,8 +90,8 @@
                     android:onClick="@{() -> categoryVM.sortByLatestButtonClick()}"
                     android:paddingRight="@dimen/space_12dp"
                     android:text="@string/sort_by_latest"
-                    android:visibility="@{categoryVM.folderItems.isEmpty() ? View.GONE : View.VISIBLE}"
-                    android:textColor="@{categoryVM.folderItemSorting ? @color/blue1 : @color/gray1}"
+                    android:visibility="@{categoryVM.categoryItems.isEmpty() ? View.GONE : View.VISIBLE}"
+                    android:textColor="@{categoryVM.categoryItemSorting ? @color/blue1 : @color/gray1}"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tvSortByExpiration" />
@@ -102,10 +102,10 @@
                     android:layout_height="wrap_content"
                     android:onClick="@{() -> categoryVM.sortByExpirationButtonClick()}"
                     android:paddingRight="@dimen/space_20dp"
-                    android:visibility="@{categoryVM.folderItems.isEmpty() ? View.GONE : View.VISIBLE}"
+                    android:visibility="@{categoryVM.categoryItems.isEmpty() ? View.GONE : View.VISIBLE}"
                     android:text="@string/sort_by_expiration_date"
                     android:textAppearance="@style/text.12sp.regular.dark"
-                    android:textColor="@{categoryVM.folderItemSorting ? @color/gray1 : @color/blue1}"
+                    android:textColor="@{categoryVM.categoryItemSorting ? @color/gray1 : @color/blue1}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -143,7 +143,7 @@
                     app:spanCount="3"
                     app:listener="@{categoryVM.onItemClickListener}"
                     app:imageState="@{categoryVM.selectedImageState}"
-                    app:categoryItem="@{categoryVM.folderItems}"
+                    app:categoryItem="@{categoryVM.categoryItems}"
                     tools:listitem="@layout/row_detail_folder"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,10 +23,19 @@ class CategoryViewModel @ViewModelInject constructor(
 ): BaseViewModel() {
 
     private val _categoryItems = MutableLiveData<List<PresentationEntity.Item>>()
+    val categoryItems: LiveData<List<PresentationEntity.Item>> = _categoryItems
+
     private val _sortByExpirationButton = SingleLiveEvent<Void>()
+    val sortByExpirationButton: SingleLiveEvent<Void> = _sortByExpirationButton
+
     private val _selectedImageList = MutableLiveData<ArrayList<Long>>()
+    val selectedImageList: LiveData<ArrayList<Long>> = _selectedImageList
+
     private val _sortByLatestButton = SingleLiveEvent<Void>()
+    val sortByLatestButton: LiveData<Void> = _sortByLatestButton
+
     private val _categoryItemSorting = MutableLiveData<Boolean>()
+    val categoryItemSorting: LiveData<Boolean> = _categoryItemSorting
 
     private val _categoryName = MutableLiveData<String>()
     val categoryName: LiveData<String> = _categoryName
