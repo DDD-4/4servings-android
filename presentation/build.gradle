@@ -3,10 +3,8 @@ apply plugin: 'com.android.library'
 apply from: '../common-android.gradle'
 
 apply from: '../dependencies.gradle'
-apply plugin: 'kotlin-android'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
-apply plugin: 'kotlin-android'
 
 android {
     buildFeatures {
@@ -50,5 +48,4 @@ dependencies {
     implementation "$presentationDependencies.startup"
     //db debuging
     debugImplementation "$presentationDependencies.debugdb"
-
 }
