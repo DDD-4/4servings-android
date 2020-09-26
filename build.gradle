@@ -11,6 +11,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigationVersion"
+        classpath "com.google.gms:google-services:$versions.gmsGradle"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$versions.crashlyticsGradle"
     }
 }
 
