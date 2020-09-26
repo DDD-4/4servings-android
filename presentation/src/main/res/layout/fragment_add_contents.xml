@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="view"
+            type="com.ddd4.dropit.presentation.ui.add.screen.AddContentsFragment" />
+
+        <variable
+            name="addVM"
+            type="com.ddd4.dropit.presentation.ui.add.AddSharedViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space_20dp"
+            android:paddingBottom="@dimen/space_100dp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_contents"
+                android:textAppearance="@style/text.20sp.bold.dark"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginEnd="@dimen/space_20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/hint_contents"
+                app:textChangeWatcher="@{view.nameTextWatcher}"
+                android:textAppearance="@style/text.16sp.regular.dark"
+                android:layout_marginTop="@dimen/space_36dp"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginEnd="@dimen/space_20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                android:inputType="text"
+                android:importantForAutofill="no" />
+
+            <ImageView
+                android:id="@+id/ivContents"
+                android:layout_width="186dp"
+                android:layout_height="186dp"
+                android:onClick="@{() -> addVM.onImageClicked()}"
+                android:background="@drawable/bg_image_add"
+                android:layout_marginTop="@dimen/space_36dp"
+                android:layout_marginStart="@dimen/space_20dp"
+                app:image="@{addVM.selectedImage}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etName"
+                android:contentDescription="@string/description_contents" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_add_image"
+                android:textAppearance="@style/text.12sp.regular.hint"
+                android:visibility="@{addVM.selectedImage != null ? View.GONE : View.VISIBLE}"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="@+id/ivContents"
+                app:layout_constraintEnd_toEndOf="@+id/ivContents"
+                app:layout_constraintTop_toTopOf="@+id/ivContents"
+                app:layout_constraintBottom_toBottomOf="@+id/ivContents"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

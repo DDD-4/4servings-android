@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.ddd4.dropit.presentation.entity.PresentationEntity.Folder" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_8dp">
+
+        <ImageView
+            android:id="@+id/ivFolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@{item.id == 0 ? @drawable/img_folder_default : @drawable/img_folder_colored }"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/description_folder" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.name}"
+            android:textAppearance="@style/text.14sp.regular.dark"
+            android:layout_marginTop="@dimen/space_8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivFolder"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

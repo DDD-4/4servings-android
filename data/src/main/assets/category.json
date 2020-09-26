@@ -1,0 +1,204 @@
+[
+  {
+    "id": 1,
+    "title": "스킨케어",
+    "subCategory": [
+      {
+        "id": 1,
+        "categoryId": 1,
+        "endAt": 1,
+        "title": "스킨/로션"
+      }, {
+        "id": 2,
+        "categoryId": 1,
+        "endAt": 1,
+        "title": "미스트"
+      }, {
+        "id": 3,
+        "categoryId": 1,
+        "endAt": 5,
+        "title": "오일"
+      }, {
+        "id": 4,
+        "categoryId": 1,
+        "endAt": 130,
+        "title": "마스크/팩"
+      }, {
+        "id": 5,
+        "categoryId": 1,
+        "endAt": 130,
+        "title": "선케어"
+      }
+    ]
+  }, {
+    "id": 2,
+    "title": "메이크업",
+    "subCategory": [
+      {
+        "id": 1,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "아이라이너"
+      }, {
+        "id": 2,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "아이섀도"
+      }, {
+        "id": 3,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "마스카라"
+      }, {
+        "id": 4,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "포인트리무버"
+      }, {
+        "id": 5,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "틴트/립클로스"
+      }, {
+        "id": 6,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "립스틱"
+      }, {
+        "id": 7,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "립케어"
+      }, {
+        "id": 8,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "BB/CC크림"
+      }, {
+        "id": 9,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "파운데이션"
+      }, {
+        "id": 10,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "파우더"
+      }, {
+        "id": 11,
+        "categoryId": 2,
+        "endAt": 130,
+        "title": "컨실러"
+      }
+    ]
+  }, {
+    "id": 3,
+    "title": "네일",
+    "subCategory": [
+      {
+        "id": 1,
+        "categoryId": 3,
+        "endAt": 130,
+        "title": "젤네일"
+      }
+    ]
+  }, {
+    "id": 4,
+    "title": "탈취/방향/살충",
+    "subCategory": [
+      {
+        "id": 1,
+        "categoryId": 4,
+        "endAt": 130,
+        "title": "탈취제"
+      }, {
+        "id": 2,
+        "categoryId": 4,
+        "endAt": 130,
+        "title": "제습제"
+      }, {
+        "id": 3,
+        "categoryId": 4,
+        "endAt": 130,
+        "title": "방향제"
+      }, {
+        "id": 4,
+        "categoryId": 4,
+        "endAt": 130,
+        "title": "방충제"
+      }
+    ]
+  }, {
+    "id": 5,
+    "title": "출산/유아동",
+    "subCategory": [
+      {
+        "id": 1,
+        "categoryId": 5,
+        "endAt": 130,
+        "title": "천기저귀"
+      }, {
+        "id": 2,
+        "categoryId": 5,
+        "endAt": 130,
+        "title": "일반기저귀"
+      }, {
+        "id": 3,
+        "categoryId": 5,
+        "endAt": 130,
+        "title": "위생용품"
+      }, {
+        "id": 4,
+        "categoryId": 5,
+        "endAt": 130,
+        "title": "유아세정제"
+      }, {
+        "id": 5,
+        "categoryId": 5,
+        "endAt": 130,
+        "title": "건강용품"
+      }
+    ]
+  }, {
+    "id": 6,
+    "title": "생활용품",
+    "subCategory": [
+      {
+        "id": 1,
+        "categoryId": 6,
+        "endAt": 130,
+        "title": "샴푸/린스"
+      }, {
+        "id": 2,
+        "categoryId": 6,
+        "endAt": 130,
+        "title": "트리트먼트"
+      }, {
+        "id": 3,
+        "categoryId": 6,
+        "endAt": 130,
+        "title": "염색/파마"
+      }, {
+        "id": 4,
+        "categoryId": 6,
+        "endAt": 130,
+        "title": "입욕용품"
+      }, {
+        "id": 5,
+        "categoryId": 6,
+        "endAt": 130,
+        "title": "바디로션/크림"
+      }, {
+        "id": 6,
+        "categoryId": 6,
+        "endAt": 130,
+        "title": "핸드/풋/데오"
+      }, {
+        "id": 7,
+        "categoryId": 6,
+        "endAt": 130,
+        "title": "클렌징/플링"
+      }
+    ]
+  }
+]

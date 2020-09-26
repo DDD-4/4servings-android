@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: bug_report
+    url: https://github.com/DDD-4/4servings-android
+    about: create a bug report
+  - name: pull_request
+    url: https://github.com/DDD-4/4servings-android
+    about: Create a pull request

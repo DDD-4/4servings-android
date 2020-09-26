@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_graph.xml"
+    app:startDestination="@id/addSectionFragment">
+
+    <fragment
+        android:id="@+id/addSectionFragment"
+        android:name="com.ddd4.dropit.presentation.ui.add.screen.AddSectionFragment"
+        android:label="AddSectionFragment" >
+        <action
+            android:id="@+id/action_addSectionFragment_to_addContentsFragment"
+            app:destination="@id/addContentsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addContentsFragment"
+        android:name="com.ddd4.dropit.presentation.ui.add.screen.AddContentsFragment"
+        android:label="AddContentsFragment" >
+        <action
+            android:id="@+id/action_addContentsFragment_to_addDateFragment"
+            app:destination="@id/addDateFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addDateFragment"
+        android:name="com.ddd4.dropit.presentation.ui.add.screen.AddDateFragment"
+        android:label="AddDateFragment" />
+
+</navigation>

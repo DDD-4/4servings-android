@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="mainVM"
+            type="com.ddd4.dropit.presentation.ui.main.MainViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvFolder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_title_folder"
+                    android:textAppearance="@style/text.20sp.bold.dark"
+                    android:layout_margin="@dimen/space_16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvFolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{mainVM.folderState ? View.VISIBLE : View.GONE}"
+                    tools:listitem="@layout/row_home_folder"
+                    app:mainItems="@{mainVM.folderItems}"
+                    app:clickListener="@{mainVM.onItemClickListener}"
+                    android:paddingStart="@dimen/space_12dp"
+                    android:paddingEnd="@dimen/space_12dp"
+                    android:clipToPadding="false"
+                    android:layout_marginTop="@dimen/space_16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFolder"
+                    app:layout_constraintBottom_toTopOf="@+id/layoutGone"/>
+
+                <LinearLayout
+                    android:id="@+id/layoutGone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{mainVM.folderState ? View.GONE : View.VISIBLE}"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/space_100dp"
+                    android:paddingBottom="@dimen/space_100dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvFolder"
+                    app:layout_constraintBottom_toTopOf="@+id/divider">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_add_item_hint"
+                        android:textAppearance="@style/text.16sp.regular.hint"
+                        android:gravity="center"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> mainVM.onAddClicked()}"
+                        android:text="@string/text_add_item"
+                        android:textAppearance="@style/text.14sp.regular.light"
+                        android:background="@drawable/bg_button_activate"
+                        android:paddingStart="@dimen/space_36dp"
+                        android:paddingEnd="@dimen/space_36dp"
+                        android:paddingTop="@dimen/space_10dp"
+                        android:paddingBottom="@dimen/space_10dp"
+                        android:layout_marginTop="@dimen/space_40dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:background="@color/background_view_divider"
+                    android:layout_marginTop="@dimen/space_16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutGone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_title_category"
+                    android:textAppearance="@style/text.20sp.bold.dark"
+                    android:layout_margin="@dimen/space_16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_category_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/row_home_category"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:mainItems="@{mainVM.categoryItems}"
+                    app:clickListener="@{mainVM.onItemClickListener}"
+                    android:paddingStart="@dimen/space_20dp"
+                    android:paddingEnd="@dimen/space_20dp"
+                    android:layout_marginTop="@dimen/space_16dp"
+                    android:layout_marginBottom="@dimen/space_40dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCategory"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> mainVM.onAddClicked()}"
+            android:src="@drawable/ic_add_white_24dp"
+            android:layout_margin="@dimen/space_16dp"
+            android:layout_gravity="bottom|end"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

@@ -1,0 +1,19 @@
+apply plugin: 'java-library'
+
+apply plugin: 'kotlin'
+
+apply plugin: 'kotlin-kapt'
+
+apply from: '../dependencies.gradle'
+
+dependencies {
+    // hilt
+    implementation "$domainDependencies.hiltAndroid"
+    kapt "$domainDependencies.hiltAndroidCompiler"
+    implementation "$domainDependencies.hiltViewmodel"
+    implementation "$domainDependencies.hiltCommon"
+    kapt "$domainDependencies.hiltCompiler"
+    // coroutines
+    implementation "$domainDependencies.coroutinesCore"
+    implementation "$domainDependencies.coroutinesAndroid"
+}

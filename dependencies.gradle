@@ -1,0 +1,138 @@
+ext {
+    application = [
+            id                      : 'com.ddd4.dropit'
+    ]
+    versions = [
+            minSdk                  : 23,
+            compileSdk              : 29,
+            targetSdk               : 29,
+            versionCode             : 1,
+            versionName             : '1.0.0',
+
+            // gradle plugins
+            gradleBuildTool         : '4.0.1',
+            spotlessGradle          : '4.5.1',
+            versionPlugin           : '0.28.0',
+
+            //library
+            kotlinVersion               : '1.3.72',
+            appcompatVersion            : '1.1.0-alpha03',
+            ktxVersion                  : '1.2.0',
+            constraintlayoutVersion     : '1.1.3',
+            materialVersion             : '1.3.0-alpha02',
+            legacySupportVersion        : '1.0.0',
+            gsonVersion                 : '2.8.5',
+
+            // architecture components
+            fragmentVersion         : '1.2.5',
+            lifecycleVersion        : '2.2.0',
+            roomVersion             : '2.2.5',
+            archCompomentVersion    : '2.1.0',
+            navigationVersion       : '2.3.0',
+
+            // startup
+            startupVersion          : '1.0.0-alpha01',
+
+            // di
+            hilt                    : '2.28.3-alpha',
+            hiltLifecycle           : '1.0.0-alpha01',
+
+            // coroutines
+            coroutinesVersion       : '1.3.7',
+
+            // glide
+            glideVersion            : '4.11.0',
+            glidePaletteVersion     : '2.1.2',
+
+            // debugging
+            timberVersion           : '4.7.1',
+
+            // unit test
+            truthVersion            : '1.0.1',
+            junitVersion            : '4.12',
+            robolectricVersion      : '4.3.1',
+            androidxTest            : '1.1.0',
+            androidxTestJunit       : '1.1.2-rc01',
+            androidTestRunner       : '1.3.0-beta01',
+            espressoVersion         : '3.2.0',
+            mockitoKotlinVersion    : '2.2.0',
+            mockitoInlineVersion    : '3.3.3',
+            debugdbVersion          : '1.0.6'
+    ]
+    modularization = [
+            presentation                : ':presentation',
+            domain                      : ':domain',
+            data                        : ':data'
+    ]
+    appDependencies = [
+            hiltAndroid             : "com.google.dagger:hilt-android:$versions.hilt",
+            hiltAndroidCompiler     : "com.google.dagger:hilt-android-compiler:$versions.hilt", //kapt
+            hiltCommon              : "androidx.hilt:hilt-common:$versions.hiltLifecycle",
+            hiltViewmodel           : "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltLifecycle",
+            hiltCompiler            : "androidx.hilt:hilt-compiler:$versions.hiltLifecycle", //kapt
+            roomRuntime             : "androidx.room:room-runtime:$versions.roomVersion",
+            roomKtx                 : "androidx.room:room-ktx:$versions.roomVersion",
+            roomCompiler            : "androidx.room:room-compiler:$versions.roomVersion", //kapt
+            archCoreTest            : "androidx.arch.core:core-testing:$versions.archCompomentVersion" //testImplementation
+    ]
+    presentationDependencies = [
+            appcompat               : "androidx.appcompat:appcompat:$versions.appcompatVersion",
+            ktx                     : "androidx.core:core-ktx:$versions.ktxVersion",
+            constraint              : "androidx.constraintlayout:constraintlayout:$versions.constraintlayoutVersion",
+            material                : "com.google.android.material:material:$versions.materialVersion",
+            legacySupport           : "androidx.legacy:legacy-support-v4:$versions.legacySupportVersion",
+            hiltAndroid             : "com.google.dagger:hilt-android:$versions.hilt",
+            hiltAndroidCompiler     : "com.google.dagger:hilt-android-compiler:$versions.hilt", //kapt
+            hiltCommon              : "androidx.hilt:hilt-common:$versions.hiltLifecycle",
+            hiltViewmodel           : "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltLifecycle",
+            hiltCompiler            : "androidx.hilt:hilt-compiler:$versions.hiltLifecycle", //kapt
+            fragmentKtx             : "androidx.fragment:fragment-ktx:$versions.fragmentVersion",
+            lifecycleExtension      : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion",
+            lifecycleLivedata       : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion",
+            lifecycleViewmodel      : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion",
+            lifecycleViewmodelState : "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycleVersion",
+            navigationFragment      : "androidx.navigation:navigation-fragment-ktx:$versions.navigationVersion",
+            navigationUi            : "androidx.navigation:navigation-ui-ktx:$versions.navigationVersion",
+            coroutinesCore          : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesVersion",
+            coroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion",
+            glide                   : "com.github.bumptech.glide:glide:$versions.glideVersion",
+            glidePalette            : "com.github.florent37:glidepalette:$versions.glidePaletteVersion",
+            glideCompiler           : "com.github.bumptech.glide:compiler:$versions.glideVersion", //kapt
+            startup                 : "androidx.startup:startup-runtime:$versions.startupVersion",
+            debugdb                 : "com.amitshekhar.android:debug-db:$versions.debugdbVersion"
+    ]
+    domainDependencies = [
+            hiltAndroid             : "com.google.dagger:hilt-android:$versions.hilt",
+            hiltAndroidCompiler     : "com.google.dagger:hilt-android-compiler:$versions.hilt", //kapt
+            hiltCommon              : "androidx.hilt:hilt-common:$versions.hiltLifecycle",
+            hiltViewmodel           : "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltLifecycle",
+            hiltCompiler            : "androidx.hilt:hilt-compiler:$versions.hiltLifecycle", //kapt
+            coroutinesCore          : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesVersion",
+            coroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion",
+    ]
+    dataDependencies = [
+            hiltAndroid             : "com.google.dagger:hilt-android:$versions.hilt",
+            hiltAndroidCompiler     : "com.google.dagger:hilt-android-compiler:$versions.hilt", //kapt
+            hiltCommon              : "androidx.hilt:hilt-common:$versions.hiltLifecycle",
+            hiltViewmodel           : "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltLifecycle",
+            hiltCompiler            : "androidx.hilt:hilt-compiler:$versions.hiltLifecycle", //kapt
+            roomRuntime             : "androidx.room:room-runtime:$versions.roomVersion",
+            roomKtx                 : "androidx.room:room-ktx:$versions.roomVersion",
+            roomCompiler            : "androidx.room:room-compiler:$versions.roomVersion", //kapt
+            archCoreTest            : "androidx.arch.core:core-testing:$versions.archCompomentVersion", //testImplementation
+            coroutinesCore          : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0",
+            coroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0",
+            gson                    : "com.google.code.gson:gson:$versions.gsonVersion"
+    ]
+    testDependencies = [
+            junit                   : "junit:junit:$versions.junitVersion",
+            mockitoKOtlin           : "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockitoKotlinVersion",
+            mockitoInline           : "org.mockito:mockito-inline:$versions.mockitoInlineVersion",
+            robolectric             : "org.robolectric:robolectric:$versions.robolectricVersion", //testImplementation
+            androidxTest            : "androidx.test:core:$versions.androidxTest", //androidTestImplementation
+            truth                   : "com.google.truth:truth:$versions.truthVersion", //androidTestImplementation
+            androidxJunit           : "androidx.test.ext:junit:$versions.androidxTestJunit", //androidTestImplementation
+            androidTestRunner       : "com.android.support.test:runner:$versions.androidTestRunner", //androidTestImplementation
+            espresso                : "androidx.test.espresso:espresso-core:$versions.espressoVersion" //androidTestImplementation
+    ]
+}

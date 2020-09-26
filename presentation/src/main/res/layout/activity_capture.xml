@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.capture.CaptureActivity">
+
+    <data>
+
+        <variable
+            name="view"
+            type="com.ddd4.dropit.presentation.ui.capture.CaptureActivity" />
+
+        <variable
+            name="captureVM"
+            type="com.ddd4.dropit.presentation.ui.capture.CaptureViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/texture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextureView
+            android:id="@+id/texture"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:listener="@{view.textureListener}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/capture"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+        <LinearLayout
+            android:id="@+id/frame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_frame_camera"
+            android:orientation="vertical"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@+id/texture"
+            app:layout_constraintEnd_toEndOf="@+id/texture"
+            app:layout_constraintTop_toTopOf="@id/texture"
+            app:layout_constraintBottom_toBottomOf="@id/texture"/>
+
+        <LinearLayout
+            android:id="@+id/capture"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_100dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/texture"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/btn_capture"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:onClick="@{() -> captureVM.onCaptureClicked()}"
+                android:text="@string/text_camera_capture"
+                android:textAppearance="@style/text.16sp.regular.dark"
+                android:elevation="@dimen/button_elevation"
+                android:background="@drawable/bg_button_capture"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

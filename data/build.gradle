@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+
+apply from: '../common-android.gradle'
+
+apply from: '../dependencies.gradle'
+
+dependencies {
+    implementation project("$modularization.domain")
+    // hilt
+    implementation "$dataDependencies.hiltAndroid"
+    kapt "$dataDependencies.hiltAndroidCompiler"
+    implementation "$dataDependencies.hiltViewmodel"
+    implementation "$dataDependencies.hiltCommon"
+    kapt "$dataDependencies.hiltCompiler"
+    //room
+    implementation "$dataDependencies.roomRuntime"
+    implementation "$dataDependencies.roomKtx"
+    kapt "$dataDependencies.roomCompiler"
+    testImplementation "$dataDependencies.archCoreTest"
+    // coroutines
+    implementation "$dataDependencies.coroutinesCore"
+    implementation "$dataDependencies.coroutinesAndroid"
+    //gson
+    implementation "$dataDependencies.gson"
+}
