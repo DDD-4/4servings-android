@@ -10,7 +10,7 @@ import java.util.*
 @Database(entities = [
     DataEntity.Folder::class, DataEntity.Item::class,
     DataEntity.Category::class, DataEntity.SubCategory::class]
-    , version = 1, exportSchema = true)
+    , version = 2, exportSchema = true)
 @TypeConverters(DateConverter::class)
 abstract class AppDataBase: RoomDatabase(){
     abstract fun databaseDao(): DatabaseDao
