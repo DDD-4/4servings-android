@@ -11,7 +11,9 @@ import com.ddd4.dropit.presentation.databinding.ActivitySplashBinding
 import com.ddd4.dropit.presentation.ui.category.CategoryActivity
 import com.ddd4.dropit.presentation.ui.main.MainActivity
 import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
 
     private val viewModel: SplashViewModel by viewModels()

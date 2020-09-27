@@ -1,5 +1,6 @@
 package com.ddd4.dropit.presentation.ui.splash
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.usecase.SetSectionUseCase
@@ -8,7 +9,7 @@ import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class SplashViewModel(
+class SplashViewModel @ViewModelInject constructor(
     private val setSectionUseCase: SetSectionUseCase
 ): BaseViewModel() {
 
