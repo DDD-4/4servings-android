@@ -1,4 +1,4 @@
-package com.ddd4.dropit.presentation.ui.dialog
+package com.ddd4.dropit.presentation.ui.createfolderdialog
 
 import android.content.Intent
 import androidx.activity.viewModels
@@ -11,15 +11,14 @@ import com.ddd4.dropit.presentation.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DialogActivity : BaseActivity<ActivityCreateFolderDialogBinding>(R.layout.activity_create_folder_dialog) {
+class CreateFolderDialogActivity : BaseActivity<ActivityCreateFolderDialogBinding>(R.layout.activity_create_folder_dialog) {
 
-    private val viewModel: DialogViewModel by viewModels()
+    private val viewModel: CreateFolderDialogViewModel by viewModels()
     private var itemIdList = arrayListOf<Long>()
-
 
     override fun setBind() {
         binding.apply{
-            dialogViewModel = viewModel
+            createDialogVM = viewModel
         }
         itemIdList = getIdList(intent)
         viewModel.start(itemIdList)
@@ -37,7 +36,7 @@ class DialogActivity : BaseActivity<ActivityCreateFolderDialogBinding>(R.layout.
     }
 
     private fun getIdList(intent: Intent): ArrayList<Long> {
-        return intent.getIntegerArrayListExtra(Constants.ITEM_ID) as ArrayList<Long> ?: arrayListOf()
+        return intent.getIntegerArrayListExtra(Constants.EXTRA_NAME_ITEM_ID) as ArrayList<Long> ?: arrayListOf()
     }
 
 }

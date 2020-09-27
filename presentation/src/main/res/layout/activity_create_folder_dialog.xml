@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="dialogViewModel"
-            type="com.ddd4.dropit.presentation.ui.dialog.DialogViewModel" />
+            name="createDialogVM"
+            type="com.ddd4.dropit.presentation.ui.createfolderdialog.CreateFolderDialogViewModel" />
 
         <import type="android.view.View"/>
         <import type="android.R.string" />
@@ -43,7 +43,7 @@
         android:layout_marginTop="@dimen/space_10dp"
         android:layout_marginEnd="@dimen/space_20dp"
         android:layout_marginBottom="@dimen/space_8dp"
-        android:text="@={dialogViewModel.createFolder}"
+        android:text="@={createDialogVM.createFolder}"
         android:hint="@string/enter_folder_name"
         android:theme="@style/Theme.EditTheme"
         app:layout_constraintBottom_toTopOf="@+id/tvPositive"
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/space_20dp"
         android:text="@string/ok"
-        android:onClick="@{() -> dialogViewModel.confirmButtonClick()}"
+        android:onClick="@{() -> createDialogVM.confirmButtonClick()}"
         android:textAppearance="@style/text.14sp.regular.dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etFolderName" />
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/space_20dp"
         android:text="@string/cancel"
-        android:onClick="@{() -> dialogViewModel.cancelButtonClick()}"
+        android:onClick="@{() -> createDialogVM.cancelButtonClick()}"
         android:textAppearance="@style/text.14sp.regular.dark"
         app:layout_constraintEnd_toStartOf="@+id/tvPositive"
         app:layout_constraintTop_toBottomOf="@+id/etFolderName" />

@@ -7,12 +7,13 @@ import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
 import com.ddd4.dropit.presentation.databinding.ActivityFolderBinding
 import com.ddd4.dropit.presentation.ui.add.AddActivity
-import com.ddd4.dropit.presentation.ui.detailFolder.FolderItemDetailActivity
+import com.ddd4.dropit.presentation.ui.detailfolder.FolderItemDetailActivity
 import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderActivity
 import com.ddd4.dropit.presentation.util.Constants
 import com.ddd4.dropit.presentation.util.hideButton
 import com.ddd4.dropit.presentation.util.showButton
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.time.days
 
 
 @AndroidEntryPoint
@@ -38,7 +39,7 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
         folderViewModel.nextButton.observe(this, Observer {
             startActivityForResult(
                 Intent(this, MoveFolderActivity::class.java)
-                    .putExtra(Constants.ITEM_ID, it),
+                    .putExtra(Constants.EXTRA_NAME_ITEM_ID, it),
                 1500
             )
         })

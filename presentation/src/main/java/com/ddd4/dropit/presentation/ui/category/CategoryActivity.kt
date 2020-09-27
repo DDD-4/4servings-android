@@ -1,23 +1,18 @@
 package com.ddd4.dropit.presentation.ui.category
 
 import android.content.Intent
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
 import com.ddd4.dropit.presentation.databinding.ActivityCategoryBinding
 import com.ddd4.dropit.presentation.ui.add.AddActivity
-import com.ddd4.dropit.presentation.ui.detailFolder.FolderItemDetailActivity
-import com.ddd4.dropit.presentation.ui.folder.FolderAdapter
-import com.ddd4.dropit.presentation.ui.folder.FolderViewModel
+import com.ddd4.dropit.presentation.ui.detailfolder.FolderItemDetailActivity
 import com.ddd4.dropit.presentation.ui.moveFolder.MoveFolderActivity
 import com.ddd4.dropit.presentation.util.Constants
 import com.ddd4.dropit.presentation.util.hideButton
 import com.ddd4.dropit.presentation.util.showButton
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity_category) {

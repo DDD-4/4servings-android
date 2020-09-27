@@ -1,4 +1,4 @@
-package com.ddd4.dropit.presentation.ui.dialog
+package com.ddd4.dropit.presentation.ui.createfolderdialog
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.*
 
-class DialogViewModel @ViewModelInject constructor(
+class CreateFolderDialogViewModel @ViewModelInject constructor(
     private val createFolderUseCase: CreateFolderUseCase,
     private val getFolderByNameUseCase: GetFolderByNameUseCase,
     private val updateItemByFolderIdUseCase: UpdateItemByFolderIdUseCase

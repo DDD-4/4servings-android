@@ -21,6 +21,6 @@ object Constants {
     const val EXTRA_NAME_IMAGE_PATH = "imagePath"
     const val EXTRA_NAME_ITEM_ID = "itemId"
 
-    const val DELETE_ITEM = "deleteItem"
-    const val ITEM_ID = "itemId"
+    const val EXTRA_DELETE_ITEM = "deleteItem"
+    const val EXTRA_DDAY = "dday"
 }

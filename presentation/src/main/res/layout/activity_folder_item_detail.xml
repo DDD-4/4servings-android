@@ -6,7 +6,7 @@
     <data>
         <variable
             name="detailItemViewModel"
-            type="com.ddd4.dropit.presentation.ui.detailFolder.FolderItemDetailViewModel" />
+            type="com.ddd4.dropit.presentation.ui.detailfolder.FolderItemDetailViewModel" />
 
         <import type="android.view.View"/>
         <import type="android.R.color"/>
@@ -105,7 +105,7 @@
             android:layout_width="@dimen/dday_button_width"
             android:layout_height="@dimen/dday_button_height"
             android:layout_marginTop="@dimen/space_20dp"
-            android:background="@drawable/bg_dday_button"
+            android:background="@drawable/bg_dday_blue_border"
             android:gravity="center"
             android:text="@{detailItemViewModel.itemDetails.getDDay()}"
             tools:text="D-22"

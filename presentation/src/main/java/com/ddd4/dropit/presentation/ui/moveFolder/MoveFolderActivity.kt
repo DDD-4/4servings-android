@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
 import com.ddd4.dropit.presentation.databinding.ActivityMoveFolderBinding
-import com.ddd4.dropit.presentation.ui.dialog.DialogActivity
+import com.ddd4.dropit.presentation.ui.createfolderdialog.CreateFolderDialogActivity
 import com.ddd4.dropit.presentation.ui.main.MainActivity
 import com.ddd4.dropit.presentation.util.Constants
 import com.ddd4.dropit.presentation.util.toast
@@ -29,8 +29,8 @@ class MoveFolderActivity : BaseActivity<ActivityMoveFolderBinding>(R.layout.acti
     override fun setObserve() {
         viewModel.newFolderButton.observe(this, Observer {
             startActivityForResult(
-                Intent(this, DialogActivity::class.java)
-                    .putExtra(Constants.ITEM_ID, itemIdList)
+                Intent(this, CreateFolderDialogActivity::class.java)
+                    .putExtra(Constants.EXTRA_NAME_ITEM_ID, itemIdList)
                 , 1500
             )
         })
@@ -48,7 +48,7 @@ class MoveFolderActivity : BaseActivity<ActivityMoveFolderBinding>(R.layout.acti
     }
 
     private fun getIdList(intent: Intent): ArrayList<Long> {
-        return intent.getIntegerArrayListExtra(Constants.ITEM_ID) as ArrayList<Long> ?: arrayListOf()
+        return intent.getIntegerArrayListExtra(Constants.EXTRA_NAME_ITEM_ID) as ArrayList<Long> ?: arrayListOf()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
