@@ -48,6 +48,12 @@ ext {
             // debugging
             timberVersion           : '4.7.1',
 
+            // firebase
+            gmsGradle               : '4.3.3',
+            crashlyticsGradle       : '2.3.0',
+            analytics               : '17.5.0',
+            crashlytics             : '17.2.1',
+
             // unit test
             truthVersion            : '1.0.1',
             junitVersion            : '4.12',

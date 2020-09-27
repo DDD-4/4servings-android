@@ -4,6 +4,10 @@ apply from: '../common-android.gradle'
 
 apply from: '../dependencies.gradle'
 
+apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'com.google.firebase.crashlytics'
+
 android {
     defaultConfig {
         applicationId "$application.id"
