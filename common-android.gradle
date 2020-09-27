@@ -16,6 +16,7 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode versions.versionCode
         versionName versions.versionName
+        archivesBaseName = "${application.archiveName}-v${versions.versionName}(${versions.versionCode})"
     }
 
     buildTypes {
