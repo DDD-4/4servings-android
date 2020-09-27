@@ -19,6 +19,7 @@
         android:layout_height="@dimen/card_add_category_size"
         app:cardCornerRadius="@dimen/card_add_category_radius"
         app:cardElevation="@dimen/card_add_category_elevation"
+        app:cardUseCompatPadding="false"
         android:layout_margin="@dimen/space_6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

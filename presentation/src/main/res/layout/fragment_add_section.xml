@@ -49,6 +49,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:addItems="@{addVM.categoryItems}"
                 app:clickListener="@{view.onItemClickListener}"
+                android:clipToPadding="false"
                 android:paddingStart="@dimen/space_14dp"
                 android:paddingEnd="@dimen/space_14dp"
                 android:layout_marginTop="@dimen/space_20dp"
