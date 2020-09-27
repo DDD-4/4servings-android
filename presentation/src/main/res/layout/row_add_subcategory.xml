@@ -23,7 +23,7 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="center"
-        android:textColor="@{isSelected ? @color/textAccent : @color/textHint}"
+        android:textColor="@{isSelected ? @color/textLight : @color/textHint}"
         android:background="@{isSelected ? @drawable/bg_subcategory_activate : @drawable/bg_subcategory_default}"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"

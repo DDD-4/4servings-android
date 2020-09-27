@@ -19,13 +19,13 @@
         android:layout_height="@dimen/card_add_category_size"
         app:cardCornerRadius="@dimen/card_add_category_radius"
         app:cardElevation="@dimen/card_add_category_elevation"
+        app:cardUseCompatPadding="false"
         android:layout_margin="@dimen/space_6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutItem"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@{isSelected ? @drawable/bg_category_activate : null}">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/ivCategory"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{item.title}"
                 android:textAppearance="@style/text.12sp.bold.hint"
-                android:textColor="@{isSelected ? @color/textLight : @color/textHint}"
+                android:textColor="@{isSelected ? @color/textAccent : @color/textHint}"
                 android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
