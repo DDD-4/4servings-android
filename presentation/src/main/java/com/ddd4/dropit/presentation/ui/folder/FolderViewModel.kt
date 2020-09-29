@@ -8,6 +8,7 @@ import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
+import com.ddd4.dropit.domain.getValue
 import com.ddd4.dropit.domain.usecase.GetFolderByIdUseCase
 import com.ddd4.dropit.domain.usecase.GetFolderItemUseCase
 import com.ddd4.dropit.presentation.entity.PresentationEntity.*
@@ -70,24 +71,24 @@ class FolderViewModel @ViewModelInject constructor(
     }
 
     fun start(folderId: Long) = viewModelScope.launch {
-        when (val result = getFolderItemUseCase(folderId)) {
-            is Result.Success -> {
-                if (result.data.isNotEmpty()) {
-                    _folderItems.value =
-                        result.data
-                            .map(DomainEntity.Item::mapToPresentation)
-                            .sortedByDescending { it.endAt.time }
-                } else {
-                    _folderItems.value = emptyList()
-                    Timber.d("empty")
-                }
-            }
-            is Result.Error -> Timber.d(result.exception)
-        }
+        try {
+            val items = getFolderItemUseCase(folderId).getValue()
+            if(items.isNotEmpty()) {
+                _folderItems.value =  getFolderItemUseCase(folderId)
+                        .getValue()
+                        .map(DomainEntity.Item::mapToPresentation)
+                        .sortedByDescending { it.endAt.time }
 
-        when (val result = getFolderByIdUseCase(folderId)) {
-            is Result.Success -> _folderName.value = result.data.name
-            is Result.Error -> Timber.d(result.exception)
+                _folderName.value = getFolderByIdUseCase(folderId).getValue().name
+
+            } else {
+                _folderItems.value = emptyList()
+                _folderName.value = ""
+
+            }
+
+        } catch (e: Exception) {
+            Timber.d(e)
         }
     }
 

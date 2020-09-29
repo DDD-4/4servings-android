@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ddd4.dropit.domain.Result
+import com.ddd4.dropit.domain.getValue
 import com.ddd4.dropit.domain.usecase.DeleteItemUseCase
 import com.ddd4.dropit.domain.usecase.GetDetailItemUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
@@ -33,15 +34,17 @@ class EndDialogViewModel @ViewModelInject constructor(
     val confirmButton: LiveData<Void> = _confirmButton
 
     fun start(itemId: Long) = viewModelScope.launch {
-        when(val result = getDetailItemUseCase(itemId)) {
-            is Result.Success -> {
-                _itemDetails.value = result.data.mapToPresentation()
-
-            }
-            is Result.Error -> Timber.d(result.exception)
+        try {
+            getDetailItemUseCase(itemId)
+                .getValue()
+                .mapToPresentation()
+                .let { item ->
+                    _itemDetails.value = item
+                    _itemName.value = item.name
+                }
+        } catch (e: Exception) {
+            Timber.d(e)
         }
-        _itemName.value = _itemDetails.value!!.name
-
     }
 
     fun cancelButtonClick() {
@@ -49,8 +52,12 @@ class EndDialogViewModel @ViewModelInject constructor(
     }
 
     fun confirmButtonClick() = viewModelScope.launch {
-        deleteItemUseCase(_itemDetails.value?.id!!)
-        _confirmButton.call()
+        try {
+            deleteItemUseCase(_itemDetails.value?.id!!)
+            _confirmButton.call()
+        } catch (e: Exception) {
+            Timber.d(e)
+        }
     }
 
 }

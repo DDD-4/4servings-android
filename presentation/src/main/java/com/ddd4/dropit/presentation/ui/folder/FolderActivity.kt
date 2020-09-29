@@ -40,7 +40,7 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
             startActivityForResult(
                 Intent(this, MoveFolderActivity::class.java)
                     .putExtra(Constants.EXTRA_NAME_ITEM_ID, it),
-                1500
+                Constants.INTENT_MOVE_FOLDER
             )
         })
 
@@ -56,7 +56,7 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
             startActivityForResult(
                 Intent(this, FolderItemDetailActivity::class.java)
                     .putExtra(Constants.EXTRA_NAME_ITEM_ID, item),
-                3030)
+                Constants.INTENT_ITEM_DETAIL)
 
         })
 
@@ -88,6 +88,4 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
         folderViewModel.start(folderId)
         binding.rvDetailFolder.adapter?.notifyDataSetChanged()
     }
-
-
 }

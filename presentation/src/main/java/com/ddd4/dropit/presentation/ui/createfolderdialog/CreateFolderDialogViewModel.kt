@@ -1,11 +1,13 @@
 package com.ddd4.dropit.presentation.ui.createfolderdialog
 
+import android.app.Presentation
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ddd4.dropit.domain.usecase.CreateFolderUseCase
 import com.ddd4.dropit.domain.Result
+import com.ddd4.dropit.domain.getValue
 import com.ddd4.dropit.domain.usecase.GetFolderByNameUseCase
 import com.ddd4.dropit.domain.usecase.UpdateItemByFolderIdUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
@@ -14,6 +16,7 @@ import com.ddd4.dropit.presentation.mapper.mapToDomain
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.Exception
 import java.util.*
 
 class CreateFolderDialogViewModel @ViewModelInject constructor(
@@ -40,28 +43,37 @@ class CreateFolderDialogViewModel @ViewModelInject constructor(
 
     fun confirmButtonClick() = viewModelScope.launch {
         createFolder.value?.let {
-            when (val result = createFolderUseCase(
-                PresentationEntity.Folder(
+            try {
+                val folder = PresentationEntity.Folder(
                     id = null,
                     name = it,
                     createAt = Date()
-                ).mapToDomain())) {
-                is Result.Success -> getFolderIdByName()
-                is Result.Error -> Timber.d(result.exception)
+                ).mapToDomain()
+
+                createFolderUseCase(folder)
+                getFolderIdByName()
+
+            } catch (e: Exception) {
+                Timber.d(e)
             }
         }
     }
 
     private fun getFolderIdByName() = viewModelScope.launch {
-        when (val result = getFolderByNameUseCase(createFolder.value!!)) {
-            is Result.Success -> {
-                _itemIdList.value?.map { itemId ->
-                    updateItemByFolderIdUseCase(result.data.id!!, itemId)
+        try {
+            createFolder.value?.let { folder ->
+                _itemIdList.value?.map { id ->
+                    updateItemByFolderIdUseCase(
+                        getFolderByNameUseCase(folder).getValue().id!!,
+                        id
+                    )
                 }
             }
-            is Result.Error -> Timber.d(result.exception)
-        }
             _confirmButton.call()
+
+        } catch (e: Exception) {
+            Timber.d(e)
+        }
     }
 
     fun cancelButtonClick() {

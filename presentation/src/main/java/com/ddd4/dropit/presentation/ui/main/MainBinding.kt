@@ -18,9 +18,11 @@ object MainBinding {
     @BindingAdapter(value = ["mainItems", "clickListener"])
     fun setMainFolderItems(view: RecyclerView, mainItems: List<PresentationEntity.Folder>?, clickListener: ItemClickListener) {
         if (mainItems?.size ?: 0 < 2) {
-            view.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
+            view.layoutManager =
+                GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
         } else {
-            view.layoutManager = GridLayoutManager(view.context, 2, GridLayoutManager.HORIZONTAL, false)
+            view.layoutManager =
+                GridLayoutManager(view.context, 2, GridLayoutManager.HORIZONTAL, false)
         }
 
         view.adapter?.run {

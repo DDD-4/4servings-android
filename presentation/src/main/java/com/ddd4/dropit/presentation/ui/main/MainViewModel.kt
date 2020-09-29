@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
+import com.ddd4.dropit.domain.getValue
 import com.ddd4.dropit.domain.usecase.GetCategoryUseCase
 import com.ddd4.dropit.domain.usecase.GetFoldersUseCase
 import com.ddd4.dropit.domain.usecase.SetSectionUseCase
@@ -41,25 +42,29 @@ class MainViewModel @ViewModelInject constructor(
 
     private fun getCategoryItems() {
         viewModelScope.launch {
-            when (val result = getCategoryUseCase()) {
-                is Result.Success -> _categoryItems.value = result.data.map(DomainEntity.Category::mapToPresentation)
-                is Result.Error -> Timber.d(result.exception)
+            try {
+                _categoryItems.value =
+                    getCategoryUseCase().getValue().map(DomainEntity.Category::mapToPresentation)
+            } catch (e: Exception) {
+                Timber.d(e)
             }
         }
     }
 
     fun getFolderItems() {
         viewModelScope.launch {
-            when (val result = getFoldersUseCase()) {
-                is Result.Success -> {
-                    if (result.data.isNotEmpty()) {
-                        _folderItems.value = result.data.map(DomainEntity.Folder::mapToPresentation)
-                        _folderState.value = true
-                    } else {
-                        _folderState.value = false
-                    }
+            try {
+                val items = getFoldersUseCase().getValue()
+                if(items.isNotEmpty()) {
+                    _folderItems.value = items.map(DomainEntity.Folder::mapToPresentation)
+                    _folderState.value = true
+                } else {
+                    _folderState.value = false
                 }
-                is Result.Error -> Timber.d(result.exception)
+            } catch (e: Exception) {
+                _folderItems.value = emptyList()
+
+                Timber.d(e)
             }
         }
     }

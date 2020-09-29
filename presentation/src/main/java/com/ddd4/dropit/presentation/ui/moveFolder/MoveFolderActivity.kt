@@ -31,7 +31,7 @@ class MoveFolderActivity : BaseActivity<ActivityMoveFolderBinding>(R.layout.acti
             startActivityForResult(
                 Intent(this, CreateFolderDialogActivity::class.java)
                     .putExtra(Constants.EXTRA_NAME_ITEM_ID, itemIdList)
-                , 1500
+                , Constants.INTENT_MOVE_FOLDER
             )
         })
 

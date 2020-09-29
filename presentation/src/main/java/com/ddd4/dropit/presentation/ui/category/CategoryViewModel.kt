@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
+import com.ddd4.dropit.domain.getValue
 import com.ddd4.dropit.domain.usecase.GetCategoryByIdUseCase
 import com.ddd4.dropit.domain.usecase.GetCategoryItemUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
@@ -75,21 +76,19 @@ class CategoryViewModel @ViewModelInject constructor(
     }
 
     fun start(categoryId: Long) = viewModelScope.launch {
-        when (val result = getCategoryItemUseCase(categoryId)) {
-            is Result.Success -> {
-                if (result.data.isNotEmpty()) {
-                    _categoryItems.value = result.data.map(DomainEntity.Item::mapToPresentation).sortedByDescending { it.endAt.time }
-                } else {
-                    _categoryItems.value = emptyList()
-                    Timber.d("empty")
-                }
-            }
-            is Result.Error -> Timber.d(result.exception)
-        }
+        try {
+            _categoryItems.value = getCategoryItemUseCase(categoryId)
+                .getValue()
+                .map(DomainEntity.Item::mapToPresentation)
+                .sortedByDescending { it.endAt.time }
 
-        when(val result = getCategoryByIdUseCase(categoryId)) {
-            is Result.Success -> _categoryName.value = result.data.title
-            is Result.Error -> Timber.d(result.exception)
+            _categoryName.value = getCategoryByIdUseCase(categoryId).getValue().title
+
+        } catch(e: Exception) {
+            _categoryItems.value = emptyList()
+            _categoryName.value = ""
+
+            Timber.d(e)
         }
     }
 
