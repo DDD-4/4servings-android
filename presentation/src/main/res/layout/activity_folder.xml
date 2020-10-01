@@ -165,7 +165,7 @@
         android:layout_margin="@dimen/space_16dp"
         android:background="@{folderVM.isButtonActivated ? @drawable/bg_active_button : @drawable/bg_inactive_button}"
         android:text="@string/select_folder"
-        android:textColor="#ffffff"/>
+        android:textColor="@color/colorPrimary"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

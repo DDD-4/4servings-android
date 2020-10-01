@@ -36,7 +36,7 @@ class MoveFolderActivity : BaseActivity<ActivityMoveFolderBinding>(R.layout.acti
         })
 
         viewModel.moveFolder.observe(this, Observer {
-            this.toast("사진 이동이 완료되었습니다.")
+            this.toast(resources.getString(R.string.toast_move_complete))
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         })

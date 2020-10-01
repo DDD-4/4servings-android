@@ -47,9 +47,6 @@ class FolderViewModel @ViewModelInject constructor(
     private val _nextButton = SingleLiveEvent<ArrayList<Long>>()
     val nextButton: LiveData<ArrayList<Long>> = _nextButton
 
-    private val _selectImageButton = SingleLiveEvent<String>()
-    val selectImageButton: SingleLiveEvent<String> = _selectImageButton
-
     private val _selectedImageState = MutableLiveData<Boolean>()
     val selectedImageState: LiveData<Boolean> = _selectedImageState
 
@@ -57,6 +54,13 @@ class FolderViewModel @ViewModelInject constructor(
     val item: SingleLiveEvent<Long> = _item
 
     val clearSelected = SingleLiveEvent<Void>()
+
+    /**
+     * false : 취소,
+     * true : 선택
+     */
+    private val _selectImageMode = MutableLiveData<Boolean>()
+    val selectImageMode: LiveData<Boolean> = _selectImageMode
 
     init {
         initView()
@@ -66,7 +70,7 @@ class FolderViewModel @ViewModelInject constructor(
     //TODO FIX
     private fun initView() {
         _selectedImageState.value = false
-        _selectImageButton.value = "선택"
+        _selectImageMode.value = true
         _isButtonActivated.value = false
     }
 
@@ -110,16 +114,8 @@ class FolderViewModel @ViewModelInject constructor(
         _floatingButton.call()
     }
 
-    //TODO FIX
     fun selectImageButtonClick() {
-        if (_selectedImageState.value!!) {
-            _selectImageButton.value = "선택"
-            clearSelected.call()
-        } else {
-            _selectImageButton.value = "취소"
-            _selectedImageList.clear()
-
-        }
+        _selectImageMode.value = _selectedImageState.value!!
         _selectedImageState.value = !_selectedImageState.value!!
     }
 
@@ -137,7 +133,7 @@ class FolderViewModel @ViewModelInject constructor(
     val onItemClickListener by lazy {
         object : ItemHandler {
             override fun <T> onItemClicked(item: T, visibility: Boolean) {
-                if (selectImageButton.value == "취소") {
+                if (selectImageMode.value == false) {
                     when (visibility) {
                         true -> {
                             _selectedImageList.add((item as Item).id!!)

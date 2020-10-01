@@ -48,14 +48,13 @@ class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity
             finish()
         })
 
-        viewModel.selectImageButton.observe(this, Observer {
-            binding.ibSelectImage.text = it
+        viewModel.selectImageMode.observe(this, Observer {
             when(it) {
-                resources.getString(R.string.select) -> {
+                true -> {
                     binding.folderFloatingButton.showButton()
                     binding.folderRectangleButton.hideButton()
                 }
-                resources.getString(R.string.cancel) -> {
+                false -> {
                     binding.folderFloatingButton.hideButton()
                     binding.folderRectangleButton.showButton()
                 }
