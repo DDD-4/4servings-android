@@ -50,4 +50,9 @@
     <string name="start_day">개봉일</string>
     <string name="drop_day">버리는 날</string>
 
+    <string name="toast_input_length">1자 이상 입력해주세요.</string>
+    <string name="toast_delete">삭제되었습니다.</string>
+    <string name="toast_edit_complete">수정이 완료되었습니다.</string>
+    <string name="toast_move_complete">사진 이동이 완료되었습니다.</string>
+
 </resources>
