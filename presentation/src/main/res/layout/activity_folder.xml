@@ -161,11 +161,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:visibility="gone"
         android:onClick="@{() -> folderVM.nextButtonClicked()}"
         android:layout_margin="@dimen/space_16dp"
         android:background="@{folderVM.isButtonActivated ? @drawable/bg_active_button : @drawable/bg_inactive_button}"
         android:text="@string/select_folder"
-        android:textColor="#ffffff"/>
+        android:textColor="@color/colorPrimary"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

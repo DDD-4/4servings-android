@@ -48,7 +48,7 @@ class FolderAdapter(
                 selectedView.put(i, false)
             }
 
-            binding.item = item
+            binding.setVariable(BR.item, item)
             binding.viewShadow.visibility = View.GONE
 
             binding.folderLayout.setOnClickListener {

@@ -31,12 +31,12 @@ class MoveFolderActivity : BaseActivity<ActivityMoveFolderBinding>(R.layout.acti
             startActivityForResult(
                 Intent(this, CreateFolderDialogActivity::class.java)
                     .putExtra(Constants.EXTRA_NAME_ITEM_ID, itemIdList)
-                , 1500
+                , Constants.INTENT_MOVE_FOLDER
             )
         })
 
         viewModel.moveFolder.observe(this, Observer {
-            this.toast("사진 이동이 완료되었습니다.")
+            this.toast(resources.getString(R.string.toast_move_complete))
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         })

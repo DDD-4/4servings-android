@@ -18,7 +18,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CaptureActivity : BaseActivity<ActivityCaptureBinding>(R.layout.activity_capture) {
 
-    private val captureViewModel: CaptureViewModel by viewModels()
+    private val viewModel: CaptureViewModel by viewModels()
 
     @Inject
     lateinit var textureCaptureUtil: TextureCaptureUtil
@@ -26,7 +26,7 @@ class CaptureActivity : BaseActivity<ActivityCaptureBinding>(R.layout.activity_c
     override fun setBind() {
         binding.apply {
             view = this@CaptureActivity
-            captureVM = captureViewModel
+            captureVM = viewModel
         }
     }
 
@@ -36,12 +36,12 @@ class CaptureActivity : BaseActivity<ActivityCaptureBinding>(R.layout.activity_c
     }
 
     override fun setObserve() {
-        captureViewModel.captureComplete.observe(this, Observer { imageUri ->
+        viewModel.captureComplete.observe(this, Observer { imageUri ->
             val intent = intent.putExtra(Constants.EXTRA_NAME_IMAGE_PATH, imageUri)
             setResult(Activity.RESULT_OK, intent)
             finish()
         })
-        captureViewModel.captureClick.observe(this, Observer {
+        viewModel.captureClick.observe(this, Observer {
             textureCaptureUtil.takePicture(this, setImageListener)
         })
     }
@@ -69,7 +69,7 @@ class CaptureActivity : BaseActivity<ActivityCaptureBinding>(R.layout.activity_c
 
     private val setImageListener = object: TextureCaptureUtil.OnTextureImageListener {
         override fun onImageCaptured(imageUri: String) {
-            captureViewModel.setCapturedImage(imageUri)
+            viewModel.setCapturedImage(imageUri)
         }
     }
 }

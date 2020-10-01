@@ -8,6 +8,7 @@ import com.ddd4.dropit.domain.usecase.GetDetailItemUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.domain.Result
+import com.ddd4.dropit.domain.getValue
 import com.ddd4.dropit.domain.usecase.DeleteItemUseCase
 import com.ddd4.dropit.domain.usecase.UpdateItemUseCase
 import com.ddd4.dropit.presentation.mapper.mapToDomain
@@ -46,11 +47,17 @@ class FolderItemDetailViewModel @ViewModelInject constructor(
     val backButton: LiveData<Void> = _backButton
 
     fun start(itemId: Long) = viewModelScope.launch {
-        when(val result = getDetailItemUseCase(itemId)) {
-            is Result.Success -> _itemDetails.value = result.data.mapToPresentation()
-            is Result.Error -> Timber.d(result.exception)
+        try {
+            getDetailItemUseCase(itemId)
+                .getValue()
+                .mapToPresentation()
+                .let { item ->
+                    _itemDetails.value = item
+                    itemName.value = item.name
+                }
+        } catch (e: Exception) {
+            Timber.d(e)
         }
-        itemName.value = _itemDetails.value!!.name
     }
 
     fun editButtonClick() = viewModelScope.launch  {

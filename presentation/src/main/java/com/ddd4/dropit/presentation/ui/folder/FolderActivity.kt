@@ -1,6 +1,7 @@
 package com.ddd4.dropit.presentation.ui.folder
 
 import android.content.Intent
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.ddd4.dropit.presentation.R
@@ -19,62 +20,63 @@ import kotlin.time.days
 @AndroidEntryPoint
 class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_folder) {
 
-    private val folderViewModel: FolderViewModel by viewModels()
+    private val viewModel: FolderViewModel by viewModels()
     private var folderId = -1L
 
     override fun setBind() {
         binding.apply {
-            folderVM = folderViewModel
+            folderVM = viewModel
         }
         folderId = getId(intent)
     }
 
     override fun setObserve() {
 
-        folderViewModel.floatingButton.observe(this, Observer {
+        viewModel.floatingButton.observe(this, Observer {
             startActivity(Intent(this, AddActivity::class.java))
             overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
         })
 
-        folderViewModel.nextButton.observe(this, Observer {
+        viewModel.nextButton.observe(this, Observer {
             startActivityForResult(
                 Intent(this, MoveFolderActivity::class.java)
                     .putExtra(Constants.EXTRA_NAME_ITEM_ID, it),
-                1500
+                Constants.INTENT_MOVE_FOLDER
             )
         })
 
-        folderViewModel.folderItems.observe(this, Observer {
+        viewModel.folderItems.observe(this, Observer {
             binding.rvDetailFolder.adapter?.notifyDataSetChanged()
         })
 
-        folderViewModel.backButton.observe(this, Observer {
+        viewModel.backButton.observe(this, Observer {
             finish()
         })
 
-        folderViewModel.item.observe(this, Observer { item ->
+        viewModel.item.observe(this, Observer { item ->
             startActivityForResult(
                 Intent(this, FolderItemDetailActivity::class.java)
                     .putExtra(Constants.EXTRA_NAME_ITEM_ID, item),
-                3030)
+                Constants.INTENT_ITEM_DETAIL)
 
         })
 
-        folderViewModel.selectImageButton.observe(this, Observer {
-            binding.ibSelectImage.text = it
+        viewModel.selectImageMode.observe(this, Observer {
             when(it) {
-                resources.getString(R.string.select) -> {
+                true -> {
+                    binding.folderRectangleButton.visibility = View.GONE
                     binding.folderFloatingButton.showButton()
                     binding.folderRectangleButton.hideButton()
                 }
-                resources.getString(R.string.cancel) -> {
+                false -> {
+                    binding.folderRectangleButton.visibility = View.VISIBLE
                     binding.folderFloatingButton.hideButton()
                     binding.folderRectangleButton.showButton()
                 }
             }
         })
 
-        folderViewModel.clearSelected.observe(this, Observer {
+        viewModel.clearSelected.observe(this, Observer {
             binding.rvDetailFolder.adapter?.notifyDataSetChanged()
         })
     }
@@ -85,9 +87,7 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
 
     override fun onResume() {
         super.onResume()
-        folderViewModel.start(folderId)
+        viewModel.start(folderId)
         binding.rvDetailFolder.adapter?.notifyDataSetChanged()
     }
-
-
 }
