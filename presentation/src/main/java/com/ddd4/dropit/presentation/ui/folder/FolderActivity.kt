@@ -64,10 +64,12 @@ class FolderActivity : BaseActivity<ActivityFolderBinding>(R.layout.activity_fol
         viewModel.selectImageMode.observe(this, Observer {
             when(it) {
                 true -> {
+                    binding.folderRectangleButton.visibility = View.GONE
                     binding.folderFloatingButton.showButton()
                     binding.folderRectangleButton.hideButton()
                 }
                 false -> {
+                    binding.folderRectangleButton.visibility = View.VISIBLE
                     binding.folderFloatingButton.hideButton()
                     binding.folderRectangleButton.showButton()
                 }

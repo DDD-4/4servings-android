@@ -165,6 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:visibility="gone"
             android:onClick="@{() -> categoryVM.nextButtonClicked()}"
             android:layout_margin="@dimen/space_16dp"
             android:background="@{categoryVM.isButtonActivated ? @drawable/bg_active_button : @drawable/bg_inactive_button}"

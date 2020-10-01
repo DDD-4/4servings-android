@@ -1,6 +1,7 @@
 package com.ddd4.dropit.presentation.ui.category
 
 import android.content.Intent
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.ddd4.dropit.presentation.R
@@ -51,10 +52,12 @@ class CategoryActivity : BaseActivity<ActivityCategoryBinding>(R.layout.activity
         viewModel.selectImageMode.observe(this, Observer {
             when(it) {
                 true -> {
+                    binding.folderRectangleButton.visibility = View.GONE
                     binding.folderFloatingButton.showButton()
                     binding.folderRectangleButton.hideButton()
                 }
                 false -> {
+                    binding.folderRectangleButton.visibility = View.VISIBLE
                     binding.folderFloatingButton.hideButton()
                     binding.folderRectangleButton.showButton()
                 }
