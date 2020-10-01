@@ -82,14 +82,11 @@ class FolderViewModel @ViewModelInject constructor(
                         .getValue()
                         .map(DomainEntity.Item::mapToPresentation)
                         .sortedByDescending { it.endAt.time }
-
-                _folderName.value = getFolderByIdUseCase(folderId).getValue().name
-
             } else {
                 _folderItems.value = emptyList()
-                _folderName.value = ""
-
             }
+
+            _folderName.value = getFolderByIdUseCase(folderId).getValue().name
 
         } catch (e: Exception) {
             Timber.d(e)
