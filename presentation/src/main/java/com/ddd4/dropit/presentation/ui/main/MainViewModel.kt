@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class MainViewModel @ViewModelInject constructor(
-    private val setSectionUseCase: SetSectionUseCase,
     private val getCategoryUseCase: GetCategoryUseCase,
     private val getFoldersUseCase: GetFoldersUseCase
 ): BaseViewModel() {
@@ -37,16 +36,7 @@ class MainViewModel @ViewModelInject constructor(
     val addClick = SingleLiveEvent<Void>()
 
     init {
-        setSectionFromJson()
-    }
-
-    private fun setSectionFromJson() {
-        viewModelScope.launch {
-            when (val result = setSectionUseCase()) {
-                is Result.Success -> getCategoryItems()
-                is Result.Error -> Timber.d(result.exception)
-            }
-        }
+        getCategoryItems()
     }
 
     private fun getCategoryItems() {

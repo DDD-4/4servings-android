@@ -1,4 +1,4 @@
-package com.ddd4.dropit.presentation.ui.detailFolder
+package com.ddd4.dropit.presentation.ui.detailfolder
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData

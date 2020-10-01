@@ -1,4 +1,4 @@
-package com.ddd4.dropit.presentation.ui.detailFolder
+package com.ddd4.dropit.presentation.ui.detailfolder
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseActivity
 import com.ddd4.dropit.presentation.databinding.ActivityFolderItemDetailBinding
-import com.ddd4.dropit.presentation.ui.folder.FolderViewModel
 import com.ddd4.dropit.presentation.util.Constants
 import com.ddd4.dropit.presentation.util.alarm.AlarmReceiver
 import com.ddd4.dropit.presentation.util.toast
@@ -37,7 +36,7 @@ class FolderItemDetailActivity : BaseActivity<ActivityFolderItemDetailBinding>(R
 
         viewModel.itemDeleteButton.observe(this, Observer {
             this.toast("삭제되었습니다.")
-            setResult(resultCode, Intent().apply { putExtra(Constants.DELETE_ITEM ,false) })
+            setResult(resultCode, Intent().apply { putExtra(Constants.EXTRA_DELETE_ITEM ,false) })
 
             val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(this, AlarmReceiver::class.java).putExtra("alarmId", itemId)

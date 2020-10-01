@@ -5,6 +5,8 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.math.abs
+import kotlin.math.absoluteValue
 import kotlin.math.floor
 
 sealed class PresentationEntity {
@@ -31,7 +33,18 @@ sealed class PresentationEntity {
     ): PresentationEntity() {
         fun getDDay(): String {
             val day = (endAt.time - Date().time) / TODAY
-            return "D-$day"
+            return when {
+                day > 0 -> {
+                    "D-$day"
+                }
+                else -> {
+                    "D-Day"
+                }
+            }
+        }
+
+        fun isDDay(): Boolean {
+            return getDDay() == "D-Day"
         }
 
         fun getStartDate(): String {
