@@ -8,6 +8,7 @@ import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.Exception
 
 class SplashViewModel @ViewModelInject constructor(
     private val setSectionUseCase: SetSectionUseCase
@@ -21,9 +22,12 @@ class SplashViewModel @ViewModelInject constructor(
 
     private fun setSectionFromJson() {
         viewModelScope.launch {
-            when (val result = setSectionUseCase()) {
-                is Result.Success -> navigateToMain.call()
-                is Result.Error -> Timber.d(result.exception)
+            try {
+                setSectionUseCase()
+                navigateToMain.call()
+
+            } catch (e: Exception) {
+                Timber.d(e)
             }
         }
     }
