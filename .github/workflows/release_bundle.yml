@@ -1,0 +1,51 @@
+name: Release Bundle
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  apk:
+    name: Generate Release Bundle
+    runs-on: ubuntu-latest
+
+    steps:
+      #Action Checkout
+      - name: Checkout
+        uses: actions/checkout@v2
+      #Set Up Java JDK 1.8
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      #Android Gradle Build for Release Bundle
+      - name: Build Release Bundle
+        id: build
+        run: ./gradlew bundleRelease
+      #Android Singing Release Bundle
+      #Must be Create 'Secret' by Repository Setting
+      - name: Sign Release Bundle
+        id: sign
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+      #Upload Release Bundle file
+      - name: Upload Release Bundle
+        id: upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle
+          path: app/build/outputs/bundle/release/*.aab
+#      #Sharing Release Bundle file to Slack
+#      - name: Sharing on slack
+#        uses: rtCamp/action-slack-notify@v2.1.0
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#          SLACK_CHANNEL: "your-channel"
+#          SLACK_USERNAME: "USERNAME"
+#          SLACK_TITLE: "Generate Release Bundle Success"
+#          SLACK_MESSAGE: ${{ steps.ias.outputs.downloadUrl }}

@@ -16,6 +16,7 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode versions.versionCode
         versionName versions.versionName
+        archivesBaseName = "${application.archiveName}-v${versions.versionName}(${versions.versionCode})"
     }
 
     buildTypes {
@@ -46,4 +47,7 @@ dependencies {
     //debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinVersion"
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
+    //Firebase
+    implementation "com.google.firebase:firebase-analytics-ktx:$versions.analytics"
+    implementation "com.google.firebase:firebase-crashlytics-ktx:$versions.crashlytics"
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="endDialogVM"
+            type="com.ddd4.dropit.presentation.ui.enddialog.EndDialogViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:clipToPadding="false"
+        android:background="@color/white"
+        android:layout_marginStart="@dimen/space_30dp"
+        android:layout_marginEnd="@dimen/space_30dp">
+
+        <TextView
+            android:id="@+id/tvAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_50dp"
+            android:gravity="center"
+            android:text="@string/ask_drop_item"
+            android:textAppearance="@style/text.16sp.regular.dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPositive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_20dp"
+            android:layout_marginTop="@dimen/space_30dp"
+            android:text="@string/ok"
+            android:onClick="@{() -> endDialogVM.confirmButtonClick()}"
+            android:textAppearance="@style/text.14sp.regular.dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAlert" />
+
+        <TextView
+            android:id="@+id/tvNegative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_30dp"
+            android:padding="@dimen/space_20dp"
+            android:text="@string/cancel"
+            android:onClick="@{() -> endDialogVM.cancelButtonClick()}"
+            android:textAppearance="@style/text.14sp.regular.dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvPositive"
+            app:layout_constraintTop_toBottomOf="@+id/tvAlert" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

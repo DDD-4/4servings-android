@@ -39,18 +39,6 @@
             app:layout_constraintStart_toStartOf="@+id/ivDetailFolder"
             app:layout_constraintTop_toTopOf="@+id/ivDetailFolder" />
 
-        <TextView
-            android:id="@+id/tvDetailFolder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_16dp"
-            android:layout_marginBottom="@dimen/space_12dp"
-            android:text="@{item.getDDay()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textAppearance="@style/text.18sp.bold.light"
-            tools:text="D-12" />
-
         <View
             android:id="@+id/viewShadow"
             android:layout_width="0dp"
@@ -60,6 +48,24 @@
             app:layout_constraintEnd_toEndOf="@+id/ivDetailFolder"
             app:layout_constraintStart_toStartOf="@+id/ivDetailFolder"
             app:layout_constraintTop_toTopOf="@+id/ivDetailFolder" />
+
+        <TextView
+            android:id="@+id/tvDetailFolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_16dp"
+            android:layout_marginBottom="@dimen/space_12dp"
+            android:paddingStart="@dimen/space_12dp"
+            android:paddingEnd="@dimen/space_12dp"
+            android:paddingTop="@dimen/space_3dp"
+            android:paddingBottom="@dimen/space_3dp"
+            android:background="@{item.isDDay() ? @drawable/bg_dday_blue_border : null}"
+            android:text="@{item.getDDay()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/text.18sp.bold.light"
+            tools:text="D-12" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

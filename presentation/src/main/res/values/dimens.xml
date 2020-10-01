@@ -27,8 +27,11 @@
     <dimen name="progress_height">10dp</dimen>
     <dimen name="progress_radius">50dp</dimen>
     <dimen name="space_40dp">40dp</dimen>
+    <dimen name="space_38dp">38dp</dimen>
+    <dimen name="space_42dp">42dp</dimen>
     <dimen name="space_10dp">10dp</dimen>
     <dimen name="space_100dp">100dp</dimen>
+    <dimen name="space_117dp">117dp</dimen>
     <dimen name="space_36dp">36dp</dimen>
     <dimen name="card_add_category_size">106dp</dimen>
     <dimen name="space_6dp">6dp</dimen>

@@ -3,10 +3,8 @@ apply plugin: 'com.android.library'
 apply from: '../common-android.gradle'
 
 apply from: '../dependencies.gradle'
-apply plugin: 'kotlin-android'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
-apply plugin: 'kotlin-android'
 
 android {
     buildFeatures {
@@ -26,8 +24,6 @@ dependencies {
     // hilt
     implementation "$presentationDependencies.hiltAndroid"
     kapt "$presentationDependencies.hiltAndroidCompiler"
-    implementation 'androidx.wear:wear:1.0.0'
-    compileOnly 'com.google.android.wearable:wearable:2.5.0'
     implementation "$presentationDependencies.hiltViewmodel"
     implementation "$presentationDependencies.hiltCommon"
     kapt "$presentationDependencies.hiltCompiler"
@@ -50,5 +46,4 @@ dependencies {
     implementation "$presentationDependencies.startup"
     //db debuging
     debugImplementation "$presentationDependencies.debugdb"
-
 }

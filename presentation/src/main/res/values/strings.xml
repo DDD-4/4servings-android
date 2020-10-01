@@ -27,8 +27,7 @@
     <string name="text_add_date_little_hint">대략적인 느낌\n대략 언제 사용을 시작했는지 알려주세요.</string>
     <string name="text_add_date_dont_hint">괜찮아요. 오늘부터 우리 1일</string>
     <string name="text_add_date_little_text">주 전</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="text_camera_capture">확인</string>
     <string name="permission_denied">권한이 거부되었습니다. [설정] > [권한]에서 설정을 진행해주세요.</string>
 
@@ -41,6 +40,8 @@
     <string name="select">선택</string>
     <string name="ok">확인</string>
     <string name="cancel">취소</string>
+    
+    <string name="ask_drop_item">버리는 날이에요.\n이제 그만 보내줄까요?</string>
 
     <string name="edit">편집</string>
     <string name="delete">삭제</string>

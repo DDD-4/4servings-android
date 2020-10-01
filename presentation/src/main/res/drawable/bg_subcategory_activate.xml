@@ -4,6 +4,8 @@
         <shape>
             <corners
                 android:radius="@dimen/subcategory_radius"/>
+            <solid
+                android:color="@color/colorAccent"/>
             <stroke
                 android:width="@dimen/subcategory_line"
                 android:color="@color/colorAccent"/>

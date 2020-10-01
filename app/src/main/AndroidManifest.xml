@@ -12,12 +12,12 @@
 
     <application
         android:name=".DropitApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_dropit"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_dropit"
+        android:roundIcon="@mipmap/ic_dropit_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:allowBackup="true"
         tools:ignore="AllowBackup">
         <receiver
             android:name=".presentation.util.alarm.AlarmReceiver"
@@ -28,13 +28,16 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".presentation.ui.main.MainActivity">
+        <activity android:name=".presentation.ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".presentation.ui.main.MainActivity"
+            android:screenOrientation="portrait" />
 
         <activity android:name=".presentation.ui.category.CategoryActivity"
             android:screenOrientation="portrait" />
@@ -51,11 +54,16 @@
         <activity android:name=".presentation.ui.capture.CaptureActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".presentation.ui.detailFolder.FolderItemDetailActivity"
+        <activity android:name=".presentation.ui.detailfolder.FolderItemDetailActivity"
             android:screenOrientation="portrait"/>
         
-        <activity android:name="com.ddd4.dropit.presentation.ui.dialog.DialogActivity"
+        <activity android:name="com.ddd4.dropit.presentation.ui.createfolderdialog.CreateFolderDialogActivity"
             android:theme="@style/Theme.DropItDialog" />
+
+        <activity android:name=".presentation.ui.enddialog.EndDialogActivity"
+            android:theme="@style/Theme.DropItDialog" />
+
     </application>
+
 
 </manifest>

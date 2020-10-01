@@ -1,13 +1,14 @@
 ext {
     application = [
-            id                      : 'com.ddd4.dropit'
+            id                      : 'com.ddd4.dropit',
+            archiveName             : 'dropit'
     ]
     versions = [
             minSdk                  : 23,
             compileSdk              : 29,
             targetSdk               : 29,
-            versionCode             : 1,
-            versionName             : '1.0.0',
+            versionCode             : 10101,
+            versionName             : '1.1.0',
 
             // gradle plugins
             gradleBuildTool         : '4.0.1',
@@ -46,6 +47,12 @@ ext {
 
             // debugging
             timberVersion           : '4.7.1',
+
+            // firebase
+            gmsGradle               : '4.3.3',
+            crashlyticsGradle       : '2.3.0',
+            analytics               : '17.5.0',
+            crashlytics             : '17.2.1',
 
             // unit test
             truthVersion            : '1.0.1',
