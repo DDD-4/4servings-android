@@ -14,6 +14,7 @@ import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.mapper.mapToDomain
 import com.ddd4.dropit.presentation.mapper.mapToPresentation
+import com.ddd4.dropit.presentation.ui.add.model.AlarmModel
 import com.ddd4.dropit.presentation.util.*
 import com.ddd4.dropit.presentation.util.permission.PermissionHelper
 import kotlinx.coroutines.launch
@@ -64,7 +65,7 @@ class AddSharedViewModel @ViewModelInject constructor(
 
     val captureClick = SingleLiveEvent<Void>()
 
-    val addComplete = SingleLiveEvent<Long>()
+    val addComplete = SingleLiveEvent<AlarmModel>()
 
     val isLittleState = MutableLiveData<Boolean>()
     val isDontState = MutableLiveData<Boolean>()
@@ -124,18 +125,20 @@ class AddSharedViewModel @ViewModelInject constructor(
 
     fun setItem() {
         viewModelScope.launch {
-            val alarmId = _selectedEndAt.value!!.time
+            val alarmTime = _selectedEndAt.value!!.time
             when (val result = setItemUseCase(PresentationEntity.Item(
                     id = null,
                     categoryId = _selectedCategory.value!!,
                     subCategoryId = _selectedSubCategory.value!!,
-                    alarmId = alarmId,
+                    alarmTime = alarmTime,
                     name = _selectedName.value!!,
                     image = _selectedImage.value!!,
                     startAt = _selectedStartAt.value!!,
                     endAt = _selectedEndAt.value!!,
                     createAt = Date()).mapToDomain())) {
-                is Result.Success -> addComplete.value = alarmId
+                is Result.Success -> {
+                    addComplete.value = AlarmModel(result.data, alarmTime)
+                }
                 is Result.Error -> Timber.d(result.exception)
             }
         }
