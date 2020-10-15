@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
+import com.ddd4.dropit.domain.getValue
 import com.ddd4.dropit.domain.usecase.GetCategoryUseCase
 import com.ddd4.dropit.domain.usecase.GetSubCategoryUseCase
 import com.ddd4.dropit.domain.usecase.SetItemUseCase
@@ -13,6 +14,7 @@ import com.ddd4.dropit.presentation.base.ui.BaseViewModel
 import com.ddd4.dropit.presentation.entity.PresentationEntity
 import com.ddd4.dropit.presentation.mapper.mapToDomain
 import com.ddd4.dropit.presentation.mapper.mapToPresentation
+import com.ddd4.dropit.presentation.ui.add.model.AlarmModel
 import com.ddd4.dropit.presentation.util.*
 import com.ddd4.dropit.presentation.util.permission.PermissionHelper
 import kotlinx.coroutines.launch
@@ -63,7 +65,7 @@ class AddSharedViewModel @ViewModelInject constructor(
 
     val captureClick = SingleLiveEvent<Void>()
 
-    val addComplete = SingleLiveEvent<Long>()
+    val addComplete = SingleLiveEvent<AlarmModel>()
 
     val isLittleState = MutableLiveData<Boolean>()
     val isDontState = MutableLiveData<Boolean>()
@@ -93,48 +95,50 @@ class AddSharedViewModel @ViewModelInject constructor(
 
     fun getCategoryItems() {
         viewModelScope.launch {
-            when (val result = getCategoryUseCase()) {
-                is Result.Success -> {
-                    if (result.data.isNotEmpty()) {
-                        _categoryItems.value = result.data.map(DomainEntity.Category::mapToPresentation)
-                    } else {
-                        Timber.d("empty")
-                    }
+            try {
+                val item = getCategoryUseCase().getValue()
+
+                if(item.isNotEmpty()) {
+                    _categoryItems.value = item.map(DomainEntity.Category::mapToPresentation)
+                } else {
+                    Timber.d("empty")
                 }
-                is Result.Error -> Timber.d(result.exception)
+            } catch (e: Exception) {
+                Timber.d(e)
             }
         }
     }
 
     private fun getSubCategoryItems(id: Long) {
         viewModelScope.launch {
-            when (val result = getSubCategoryUseCase(id)) {
-                is Result.Success -> {
-                    if (result.data.isNotEmpty()) {
-                        _subCategoryItems.value = result.data.map(DomainEntity.SubCategory::mapToPresentation)
-                    } else {
-                        Timber.d("empty")
-                    }
+            try {
+                val item = getSubCategoryUseCase(id).getValue()
+
+                if(item.isNotEmpty()) {
+                    _subCategoryItems.value = item.map(DomainEntity.SubCategory::mapToPresentation)
                 }
-                is Result.Error ->  Timber.d(result.exception)
+            } catch (e: Exception) {
+                Timber.d(e)
             }
         }
     }
 
     fun setItem() {
         viewModelScope.launch {
-            val alarmId = _selectedEndAt.value!!.time
+            val alarmTime = _selectedEndAt.value!!.time
             when (val result = setItemUseCase(PresentationEntity.Item(
                     id = null,
                     categoryId = _selectedCategory.value!!,
                     subCategoryId = _selectedSubCategory.value!!,
-                    alarmId = alarmId,
+                    alarmTime = alarmTime,
                     name = _selectedName.value!!,
                     image = _selectedImage.value!!,
                     startAt = _selectedStartAt.value!!,
                     endAt = _selectedEndAt.value!!,
                     createAt = Date()).mapToDomain())) {
-                is Result.Success -> addComplete.value = alarmId
+                is Result.Success -> {
+                    addComplete.value = AlarmModel(result.data, alarmTime)
+                }
                 is Result.Error -> Timber.d(result.exception)
             }
         }
@@ -208,7 +212,12 @@ class AddSharedViewModel @ViewModelInject constructor(
         calendar.add(Calendar.WEEK_OF_YEAR, -week)
 
         _selectedStartAt.value = calendar.time
-        _selectedEndAt.value = endDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), _dayOfEnd.value!!)
+        _selectedEndAt.value = endDate(
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                _dayOfEnd.value!!
+        )
 
         dateLittleText.value = week.toString()
     }
@@ -218,8 +227,17 @@ class AddSharedViewModel @ViewModelInject constructor(
         val calendar = Calendar.getInstance()
         calendar.time = today
 
-        _selectedStartAt.value = startDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
-        _selectedEndAt.value = endDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), _dayOfEnd.value!!)
+        _selectedStartAt.value = startDate(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        _selectedEndAt.value = endDate(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH),
+            _dayOfEnd.value!!
+        )
 
         val formatter = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
         dateDontText.value = formatter.format(today)

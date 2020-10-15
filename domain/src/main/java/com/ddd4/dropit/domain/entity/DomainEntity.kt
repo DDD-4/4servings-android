@@ -16,7 +16,7 @@ sealed class DomainEntity {
         var folderId: Long? = 0,
         var categoryId: Long,
         var subCategoryId: Long,
-        var alarmId: Long,
+        var alarmTime: Long,
         var name: String,
         var image: String,
         var startAt: Date,

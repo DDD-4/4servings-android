@@ -1,6 +1,11 @@
 package com.ddd4.dropit.presentation.ui.add.screen
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.SystemClock
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.activityViewModels
@@ -9,9 +14,12 @@ import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.base.ui.BaseFragment
 import com.ddd4.dropit.presentation.databinding.FragmentAddDateBinding
 import com.ddd4.dropit.presentation.ui.add.AddSharedViewModel
+import com.ddd4.dropit.presentation.util.alarm.AlarmReceiver
 import com.ddd4.dropit.presentation.util.alarm.AlarmRegistUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_date.*
+import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,8 +41,8 @@ class AddDateFragment : BaseFragment<FragmentAddDateBinding>(R.layout.fragment_a
         addSharedViewModel.nextClick.observe(this, Observer {
             addSharedViewModel.setItem()
         })
-        addSharedViewModel.addComplete.observe(this, Observer { alarmId ->
-            alarmRegistUtil.setAlarm(alarmId)
+        addSharedViewModel.addComplete.observe(this, Observer { alarmData ->
+            alarmRegistUtil.setAlarm(alarmData.alarmId, alarmData.time)
             requireActivity().finish()
         })
     }
@@ -65,4 +73,21 @@ class AddDateFragment : BaseFragment<FragmentAddDateBinding>(R.layout.fragment_a
             addSharedViewModel.setLittleDate(s.toString())
         }
     }
+
+//    private fun setAlarm(alarmId: Long, alarmTime: Long) {
+//
+//        val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//        val intent = Intent(requireActivity(), AlarmReceiver::class.java).putExtra("alarmId", alarmId)
+//        val pendingIntent = PendingIntent.getBroadcast(
+//            requireActivity(), alarmId.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
+//
+//        val calendar = Calendar.getInstance()
+//        calendar.time = Date(alarmId)
+//        calendar.set(Calendar.HOUR_OF_DAY, 11)
+//        calendar.set(Calendar.MINUTE, 30)
+//        val triggerTime = calendar.timeInMillis
+//
+//        val testTime = (SystemClock.elapsedRealtime() + 10 * 1000)
+//        alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, testTime, pendingIntent)
+//    }
 }

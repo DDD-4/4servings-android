@@ -19,7 +19,7 @@ interface DropitRepository {
 
     suspend fun getCategoryById(categoryId: Long): Result<DomainEntity.Category>
 
-    suspend fun setItem(item: DomainEntity.Item): Result<Unit>
+    suspend fun setItem(item: DomainEntity.Item): Result<Long>
 
     suspend fun getAlarmIds(): Result<List<DomainEntity.Item>>
 

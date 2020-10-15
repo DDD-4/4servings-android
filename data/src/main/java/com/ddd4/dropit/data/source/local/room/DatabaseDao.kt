@@ -30,7 +30,7 @@ interface DatabaseDao {
     suspend fun selectCategoryById(categoryId: Long): DataEntity.Category
 
     @Insert
-    suspend fun insertItem(item: DataEntity.Item)
+    suspend fun insertItem(item: DataEntity.Item): Long
 
     @Update
     suspend fun updateItem(item: DataEntity.Item)

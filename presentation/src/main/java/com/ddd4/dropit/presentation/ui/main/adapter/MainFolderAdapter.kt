@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.ddd4.dropit.presentation.BR
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.databinding.RowHomeFolderBinding
 import com.ddd4.dropit.presentation.entity.PresentationEntity

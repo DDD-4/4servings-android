@@ -7,7 +7,7 @@ fun DataEntity.Folder.mapToDomain(): DomainEntity.Folder =
     DomainEntity.Folder(id!!, name, createAt, updateAt)
 
 fun DataEntity.Item.mapToDomain(): DomainEntity.Item =
-    DomainEntity.Item(id, folderId, categoryId, subCategoryId, alarmId, name, image, startAt, endAt, createAt, updateAt)
+    DomainEntity.Item(id, folderId, categoryId, subCategoryId, alarmTime, name, image, startAt, endAt, createAt, updateAt)
 
 fun DataEntity.Category.mapToDomain(): DomainEntity.Category =
     DomainEntity.Category(id, title)

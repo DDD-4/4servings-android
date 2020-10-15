@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ddd4.dropit.domain.Result
 import com.ddd4.dropit.domain.entity.DomainEntity
+import com.ddd4.dropit.domain.getValue
 import com.ddd4.dropit.domain.usecase.GetCategoryByIdUseCase
 import com.ddd4.dropit.domain.usecase.GetCategoryItemUseCase
 import com.ddd4.dropit.presentation.base.ui.BaseViewModel
@@ -28,9 +29,6 @@ class CategoryViewModel @ViewModelInject constructor(
     private val _sortByExpirationButton = SingleLiveEvent<Void>()
     val sortByExpirationButton: SingleLiveEvent<Void> = _sortByExpirationButton
 
-    private val _selectedImageList = MutableLiveData<ArrayList<Long>>()
-    val selectedImageList: LiveData<ArrayList<Long>> = _selectedImageList
-
     private val _sortByLatestButton = SingleLiveEvent<Void>()
     val sortByLatestButton: LiveData<Void> = _sortByLatestButton
 
@@ -52,14 +50,20 @@ class CategoryViewModel @ViewModelInject constructor(
     private val _nextButton = SingleLiveEvent<ArrayList<Long>>()
     val nextButton: LiveData<ArrayList<Long>> = _nextButton
 
-    private val _selectImageButton = SingleLiveEvent<String>()
-    val selectImageButton: SingleLiveEvent<String> = _selectImageButton
-
     private val _selectedImageState = MutableLiveData<Boolean>()
     val selectedImageState: LiveData<Boolean> = _selectedImageState
 
     private val _item = SingleLiveEvent<Long>()
     val item: SingleLiveEvent<Long> = _item
+
+    private var _selectedImageList = ArrayList<Long>()
+
+    /**
+     * false : 취소,
+     * true : 선택
+     */
+    private val _selectImageMode = MutableLiveData<Boolean>()
+    val selectImageMode: LiveData<Boolean> = _selectImageMode
 
     init {
         initView()
@@ -69,27 +73,25 @@ class CategoryViewModel @ViewModelInject constructor(
     //TODO FIX
     private fun initView() {
         _selectedImageState.value = false
-        _selectImageButton.value = "선택"
-        _selectedImageList.value = arrayListOf()
+        _selectImageMode.value = true
+        _selectedImageList = arrayListOf()
         _isButtonActivated.value = false
     }
 
     fun start(categoryId: Long) = viewModelScope.launch {
-        when (val result = getCategoryItemUseCase(categoryId)) {
-            is Result.Success -> {
-                if (result.data.isNotEmpty()) {
-                    _categoryItems.value = result.data.map(DomainEntity.Item::mapToPresentation).sortedByDescending { it.endAt.time }
-                } else {
-                    _categoryItems.value = emptyList()
-                    Timber.d("empty")
-                }
-            }
-            is Result.Error -> Timber.d(result.exception)
-        }
+        try {
+            _categoryItems.value = getCategoryItemUseCase(categoryId)
+                .getValue()
+                .map(DomainEntity.Item::mapToPresentation)
+                .sortedByDescending { it.endAt.time }
 
-        when(val result = getCategoryByIdUseCase(categoryId)) {
-            is Result.Success -> _categoryName.value = result.data.title
-            is Result.Error -> Timber.d(result.exception)
+            _categoryName.value = getCategoryByIdUseCase(categoryId).getValue().title
+
+        } catch(e: Exception) {
+            _categoryItems.value = emptyList()
+            _categoryName.value = ""
+
+            Timber.d(e)
         }
     }
 
@@ -109,19 +111,14 @@ class CategoryViewModel @ViewModelInject constructor(
         _floatingButton.call()
     }
 
-    //TODO FIX
     fun selectImageButtonClick() {
-        if (_selectedImageState.value!!) {
-            _selectImageButton.value = "선택"
-        } else {
-            _selectImageButton.value = "취소"
-        }
+        _selectImageMode.value = _selectedImageState.value!!
         _selectedImageState.value = !_selectedImageState.value!!
     }
 
     fun nextButtonClicked() {
         if (_isButtonActivated.value!!) {
-            _nextButton.value = _selectedImageList.value //call
+            _nextButton.value = _selectedImageList //call
         }
     }
 
@@ -133,19 +130,19 @@ class CategoryViewModel @ViewModelInject constructor(
     val onItemClickListener by lazy {
         object : ItemHandler {
             override fun <T> onItemClicked(item: T, visibility: Boolean) {
-                if (selectImageButton.value == "취소") {
+                if (selectImageMode.value == false) {
                     when (visibility) {
                         true -> {
-                            _selectedImageList.value?.add((item as PresentationEntity.Item).id!!)
+                            _selectedImageList.add((item as PresentationEntity.Item).id!!)
                         }
                         false -> {
-                            _selectedImageList.value?.remove((item as PresentationEntity.Item).id)
+                            _selectedImageList.remove((item as PresentationEntity.Item).id)
                         }
                     }
                 } else {
-                    _selectedImageList.value?.clear()
+                    _selectedImageList.clear()
                 }
-                _isButtonActivated.value = _selectedImageList.value?.isNotEmpty()
+                _isButtonActivated.value = _selectedImageList.isNotEmpty()
             }
 
             override fun <T> onItemDetailClicked(item: T) {

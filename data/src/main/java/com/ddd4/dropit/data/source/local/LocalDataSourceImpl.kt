@@ -72,7 +72,7 @@ class LocalDataSourceImpl(
             }
         }
 
-    override suspend fun setItem(item: DataEntity.Item): Result<Unit> =
+    override suspend fun setItem(item: DataEntity.Item): Result<Long> =
         coroutineScope {
             try {
                 if (databaseDao.selectFolders().isNullOrEmpty()) {

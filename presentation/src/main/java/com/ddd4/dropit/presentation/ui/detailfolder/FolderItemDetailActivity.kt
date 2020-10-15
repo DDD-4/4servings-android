@@ -31,15 +31,15 @@ class FolderItemDetailActivity : BaseActivity<ActivityFolderItemDetailBinding>(R
 
     override fun setObserve() {
         viewModel.testIsEmpty.observe(this, Observer {
-            this.toast("1자 이상 입력해주세요.")
+            this.toast(resources.getString(R.string.toast_input_length))
         })
 
         viewModel.itemDeleteButton.observe(this, Observer {
-            this.toast("삭제되었습니다.")
+            this.toast(resources.getString(R.string.toast_delete))
             setResult(resultCode, Intent().apply { putExtra(Constants.EXTRA_DELETE_ITEM ,false) })
 
             val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(this, AlarmReceiver::class.java).putExtra("alarmId", itemId)
+            val intent = Intent(this, AlarmReceiver::class.java).putExtra(ALARM_ID, itemId)
             val pendingIntent = PendingIntent.getBroadcast(
                 this, itemId.toInt(), intent, PendingIntent.FLAG_CANCEL_CURRENT)
 
@@ -52,7 +52,7 @@ class FolderItemDetailActivity : BaseActivity<ActivityFolderItemDetailBinding>(R
         })
 
         viewModel.editCompleteButton.observe(this, Observer {
-            this.toast("수정이 완료되었습니다.")
+            this.toast(resources.getString(R.string.toast_edit_complete))
         })
 
         viewModel.backButton.observe(this, Observer {
@@ -66,5 +66,6 @@ class FolderItemDetailActivity : BaseActivity<ActivityFolderItemDetailBinding>(R
 
     companion object {
         const val resultCode = 6000
+        const val ALARM_ID = "alarmId"
     }
 }

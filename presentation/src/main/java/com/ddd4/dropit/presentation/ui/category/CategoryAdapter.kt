@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ddd4.dropit.presentation.BR
 import com.ddd4.dropit.presentation.databinding.RowDetailFolderBinding
 import com.ddd4.dropit.presentation.entity.PresentationEntity.*
 import com.ddd4.dropit.presentation.ui.folder.FolderAdapter
@@ -47,7 +48,8 @@ class CategoryAdapter(
             for(i in 0 until itemCount){
                 selectedView.put(i, false)
             }
-            binding.item = item
+
+            binding.setVariable(BR.item, item)
             binding.viewShadow.visibility = View.GONE
 
             binding.folderLayout.setOnClickListener {

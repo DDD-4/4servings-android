@@ -15,6 +15,9 @@ object Constants {
     //Intent Request Code
     const val INTENT_CODE_IMAGE = 3000
 
+    const val INTENT_MOVE_FOLDER = 1500
+    const val INTENT_ITEM_DETAIL = 3030
+
     //Extra Value ID
     const val EXTRA_NAME_FOLDER_ID = "folderId"
     const val EXTRA_NAME_CATEGORY_ID = "categoryId"
