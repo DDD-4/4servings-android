@@ -21,8 +21,8 @@
         tools:ignore="AllowBackup">
         <receiver
             android:name=".presentation.util.alarm.AlarmReceiver"
-            android:exported="false"
-            android:enabled="false">
+            android:exported="true"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
