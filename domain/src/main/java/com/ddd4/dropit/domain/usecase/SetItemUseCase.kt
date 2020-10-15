@@ -9,6 +9,6 @@ class SetItemUseCase(
 ) {
     suspend operator fun invoke(
         item: DomainEntity.Item
-    ): Result<Unit> =
+    ): Result<Long> =
         dropitRepository.setItem(item)
 }

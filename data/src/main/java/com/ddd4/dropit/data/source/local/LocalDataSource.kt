@@ -20,7 +20,7 @@ interface LocalDataSource {
 
     suspend fun getCategoryById(categoryId: Long): Result<DomainEntity.Category>
 
-    suspend fun setItem(item: DataEntity.Item): Result<Unit>
+    suspend fun setItem(item: DataEntity.Item): Result<Long>
 
     suspend fun getAlarmIds(): Result<List<DomainEntity.Item>>
 

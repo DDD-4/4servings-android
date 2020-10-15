@@ -1,13 +1,7 @@
 package com.ddd4.dropit.presentation.entity
 
-import timber.log.Timber
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
-import kotlin.math.abs
-import kotlin.math.absoluteValue
-import kotlin.math.floor
 
 sealed class PresentationEntity {
 
@@ -23,7 +17,7 @@ sealed class PresentationEntity {
         var folderId: Long? = 0,
         var categoryId: Long,
         var subCategoryId: Long,
-        var alarmId: Long,
+        var alarmTime: Long,
         var name: String,
         var image: String,
         var startAt: Date,

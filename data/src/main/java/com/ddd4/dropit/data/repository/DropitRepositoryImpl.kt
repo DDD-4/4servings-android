@@ -24,7 +24,7 @@ class DropitRepositoryImpl(
     override suspend fun getFolderItems(): Result<List<DomainEntity.Folder>> =
         localDataSource.getFolderItems()
 
-    override suspend fun setItem(item: DomainEntity.Item): Result<Unit> =
+    override suspend fun setItem(item: DomainEntity.Item): Result<Long> =
         localDataSource.setItem(item.mapToData())
 
     override suspend fun getAlarmIds(): Result<List<DomainEntity.Item>> =

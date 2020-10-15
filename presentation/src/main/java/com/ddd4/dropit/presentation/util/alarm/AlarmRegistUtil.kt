@@ -4,8 +4,10 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.SystemClock
 import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.scopes.ActivityScoped
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -14,23 +16,29 @@ class AlarmRegistUtil @Inject constructor(
     @ActivityContext private val context: Context
 ) {
 
-    fun setAlarm(alarmId: Long) {
+    fun setAlarm(alarmId: Long, alarmTime: Long) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val intent = Intent(context, AlarmReceiver::class.java).putExtra("alarmId", alarmId)
         val pendingIntent = PendingIntent.getBroadcast(
-            context, alarmId.toInt(), intent, PendingIntent.FLAG_CANCEL_CURRENT)
+            context, alarmId.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        //triggerTime(알람시간)은 alarmId(Date time)로 시간을 계산
         val calendar = Calendar.getInstance()
-        calendar.time = Date(alarmId)
-        calendar.set(Calendar.HOUR_OF_DAY, 11)
+        calendar.time = Date(alarmTime)
+        Timber.d("alarmTime: $alarmTime / ${Date(alarmTime)} / ${calendar.time}")
+        calendar.set(Calendar.HOUR_OF_DAY, 9)
         calendar.set(Calendar.MINUTE, 30)
         val triggerTime = calendar.timeInMillis
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent)
 
-        //val textTriggerTime = (System.currentTimeMillis() + 30 * 1000)
-        //alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, textTriggerTime, pendingIntent)
+//        val calendar = Calendar.getInstance()
+//        calendar.time = Date()
+//        calendar.set(Calendar.HOUR_OF_DAY, 22)
+//        calendar.set(Calendar.MINUTE, 45)
+//        val bootTime = calendar.timeInMillis
+//        val secTime = (System.currentTimeMillis() + 10 * 1000)
+//        //Time Set Test with "bootTime" & "secTime"
+//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, secTime, pendingIntent)
     }
 }

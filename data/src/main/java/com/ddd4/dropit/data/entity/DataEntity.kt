@@ -45,7 +45,7 @@ sealed class DataEntity {
         @ColumnInfo(name = "folder_id") var folderId: Long?,
         @ColumnInfo(name = "category_id") var categoryId: Long,
         @ColumnInfo(name = "subcategory_id") var subCategoryId: Long,
-        @ColumnInfo(name = "alarm_id") var alarmId: Long,
+        @ColumnInfo(name = "alarm_time") var alarmTime: Long,
         @ColumnInfo(name = "name") var name: String,
         @ColumnInfo(name = "image") var image: String,
         @ColumnInfo(name = "start_at") var startAt: Date,

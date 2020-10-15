@@ -1,6 +1,5 @@
 package com.ddd4.dropit.presentation.util.alarm
 
-import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,16 +9,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.ddd4.dropit.domain.Result
-import com.ddd4.dropit.domain.usecase.GetAlarmIdUseCase
 import com.ddd4.dropit.presentation.R
 import com.ddd4.dropit.presentation.ui.main.MainActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.*
-import javax.inject.Inject
 
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -28,49 +20,29 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     private lateinit var notificationManager: NotificationManager
-    private var alarmId: Long = 0
-
-//    @Inject
-//    lateinit var getAlarmIdUseCase: GetAlarmIdUseCase
-
-//    private val serviceJob = SupervisorJob()
+    private var alarmId: Int = 0
 
     override fun onReceive(context: Context, intent: Intent) {
-//        Timber.d("Received intent : $intent")
+
+        val extras = intent.extras
+        if (extras != null) {
+            alarmId = extras["alarmId"].toString().toInt()
+        }
+        Timber.d("alarmId: $alarmId")
 
 //        if (intent.action == "android.intent.action.BOOT_COMPLETED") {
-//            //기기 재부팅 후 알람 등록
-//            CoroutineScope(serviceJob).launch {
-//                when (val result = getAlarmIdUseCase()) {
-//                    is Result.Success -> {
-//                        Timber.d("alarm service success")
-//                        for (i in result.data.indices) {
-//                            setAlarm(context, result.data[i].alarmId)
-//                        }
-//                    }
-//                    is Result.Error -> {
-//                        Timber.d("alarm service error")
-//                        if (!serviceJob.isCancelled) {
-//                            serviceJob.cancel()
-//                        }
-//                    }
-//                }
-//            }
+//
 //        }
 
         notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        val extra = intent.extras
-        alarmId = extra!!["alarmId"] as Long
-
         createNotificationChannel()
         deliverNotification(context, alarmId)
     }
 
-    private fun deliverNotification(context: Context, alarmId: Long) {
-        val contentIntent = Intent(context, MainActivity::class.java).putExtra("alarmId", alarmId)
+    private fun deliverNotification(context: Context, alarmId: Int) {
+        val contentIntent = Intent(context, MainActivity::class.java)
         val contentPendingIntent = PendingIntent.getActivity(
-            context, alarmId.toInt(), contentIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            context, alarmId, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder = NotificationCompat.Builder(context,
             PRIMARY_CHANNEL_ID
@@ -83,7 +55,7 @@ class AlarmReceiver : BroadcastReceiver() {
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setAutoCancel(true)
 
-        notificationManager.notify(alarmId.toInt(), builder.build())
+        notificationManager.notify(alarmId, builder.build())
     }
 
     private fun createNotificationChannel() {
