@@ -15,18 +15,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 
 class FolderAdapter(
-    private val onItemClick: ItemHandler? = null
+    private val viewModel: FolderViewModel? = null
 ) :
     ListAdapter<Item, FolderAdapter.FolderViewHolder>(FolderDiffCallback()) {
 
     private var selectedView = SparseBooleanArray(itemCount)
-    private var selectedImageState = false
-
-    fun setImageState(state: Boolean?) {
-         state?.let {
-             selectedImageState = it
-        }
-    }
+//    private var selectedImageState = false
+//
+//    fun setImageState(state: Boolean?) {
+//         state?.let {
+//             selectedImageState = it
+//        }
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -37,34 +37,38 @@ class FolderAdapter(
 
     override fun onBindViewHolder(holder: FolderViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, position)
+        holder.bind(item)
     }
 
     inner class FolderViewHolder constructor(val binding: RowDetailFolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item, position: Int) {
-            for(i in 0 until itemCount){
-                selectedView.put(i, false)
-            }
+        fun bind(item: Item) {
+            binding.setVariable(BR.item , item)
+            binding.isSelectMode = viewModel?.isSelectMode?.value
+            binding.listener = viewModel?.onItemClickListener
 
-            binding.setVariable(BR.item, item)
-            binding.viewShadow.visibility = View.GONE
+//            for(i in 0 until itemCount){
+//                selectedView.put(i, false)
+//            }
 
-            binding.folderLayout.setOnClickListener {
-                if(selectedImageState) { //다중선택시
-                    selectedView.put(position, !selectedView.get(position))
-                        if (selectedView.get(position)) {
-                            binding.viewShadow.visibility = View.VISIBLE
-                        } else {
-                            binding.viewShadow.visibility = View.GONE
-                        }
-                    onItemClick?.onItemClicked(item, selectedView.get(position))
-                }
-                else {
-                    onItemClick?.onItemDetailClicked(item)
-                }
-            }
+//            binding.setVariable(BR.item, item)
+//            binding.viewShadow.visibility = View.GONE
+//
+//            binding.folderLayout.setOnClickListener {
+//                if(selectedImageState) { //다중선택시
+//                    selectedView.put(position, !selectedView.get(position))
+//                        if (selectedView.get(position)) {
+//                            binding.viewShadow.visibility = View.VISIBLE
+//                        } else {
+//                            binding.viewShadow.visibility = View.GONE
+//                        }
+//                    onItemClick?.onItemClicked(item, selectedView.get(position))
+//                }
+//                else {
+//                    onItemClick?.onItemDetailClicked(item)
+//                }
+//            }
         }
     }
 }

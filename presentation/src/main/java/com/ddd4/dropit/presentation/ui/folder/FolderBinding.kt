@@ -12,25 +12,24 @@ import com.ddd4.dropit.presentation.util.loadUrlCenterCrop
 import timber.log.Timber
 
 
-@BindingAdapter("folderItem", "listener", "imageState")
+@BindingAdapter("viewModel", "folderItem")
 fun setFolderItemRecyclerView(
     recyclerView: RecyclerView,
-    list: List<PresentationEntity.Item>?,
-    listener: ItemHandler,
-    imageState: Boolean
+    viewModel: FolderViewModel,
+    list: List<PresentationEntity.Item>?
 ) {
     list?.let {
         Timber.e("first binding end! size: ${it.size}")
         recyclerView.apply {
-            adapter = FolderAdapter(listener)
+            adapter = FolderAdapter(viewModel)
         }
 
         (recyclerView.adapter as FolderAdapter).run {
             submitList(it)
-            setImageState(imageState)
+            //setImageState(imageState)
         }
 
-        recyclerView.adapter?.notifyDataSetChanged()
+      //  recyclerView.adapter?.notifyDataSetChanged()
     }
 }
 
@@ -57,7 +56,7 @@ fun setCategoryItemRecyclerView(
 }
 
 @BindingAdapter("setImage")
-fun setImageUrl(view: ImageView, src: String?) {
+fun setFolderImageUrl(view: ImageView, src: String?) {
     src?.let{
         view.loadUrlCenterCrop(src)
         view.clipToOutline = true

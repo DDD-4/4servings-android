@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CheckableImageView">
+        <attr name="imageUrl" format="string"/>
+        <attr name="dayText" format="string"/>
+        <attr name="itemClick" format="reference"/>
+        <attr name="isSelectMode" format="boolean"/>
+    </declare-styleable>
+
+</resources>

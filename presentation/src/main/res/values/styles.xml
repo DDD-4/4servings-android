@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -10,7 +10,7 @@
     </style>
 
     <!--Dialog-->
-    <style name="Theme.DropItDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+    <style name="Theme.DropItDialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowBackground">@color/transparentWhite</item>
@@ -140,6 +140,15 @@
         <item name="android:textColor">@color/textDark</item>
         <item name="android:textColorHint">@color/textDark</item>
         <item name="android:background">@null</item>
+    </style>
+
+    <style name="dropit.cardview" parent="Widget.MaterialComponents.CardView">
+        <!--<item name="fontFamily">@font/xxx</item>-->
+        <item name="android:textSize">@dimen/text_18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textLight</item>
+        <item name="elevation">0dp</item>
+        <item name="cardElevation">0dp</item>
     </style>
 
 </resources>

@@ -7,7 +7,14 @@
             name="item"
             type="com.ddd4.dropit.presentation.entity.PresentationEntity.Item" />
 
-        <import type="android.view.View"/>
+        <variable
+            name="isSelectMode"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="listener"
+            type="com.ddd4.dropit.presentation.ui.folder.ItemHandler" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,56 +23,18 @@
         android:layout_height="wrap_content"
         android:layout_margin="1dp">
 
-        <ImageView
-            android:id="@+id/ivDetailFolder"
+        <com.ddd4.dropit.presentation.customview.CheckableImageView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            android:background="@drawable/bg_view_border"
-            android:padding="1dp"
-            setImage="@{item.image}"
+            android:layout_height="match_parent"
+            android:checked="@{item.checked}"
+            app:isSelectMode="@{isSelectMode}"
+            app:dayText="@{item.getDDay()}"
+            app:imageUrl="@{item.image}"
+            app:itemClick="@{() -> listener.onItemDetailClicked(item)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/viewGradient"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/ic_gradation_rectangle"
-            app:layout_constraintBottom_toBottomOf="@+id/ivDetailFolder"
-            app:layout_constraintEnd_toEndOf="@+id/ivDetailFolder"
-            app:layout_constraintStart_toStartOf="@+id/ivDetailFolder"
-            app:layout_constraintTop_toTopOf="@+id/ivDetailFolder" />
-
-        <View
-            android:id="@+id/viewShadow"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_check"
-            app:layout_constraintBottom_toBottomOf="@+id/ivDetailFolder"
-            app:layout_constraintEnd_toEndOf="@+id/ivDetailFolder"
-            app:layout_constraintStart_toStartOf="@+id/ivDetailFolder"
-            app:layout_constraintTop_toTopOf="@+id/ivDetailFolder" />
-
-        <TextView
-            android:id="@+id/tvDetailFolder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_16dp"
-            android:layout_marginBottom="@dimen/space_12dp"
-            android:paddingStart="@dimen/space_12dp"
-            android:paddingEnd="@dimen/space_12dp"
-            android:paddingTop="@dimen/space_3dp"
-            android:paddingBottom="@dimen/space_3dp"
-            android:background="@{item.isDDay() ? @drawable/bg_dday_blue_border : null}"
-            android:text="@{item.getDDay()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textAppearance="@style/text.18sp.bold.light"
-            tools:text="D-12" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

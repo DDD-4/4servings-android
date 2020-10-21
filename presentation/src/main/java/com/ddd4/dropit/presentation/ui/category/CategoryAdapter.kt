@@ -49,23 +49,23 @@ class CategoryAdapter(
                 selectedView.put(i, false)
             }
 
-            binding.setVariable(BR.item, item)
-            binding.viewShadow.visibility = View.GONE
-
-            binding.folderLayout.setOnClickListener {
-                if(selectedImageState) { //다중선택시
-                    selectedView.put(position, !selectedView.get(position))
-                        if (selectedView.get(position)) {
-                            binding.viewShadow.visibility = View.VISIBLE
-                        } else {
-                            binding.viewShadow.visibility = View.GONE
-                        }
-                    onItemClick?.onItemClicked(item, selectedView.get(position))
-                }
-                else {
-                    onItemClick?.onItemDetailClicked(item)
-                }
-            }
+//            binding.setVariable(BR.item, item)
+//            binding.viewShadow.visibility = View.GONE
+//
+//            binding.folderLayout.setOnClickListener {
+//                if(selectedImageState) { //다중선택시
+//                    selectedView.put(position, !selectedView.get(position))
+//                        if (selectedView.get(position)) {
+//                            binding.viewShadow.visibility = View.VISIBLE
+//                        } else {
+//                            binding.viewShadow.visibility = View.GONE
+//                        }
+//                    onItemClick?.onItemClicked(item, selectedView.get(position))
+//                }
+//                else {
+//                    onItemClick?.onItemDetailClicked(item)
+//                }
+//            }
         }
     }
 }

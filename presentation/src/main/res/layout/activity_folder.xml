@@ -139,9 +139,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3"
-                app:imageState="@{folderVM.selectedImageState}"
+                app:viewModel="@{folderVM}"
                 app:folderItem="@{folderVM.folderItems}"
-                app:listener="@{folderVM.onItemClickListener}"
                 tools:listitem="@layout/row_detail_folder"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

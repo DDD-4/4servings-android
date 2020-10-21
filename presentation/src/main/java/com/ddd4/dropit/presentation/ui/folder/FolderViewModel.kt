@@ -55,6 +55,9 @@ class FolderViewModel @ViewModelInject constructor(
 
     val clearSelected = SingleLiveEvent<Void>()
 
+    private val _isSelectMode = MutableLiveData<Boolean>()
+    val isSelectMode: LiveData<Boolean> = _isSelectMode
+
     /**
      * false : 취소,
      * true : 선택
@@ -77,13 +80,13 @@ class FolderViewModel @ViewModelInject constructor(
     fun start(folderId: Long) = viewModelScope.launch {
         try {
             val items = getFolderItemUseCase(folderId).getValue()
-            if(items.isNotEmpty()) {
-                _folderItems.value =  getFolderItemUseCase(folderId)
+            _folderItems.value = if(items.isNotEmpty()) {
+                getFolderItemUseCase(folderId)
                         .getValue()
                         .map(DomainEntity.Item::mapToPresentation)
                         .sortedByDescending { it.endAt.time }
             } else {
-                _folderItems.value = emptyList()
+                emptyList()
             }
 
             _folderName.value = getFolderByIdUseCase(folderId).getValue().name
@@ -112,8 +115,10 @@ class FolderViewModel @ViewModelInject constructor(
     }
 
     fun selectImageButtonClick() {
-        _selectImageMode.value = _selectedImageState.value!!
-        _selectedImageState.value = !_selectedImageState.value!!
+        _isSelectMode.value = true
+
+//        _selectImageMode.value = _selectedImageState.value!!
+//        _selectedImageState.value = !_selectedImageState.value!!
     }
 
     fun nextButtonClicked() {

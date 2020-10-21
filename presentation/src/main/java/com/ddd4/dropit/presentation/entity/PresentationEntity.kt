@@ -23,7 +23,8 @@ sealed class PresentationEntity {
         var startAt: Date,
         var endAt: Date,
         var createAt: Date?,
-        var updateAt: Date? = Date()
+        var updateAt: Date? = Date(),
+        var checked: Boolean? = false
     ): PresentationEntity() {
         fun getDDay(): String {
             val day = (endAt.time - Date().time) / TODAY
